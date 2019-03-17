@@ -10,6 +10,7 @@ using Kendo.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Kendo_Example.Models;
+using Kendo_Example.SupportClasses;
 
 namespace Kendo_Example.Controllers
 {
@@ -24,7 +25,6 @@ namespace Kendo_Example.Controllers
         public JsonResult GetData([DataSourceRequest] DataSourceRequest request, string link)
         {
             //get data from db by link and return DataSet back
-
             DataTable dt = new DataTable("Table");
 
             DataColumn CityNameCol = new DataColumn("CityName");
@@ -37,11 +37,32 @@ namespace Kendo_Example.Controllers
 
             foreach (var city in cities)
             {
-                dt.Rows.Add( new object[] { city.CityName, city.CityDescription } );
+                dt.Rows.Add(new object[] { city.CityName, city.CityDescription });
             }
 
             var res = dt.ToDataSourceResult(request);
 
+            return Json(res);
+        }
+
+        public JsonResult GetGridData([DataSourceRequest] DataSourceRequest request, string link)
+        {
+            //get data from db by link and return DataSet back
+
+            DataTable dt = new DataTable("Data");
+
+            DataColumn TestNameCol = new DataColumn("TestName");
+            DataColumn TestDescriptionCol = new DataColumn("TestDescription");
+            dt.Columns.Add(TestNameCol);
+            dt.Columns.Add(TestDescriptionCol);
+            var testClasses = TestClass.GetTestClasses();
+            foreach (var test in testClasses)
+            {
+                dt.Rows.Add(new object[] { test.TestName, test.TestDescription });
+            }
+            
+            var res = dt.ToDataSourceResult(request);
+            
             return Json(res);
         }
     }

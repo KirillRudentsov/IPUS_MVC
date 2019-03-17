@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid type="mainGrid" id="jsTestGrid" width="800"
+          height="500" tableId="1"
+          caption="RPA Template"
+          selectCountRows="5">
+
+  <DataSource action="GetGridData" controller_name="AutoComplete" db_key_link="GetTestAu" />
+
+  <COLUMNS>
+    
+    <column type="simple" name="TestName" label="TestName" width="50">
+    </column>
+    
+    <column type="simple" name="TestDescription" label="TestDescription" width="50">
+    </column>
+
+  </COLUMNS>
+</Grid>

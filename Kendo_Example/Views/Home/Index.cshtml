@@ -12,16 +12,28 @@
     <br />
     <div id="control_content"> </div>
 
-    <button id="showAu">show au </button>
+    <button id="showAu">show au</button>
+
+    <br />
+
+    <button id="showGrid">show grid</button>
+    <br />
 
     <script>
         $('#i_menu').load('@Url.Content("~/Components/LoadMenuComponent?filename=ModelMenu.xml")');
 
-    $(document).ready(function () {
-        $('#showAu').click(function () {
-            $('#control_content').load('@Url.Content("~/Components/LoadAuComponent?filename=ModelAu.xml")');
+        $(document).ready(function () {
+            $('#showAu').click(function () {
+                $('#control_content').load('@Url.Content("~/Components/LoadAuComponent?filename=ModelAu.xml")');
+            });
         });
-    });
+
+        $(document).ready(function () {
+            $('#showGrid').click(function () {
+                $('#control_content').load('@Url.Content("~/Components/LoadGridComponent?filename=ModelGrid.xml")');
+            });
+        });
+
 
     </script>
 

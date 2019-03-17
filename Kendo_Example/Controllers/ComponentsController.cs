@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml.Serialization;
 using Kendo_Example.Models;
+using System.Data;
 
 namespace Kendo_Example.Controllers
 {
@@ -32,6 +33,29 @@ namespace Kendo_Example.Controllers
             au = (AutoComplete)xmlSerizlizer.Deserialize(new StringReader(fileContents));
 
             return PartialView("AutoComplete", au);
+        }
+
+        public PartialViewResult LoadGridComponent(string filename)
+        {
+            Grid grid = new Models.Grid();
+
+            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + filename));
+            XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(Grid));
+            grid = (Grid)xmlSerizlizer.Deserialize(new StringReader(fileContents));
+            DataTable dt = new DataTable(grid.Id);
+
+            foreach (var col in grid.COLUMNS.Column)
+            {
+                DataColumn colunm = new DataColumn(col.Name)
+                {
+                    Caption = col.Label
+                };
+                dt.Columns.Add(colunm);
+            }
+
+            ViewBag.GridParam = grid;
+
+            return PartialView("Grid", dt);
         }
     }
 }

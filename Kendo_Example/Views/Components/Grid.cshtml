@@ -1,0 +1,35 @@
+﻿@using System.Data;
+
+@model DataTable
+
+@(Html.Kendo().Grid<dynamic>()
+                    .Name(Model.TableName)
+                    .Columns(columns =>
+                    {
+                        for (int i = 0; i < Model.Columns.Count; i++)
+                        {
+                            columns.Bound(Model.Columns[i].ColumnName)
+                            .Title(ViewBag.GridParam.COLUMNS.Column[i].Label)
+                            .Width(ViewBag.GridParam.COLUMNS.Column[i].Width);
+                        }
+                    })
+                    .HtmlAttributes(new { style = "height: " + ViewBag.GridParam.Height + "px;" })
+                    .HtmlAttributes(new { style = "width: " + ViewBag.GridParam.Width + "px;" })
+                    .Scrollable()
+                    .Groupable()
+                    .Sortable()
+                    .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(true)
+                        .ButtonCount(5))
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .ServerOperation(true)
+                            .Read(read => {
+                                read.Action(ViewBag.GridParam.DataSource.Action, ViewBag.GridParam.DataSource.Controller_name,
+                                    new { link = ViewBag.GridParam.DataSource.Db_Key_Link });
+                            })
+                            .PageSize(ViewBag.GridParam.SelectCountRows)
+                        )
+
+)
