@@ -1,35 +1,72 @@
 ﻿@using System.Data;
 
-@model DataTable
+@model Kendo_Example.Models.Grid
+
+<script src="@Url.Content("~/Scripts/kendo/2019.1.220/jszip.min.js")"></script>
 
 @(Html.Kendo().Grid<dynamic>()
-                    .Name(Model.TableName)
-                    .Columns(columns =>
-                    {
-                        for (int i = 0; i < Model.Columns.Count; i++)
+                        .Name(Model.Id)
+                        .Columns(columns =>
                         {
-                            columns.Bound(Model.Columns[i].ColumnName)
-                            .Title(ViewBag.GridParam.COLUMNS.Column[i].Label)
-                            .Width(ViewBag.GridParam.COLUMNS.Column[i].Width);
-                        }
-                    })
-                    .HtmlAttributes(new { style = "height: " + ViewBag.GridParam.Height + "px;" })
-                    .HtmlAttributes(new { style = "width: " + ViewBag.GridParam.Width + "px;" })
-                    .Scrollable()
-                    .Groupable()
-                    .Sortable()
-                    .Pageable(pageable => pageable
-                        .Refresh(true)
-                        .PageSizes(true)
-                        .ButtonCount(5))
-                        .DataSource(dataSource => dataSource
-                            .Ajax()
-                            .ServerOperation(true)
-                            .Read(read => {
-                                read.Action(ViewBag.GridParam.DataSource.Action, ViewBag.GridParam.DataSource.Controller_name,
-                                    new { link = ViewBag.GridParam.DataSource.Db_Key_Link });
-                            })
-                            .PageSize(ViewBag.GridParam.SelectCountRows)
+                            foreach (var item in Model.COLUMNS.Column)
+                            {
+                                columns.Bound(item.Name).Title(item.Label).Width(item.Width);
+                            }
+                        })
+                        .HtmlAttributes(new { style = "height: " + Model.Height + "px;" })
+                        .HtmlAttributes(new { style = "width: " + Model.Width + "px;" })
+                        .Scrollable()
+                        .Groupable()
+                        .Resizable(resize => resize.Columns(true))
+                        .Reorderable(reorder => reorder.Columns(true))
+                        .Sortable()
+                        .Pageable(pageable => pageable
+                            .Refresh(true)
+                            .PageSizes(true)
+                            .ButtonCount(5))
+                            .DataSource(dataSource => dataSource
+                                .Ajax()
+                                .ServerOperation(true)
+                                .Read(read =>
+                                {
+                                    read.Action(Model.DataSource.Action, Model.DataSource.Controller_name,
+                                        new { link = Model.DataSource.Db_Key_Link });
+                                })
+                                .PageSize(Model.SelectCountRows)
                         )
+                        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                        .ColumnMenu()
+                        .ToolBar(tools =>{ if (Model.Export_Pdf != null) tools.Pdf(); })
+                        .ToolBar(tools =>{ if (Model.Export_Excel != null) tools.Excel(); })
+                        .ToolBar(tools => tools.Template("<h4>" + Model.Caption + "</h4>"))
+                        .Pdf(pdf =>
+                         {
+                             if (Model.Export_Pdf != null)
+                             {
+                                 pdf.AllPages()
+                                 .AvoidLinks()
+                                 .PaperSize("A4")
+                                 .Scale(0.8)
+                                 .Margin("2cm", "1cm", "1cm", "1cm")
+                                 .Landscape()
+                                 .RepeatHeaders()
+                                 .TemplateId("page-template")
+                                 .Title(Model.Export_Pdf.Caption)
+                                 .FileName(Model.Export_Pdf.File_name)
+                                 .ProxyURL(Url.Action(Model.Export_Pdf.DataSource.Action, Model.Export_Pdf.DataSource.Controller_name,
+                                     new { link = Model.Export_Pdf.DataSource.Db_Key_Link }));
+                             }
+                         })
+                        .Excel(excel =>
+                        {
+                            if (Model.Export_Excel != null)
+                            {
+                                excel.AllPages(true)
+                                 .FileName(Model.Export_Excel.File_name)
+                                 .Filterable(true)
+                                 .ProxyURL(Url.Action(Model.Export_Excel.DataSource.Action, Model.Export_Excel.DataSource.Controller_name,
+                                    new { link = Model.Export_Excel.DataSource.Db_Key_Link }));
+                            }
+                        })
 
 )

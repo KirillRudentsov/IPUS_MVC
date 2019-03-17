@@ -1,18 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Grid type="mainGrid" id="jsTestGrid" width="800"
           height="500" tableId="1"
-          caption="RPA Template"
+          caption="This is test table caption"
           selectCountRows="5">
 
   <DataSource action="GetGridData" controller_name="AutoComplete" db_key_link="GetTestAu" />
 
   <COLUMNS>
     
-    <column type="simple" name="TestName" label="TestName" width="50">
+    <column type="simple" name="TestName" label="Имя" width="50">
     </column>
     
-    <column type="simple" name="TestDescription" label="TestDescription" width="50">
+    <column type="simple" name="TestDescription" label="Описание" width="50">
     </column>
 
   </COLUMNS>
+  <Export_Pdf file_name="Test_Export_File.pdf" caption="EXPORT TO PDF">
+    <DataSource action="ExportFile" controller_name="ExportFiles" db_key_link="GetPdf_key" />
+  </Export_Pdf>
+  <Export_Excel file_name="Test_Export_File.xlsx" caption="EXPORT TO EXCEL">
+    <DataSource action="ExportFile" controller_name="ExportFiles" db_key_link="GetExcel_key" />
+  </Export_Excel>
 </Grid>

@@ -10,6 +10,28 @@ namespace Kendo_Example.Models
     {
     }
 
+    [XmlRoot(ElementName = "Export_Excel")]
+    public class Export_Excel
+    {
+        [XmlAttribute(AttributeName = "file_name")]
+        public string File_name { get; set; }
+        [XmlAttribute(AttributeName = "caption")]
+        public string Caption { get; set; }
+        [XmlElement(ElementName = "DataSource")]
+        public DataSource DataSource { get; set; }
+    }
+
+    [XmlRoot(ElementName = "Export_Pdf")]
+    public class Export_Pdf
+    {
+        [XmlAttribute(AttributeName = "file_name")]
+        public string File_name { get; set; }
+        [XmlAttribute(AttributeName = "caption")]
+        public string Caption { get; set; }
+        [XmlElement(ElementName = "DataSource")]
+        public DataSource DataSource { get; set; }
+    }
+
     [XmlRoot(ElementName = "column")]
     public class Column
     {
@@ -51,5 +73,9 @@ namespace Kendo_Example.Models
         public string Caption { get; set; }
         [XmlAttribute(AttributeName = "selectCountRows")]
         public int SelectCountRows { get; set; }
+        [XmlElement(ElementName = "Export_Pdf")]
+        public Export_Pdf Export_Pdf { get; set; }
+        [XmlElement(ElementName = "Export_Excel")]
+        public Export_Excel Export_Excel { get; set; }
     }
 }

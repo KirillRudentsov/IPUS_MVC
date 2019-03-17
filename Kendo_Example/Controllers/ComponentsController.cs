@@ -42,20 +42,8 @@ namespace Kendo_Example.Controllers
             var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + filename));
             XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(Grid));
             grid = (Grid)xmlSerizlizer.Deserialize(new StringReader(fileContents));
-            DataTable dt = new DataTable(grid.Id);
 
-            foreach (var col in grid.COLUMNS.Column)
-            {
-                DataColumn colunm = new DataColumn(col.Name)
-                {
-                    Caption = col.Label
-                };
-                dt.Columns.Add(colunm);
-            }
-
-            ViewBag.GridParam = grid;
-
-            return PartialView("Grid", dt);
+            return PartialView("Grid", grid);
         }
     }
 }
