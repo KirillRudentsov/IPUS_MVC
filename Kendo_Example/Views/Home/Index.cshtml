@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<html>
+<head>
+    @Styles.Render("~/Content/kendo")
+    @Scripts.Render("~/Scripts/kendo")
+</head>
+
+<body>
+    <div id="i_menu"> </div>
+    <br />
+    <div id="control_content"> </div>
+
+    <button id="showAu">show au </button>
+
+    <script>
+        $('#i_menu').load('@Url.Content("~/Components/LoadMenuComponent?filename=ModelMenu.xml")');
+
+    $(document).ready(function () {
+        $('#showAu').click(function () {
+            $('#control_content').load('@Url.Content("~/Components/LoadAuComponent?filename=ModelAu.xml")');
+        });
+    });
+
+    </script>
+
+</body>
+</html>

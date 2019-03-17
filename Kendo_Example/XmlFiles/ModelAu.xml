@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AutoComplete id="Au_City" data_text_field="CityName">
+  <DataSource action="GetData" controller_name="AutoComplete" db_key_link="GetCityAu" />
+</AutoComplete>

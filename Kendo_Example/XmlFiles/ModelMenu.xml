@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu>
+
+  <firstlevel name="GSOL Company" url="http://gsol.ru/" />
+  
+  <firstlevel name="Sites" url="http://localhost:56466/">
+    <secondlevel name="Searching" url="http://localhost:56466/">
+      <thirdlevel name="Yandex" url="https://ya.ru" />
+      <thirdlevel name="Google" url="https://www.google.com/" />
+      <thirdlevel name="Rambler" url="https://www.rambler.ru/" />
+      <thirdlevel name="Yahoo" url="https://www.yahoo.com/" />
+    </secondlevel>
+    <secondlevel name="Popular" url="http://localhost:56466/">
+      <thirdlevel name="YouTube" url="https://youtube.com" />
+      <thirdlevel name="Vk" url="https://vk.com" />
+    </secondlevel>
+  </firstlevel>
+
+  <firstlevel name="Customers" url="http://localhost:56466/">
+    <secondlevel name="Storage" url="http://localhost:56466/">
+      <thirdlevel name="Yandex" url="https://ya.ru" />
+      <thirdlevel name="Google" url="https://www.google.com/" />
+      <thirdlevel name="Rambler" url="https://www.rambler.ru/" />
+      <thirdlevel name="Yahoo" url="https://www.yahoo.com/" />
+    </secondlevel>
+    <secondlevel name="Lights" url="http://localhost:56466/">
+      <thirdlevel name="Ceiling" url="https://ya.ru" />
+      <thirdlevel name="Table" url="https://www.google.com/" />
+      <thirdlevel name="Floor" url="https://www.rambler.ru/" />
+      <thirdlevel name="Shades" url="https://www.yahoo.com/" />
+    </secondlevel>
+  </firstlevel>
+
+</menu>

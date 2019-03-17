@@ -1,0 +1,27 @@
+﻿
+@model Kendo_Example.Models.AutoComplete
+
+
+@(Html.Kendo().AutoComplete()
+              .Name(Model.Id)
+              .DataTextField(Model.Data_text_field)
+              .Filter(FilterType.Contains)
+              .MinLength(1)
+              .Placeholder("Enter the text")
+              .IgnoreCase(false)
+              .DataSource(source =>
+              {
+                  source.Custom()
+                    .ServerFiltering(true)
+                    .Type("aspnetmvc-ajax")
+                    .Transport(transport =>
+                    {
+                        transport.Read(Model.DataSource.Action, Model.DataSource.Controller_name, new { link = Model.DataSource.Db_Key_Link });
+                    })
+                    .Schema(schema =>
+                    {
+                        schema.Data("Data")
+                            .Total("Total");
+                    });
+              })
+)
