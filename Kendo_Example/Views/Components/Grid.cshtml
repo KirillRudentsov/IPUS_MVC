@@ -36,9 +36,9 @@
                         )
                         .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                         .ColumnMenu()
+                        //.ToolBar(tools => tools.Template("<h5>" + Model.Caption + "</h5>"))
                         .ToolBar(tools =>{ if (Model.Export_Pdf != null) tools.Pdf(); })
                         .ToolBar(tools =>{ if (Model.Export_Excel != null) tools.Excel(); })
-                        .ToolBar(tools => tools.Template("<h4>" + Model.Caption + "</h4>"))
                         .Pdf(pdf =>
                          {
                              if (Model.Export_Pdf != null)

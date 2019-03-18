@@ -34,7 +34,8 @@ namespace Kendo_Example
             "~/Content/kendo/2019.1.220/kendo.common.min.css",
             "~/Content/kendo/2019.1.220/kendo.default.min.css"));
 
-            bundles.IgnoreList.Clear();
+            //bundles.IgnoreList.Clear();
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
