@@ -5,6 +5,7 @@
 <head>
     @Styles.Render("~/Content/kendo")
     @Scripts.Render("~/Scripts/kendo")
+    @Scripts.Render("~/Scripts/Custom")
 </head>
 
 <body>
@@ -34,8 +35,10 @@
             });
         });
 
-
     </script>
 
+
+
+    @(Html.Kendo().Notification().Name("popupNotification"))
 </body>
 </html>

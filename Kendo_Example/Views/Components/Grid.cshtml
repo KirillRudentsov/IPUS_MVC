@@ -32,6 +32,7 @@
                                     read.Action(Model.DataSource.Action, Model.DataSource.Controller_name,
                                         new { link = Model.DataSource.Db_Key_Link });
                                 })
+                                .Events(events => events.Error("onHTTPError_Alertify"))
                                 .PageSize(Model.SelectCountRows)
                         )
                         .Filterable(ftb => ftb.Mode(GridFilterMode.Row))

@@ -30,6 +30,9 @@ namespace Kendo_Example
             // "~/Scripts/kendo/kendo.timezones.min.js", // uncomment if using the Scheduler
             "~/Scripts/kendo/2019.1.220/kendo.aspnetmvc.min.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/Custom").Include(
+            "~/Scripts/Custom/Alertify.js"));
+
             bundles.Add(new StyleBundle("~/Content/kendo").Include(
             "~/Content/kendo/2019.1.220/kendo.common.min.css",
             "~/Content/kendo/2019.1.220/kendo.default.min.css"));
