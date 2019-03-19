@@ -17,8 +17,8 @@ namespace Kendo_Example.Models
         public string Action { get; set; }
         [XmlAttribute(AttributeName = "controller_name")]
         public string Controller_name { get; set; }
-        [XmlAttribute(AttributeName = "db_key_link")]
-        public string Db_Key_Link { get; set; }
+        [XmlAttribute(AttributeName = "key_link")]
+        public string key_link { get; set; }
     }
 
     [XmlRoot(ElementName = "AutoComplete")]

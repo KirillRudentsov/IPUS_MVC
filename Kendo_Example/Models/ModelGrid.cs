@@ -10,6 +10,13 @@ namespace Kendo_Example.Models
     {
     }
 
+    [XmlRoot(ElementName = "Update")]
+    public class Update
+    {
+        [XmlElement(ElementName = "DataSource")]
+        public DataSource DataSource { get; set; }
+    }
+
     [XmlRoot(ElementName = "Export_Excel")]
     public class Export_Excel
     {
@@ -43,6 +50,12 @@ namespace Kendo_Example.Models
         public string Label { get; set; }
         [XmlAttribute(AttributeName = "width")]
         public string Width { get; set; }
+        [XmlAttribute(AttributeName = "hidden")]
+        public bool hidden { get; set; }
+        [XmlAttribute(AttributeName = "visible")]
+        public bool visible { get; set; }
+        [XmlAttribute(AttributeName = "edittype")]
+        public string edittype { get; set; }
     }
 
     [XmlRoot(ElementName = "COLUMNS")]
@@ -73,9 +86,13 @@ namespace Kendo_Example.Models
         public string Caption { get; set; }
         [XmlAttribute(AttributeName = "selectCountRows")]
         public int SelectCountRows { get; set; }
+        [XmlAttribute(AttributeName = "tablePrimaryKeyName")]
+        public string tablePrimaryKeyName { get; set; }
         [XmlElement(ElementName = "Export_Pdf")]
         public Export_Pdf Export_Pdf { get; set; }
         [XmlElement(ElementName = "Export_Excel")]
         public Export_Excel Export_Excel { get; set; }
+        [XmlElement(ElementName = "Update")]
+        public Update Update { get; set; }
     }
 }

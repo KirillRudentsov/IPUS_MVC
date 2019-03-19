@@ -16,7 +16,7 @@
                     .Type("aspnetmvc-ajax")
                     .Transport(transport =>
                     {
-                        transport.Read(Model.DataSource.Action, Model.DataSource.Controller_name, new { link = Model.DataSource.Db_Key_Link });
+                        transport.Read(Model.DataSource.Action, Model.DataSource.Controller_name, new { link = Model.DataSource.key_link });
                     })
                     .Schema(schema =>
                     {

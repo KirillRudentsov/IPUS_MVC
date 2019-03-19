@@ -9,3 +9,15 @@ function on_Alertify(message, alertType) {
     var popup = $("#popupNotification").data("kendoNotification");
     popup.show(message, alertType);
 }
+
+function reload_Grid(e) {
+
+    console.log( e );
+
+    e.sender.one("dataBound", function () {
+        e.sender.dataSource.read();
+    });
+
+    if (e.type === "create" && e.response === "OK")
+        on_Alertify("Новая запись добавлена!", "success");
+};

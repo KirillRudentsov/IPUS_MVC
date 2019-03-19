@@ -10,13 +10,18 @@
                         {
                             foreach (var item in Model.COLUMNS.Column)
                             {
-                                columns.Bound(item.Name).Title(item.Label).Width(item.Width);
+                                columns.Bound(item.Name).Title(item.Label).Width(item.Width)
+                                .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(item.edittype);
                             }
+                            columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
                         })
+                        .ToolBar(toolbar => { toolbar.Create(); })
+                        .Editable(editable => editable.Mode(GridEditMode.InLine) )
                         .HtmlAttributes(new { style = "height: " + Model.Height + "px;" })
                         .HtmlAttributes(new { style = "width: " + Model.Width + "px;" })
                         .Scrollable()
                         .Groupable()
+                        .Navigatable()
                         .Resizable(resize => resize.Columns(true))
                         .Reorderable(reorder => reorder.Columns(true))
                         .Sortable()
@@ -30,34 +35,45 @@
                                 .Read(read =>
                                 {
                                     read.Action(Model.DataSource.Action, Model.DataSource.Controller_name,
-                                        new { link = Model.DataSource.Db_Key_Link });
+                                        new { link = Model.DataSource.key_link });
                                 })
-                                .Events(events => events.Error("onHTTPError_Alertify"))
+
+                                .Create(update => update.Action(Model.Update.DataSource.Action,
+                                    Model.Update.DataSource.Controller_name, new { link = Model.Update.DataSource.key_link }))
+                                .Model(model => {
+                                    model.Id(Model.tablePrimaryKeyName);
+                                    model.Field(Model.tablePrimaryKeyName, typeof(int)).Editable(false);
+                                })
+                                .Update(update => update.Action("onHTTPError_Alertify", "Grid"))
+                                .Destroy(update => update.Action("EditingPopup_Destroy", "Grid"))
+
+                                .Events(events => { events.Error("onHTTPError_Alertify");
+                                    events.RequestEnd("reload_Grid");
+                                })
                                 .PageSize(Model.SelectCountRows)
                         )
                         .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                         .ColumnMenu()
-                        //.ToolBar(tools => tools.Template("<h5>" + Model.Caption + "</h5>"))
                         .ToolBar(tools =>{ if (Model.Export_Pdf != null) tools.Pdf(); })
                         .ToolBar(tools =>{ if (Model.Export_Excel != null) tools.Excel(); })
                         .Pdf(pdf =>
-                         {
-                             if (Model.Export_Pdf != null)
-                             {
-                                 pdf.AllPages()
-                                 .AvoidLinks()
-                                 .PaperSize("A4")
-                                 .Scale(0.8)
-                                 .Margin("2cm", "1cm", "1cm", "1cm")
-                                 .Landscape()
-                                 .RepeatHeaders()
-                                 .TemplateId("page-template")
-                                 .Title(Model.Export_Pdf.Caption)
-                                 .FileName(Model.Export_Pdf.File_name)
-                                 .ProxyURL(Url.Action(Model.Export_Pdf.DataSource.Action, Model.Export_Pdf.DataSource.Controller_name,
-                                     new { link = Model.Export_Pdf.DataSource.Db_Key_Link }));
-                             }
-                         })
+                        {
+                            if (Model.Export_Pdf != null)
+                            {
+                                pdf.AllPages()
+                                .AvoidLinks()
+                                .PaperSize("A4")
+                                .Scale(0.8)
+                                .Margin("2cm", "1cm", "1cm", "1cm")
+                                .Landscape()
+                                .RepeatHeaders()
+                                .TemplateId("page-template")
+                                .Title(Model.Export_Pdf.Caption)
+                                .FileName(Model.Export_Pdf.File_name)
+                                .ProxyURL(Url.Action(Model.Export_Pdf.DataSource.Action, Model.Export_Pdf.DataSource.Controller_name,
+                                    new { link = Model.Export_Pdf.DataSource.key_link }));
+                            }
+                        })
                         .Excel(excel =>
                         {
                             if (Model.Export_Excel != null)
@@ -66,7 +82,7 @@
                                  .FileName(Model.Export_Excel.File_name)
                                  .Filterable(true)
                                  .ProxyURL(Url.Action(Model.Export_Excel.DataSource.Action, Model.Export_Excel.DataSource.Controller_name,
-                                    new { link = Model.Export_Excel.DataSource.Db_Key_Link }));
+                                    new { link = Model.Export_Excel.DataSource.key_link }));
                             }
                         })
 

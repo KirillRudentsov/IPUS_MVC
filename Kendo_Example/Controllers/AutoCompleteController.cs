@@ -45,25 +45,47 @@ namespace Kendo_Example.Controllers
             return Json(res);
         }
 
+        private static List<TestClass> testClasses = TestClass.GetTestClasses();
+
         public JsonResult GetGridData([DataSourceRequest] DataSourceRequest request, string link)
         {
             //get data from db by link and return DataSet back
 
             DataTable dt = new DataTable("Data");
 
+            DataColumn TestId = new DataColumn("TestId");
             DataColumn TestNameCol = new DataColumn("TestName");
             DataColumn TestDescriptionCol = new DataColumn("TestDescription");
+            dt.Columns.Add(TestId);
             dt.Columns.Add(TestNameCol);
             dt.Columns.Add(TestDescriptionCol);
-            var testClasses = TestClass.GetTestClasses();
+            //var testClasses = TestClass.GetTestClasses();
             foreach (var test in testClasses)
             {
-                dt.Rows.Add(new object[] { test.TestName, test.TestDescription });
+                dt.Rows.Add(new object[] { test.TestId, test.TestName, test.TestDescription });
             }
             
             var res = dt.ToDataSourceResult(request);
             
             return Json(res);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult GridProcedure_Update([DataSourceRequest] DataSourceRequest request, string link)
+        {
+            // full example post body 
+
+            // sort=&group=&filter=&TestId=560&TestName=Test1&TestDescription=Description1
+
+            //merge post params with xml by link
+
+            var param = Request.Form;
+
+            //test local creating
+            int maxId = testClasses.Max( el => el.TestId );
+            testClasses.Add(new TestClass(maxId++, param["TestName"], param["TestDescription"]));
+
+            return Json("OK");
         }
     }
 }

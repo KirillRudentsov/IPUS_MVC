@@ -564,7 +564,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="XmlFiles\ModelMenu.xml" />
+    <Content Include="XmlFiles\ProcedureDefinition\TestProcedure.xml" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Kirill.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
