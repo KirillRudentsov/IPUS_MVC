@@ -83,7 +83,7 @@ namespace Kendo_Example.Controllers
 
             //test local creating
             int maxId = testClasses.Max( el => el.TestId );
-            testClasses.Add(new TestClass(maxId++, param["TestName"], param["TestDescription"]));
+            testClasses.Add(new TestClass(++maxId, param["TestName"], param["TestDescription"]));
 
             return Json("OK");
         }
