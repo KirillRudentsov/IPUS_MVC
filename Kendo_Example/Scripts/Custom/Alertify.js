@@ -18,9 +18,12 @@ function reload_Grid(e, id) {
 
     if (e.type === "create" && e.response === "OK") {
         on_Alertify("Новая запись добавлена!", "success");
-
-        //var grid = $("#jsTestGrid").data("kendoGrid");
-        //grid.dataSource.read();
+    }
+    if (e.type === "update" && e.response === "OK") {
+        on_Alertify("Отредактировано!", "success");
+    }
+    if (e.type === "destroy" && e.response === "OK") {
+        on_Alertify("Удалено!", "success");
     }
 }
 

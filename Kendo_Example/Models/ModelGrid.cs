@@ -16,7 +16,21 @@ namespace Kendo_Example.Models
         [XmlElement(ElementName = "DataSource")]
         public DataSource DataSource { get; set; }
     }
+    
+    [XmlRoot(ElementName = "Delete")]
+    public class Delete
+    {
+        [XmlElement(ElementName = "DataSource")]
+        public DataSource DataSource { get; set; }
+    }
 
+    [XmlRoot(ElementName = "Edit")]
+    public class Edit
+    {
+        [XmlElement(ElementName = "DataSource")]
+        public DataSource DataSource { get; set; }
+    }
+    
     [XmlRoot(ElementName = "Export_Excel")]
     public class Export_Excel
     {
@@ -49,7 +63,7 @@ namespace Kendo_Example.Models
         [XmlAttribute(AttributeName = "label")]
         public string Label { get; set; }
         [XmlAttribute(AttributeName = "width")]
-        public string Width { get; set; }
+        public int Width { get; set; }
         [XmlAttribute(AttributeName = "hidden")]
         public bool hidden { get; set; }
         [XmlAttribute(AttributeName = "visible")]
@@ -94,5 +108,9 @@ namespace Kendo_Example.Models
         public Export_Excel Export_Excel { get; set; }
         [XmlElement(ElementName = "Update")]
         public Update Update { get; set; }
+        [XmlElement(ElementName = "Edit")]
+        public Update Edit { get; set; }
+        [XmlElement(ElementName = "Delete")]
+        public Delete Delete { get; set; }
     }
 }

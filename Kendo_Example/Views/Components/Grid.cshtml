@@ -10,10 +10,19 @@
                         {
                             foreach (var item in Model.COLUMNS.Column)
                             {
-                                columns.Bound(item.Name).Title(item.Label).Width(item.Width)
-                                .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(item.edittype);
+                                if (item.Name == "TestDate")
+                                {
+                                    columns.Bound(item.Name).Title(item.Label).Width(item.Width)
+                                         .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(item.edittype)
+                                         .ClientTemplate("#= CreateControl(' " + "lolkek" + " ') #");
+                                }
+                                else
+                                {
+                                    columns.Bound(item.Name).Title(item.Label).Width(item.Width)
+                                         .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(item.edittype);
+                                }
                             }
-                            columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
+                            columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
                         })
                         .ToolBar(toolbar => { toolbar.Create(); })
                         .Editable(editable => editable.Mode(GridEditMode.InLine) )
@@ -37,16 +46,16 @@
                                     read.Action(Model.DataSource.Action, Model.DataSource.Controller_name,
                                         new { link = Model.DataSource.key_link });
                                 })
-
                                 .Create(update => update.Action(Model.Update.DataSource.Action,
                                     Model.Update.DataSource.Controller_name, new { link = Model.Update.DataSource.key_link }))
                                 .Model(model => {
                                     model.Id(Model.tablePrimaryKeyName);
                                     model.Field(Model.tablePrimaryKeyName, typeof(int)).Editable(false);
                                 })
-                                .Update(update => update.Action("onHTTPError_Alertify", "Grid"))
-                                .Destroy(update => update.Action("EditingPopup_Destroy", "Grid"))
-
+                                .Update(update => update.Action(Model.Edit.DataSource.Action,
+                                    Model.Edit.DataSource.Controller_name, new { link = Model.Edit.DataSource.key_link }))
+                                .Destroy(update => update.Action(Model.Delete.DataSource.Action,
+                                    Model.Delete.DataSource.Controller_name, new { link = Model.Delete.DataSource.key_link }))
                                 .Events(events => { events.Error("onHTTPError_Alertify");
                                     events.RequestEnd("reload_Grid");
                                     events.Sync("sync_Grid");

@@ -1,0 +1,9 @@
+﻿
+@model Kendo_Example.Models.DateTimePicker
+
+@(Html.Kendo().DateTimePicker()
+                              .Name(Model.Id)
+                              .DateInput()
+                              .Format(Model.Format)
+                              .Culture("ru-RU")
+    )

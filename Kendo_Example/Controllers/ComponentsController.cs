@@ -45,5 +45,16 @@ namespace Kendo_Example.Controllers
 
             return PartialView("Grid", grid);
         }
+
+        public PartialViewResult LoadDateTimePickerComponent(string filename)
+        {
+            DateTimePicker dateTimePicker = new DateTimePicker();
+
+            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/CustomComponents/Date/" + filename));
+            XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(DateTimePicker));
+            dateTimePicker = (DateTimePicker)xmlSerizlizer.Deserialize(new StringReader(fileContents));
+
+            return PartialView("DateTimePicker", dateTimePicker);
+        }
     }
 }

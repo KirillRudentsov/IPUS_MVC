@@ -56,13 +56,15 @@ namespace Kendo_Example.Controllers
             DataColumn TestId = new DataColumn("TestId");
             DataColumn TestNameCol = new DataColumn("TestName");
             DataColumn TestDescriptionCol = new DataColumn("TestDescription");
+            DataColumn TestDateCol = new DataColumn("TestDate");
             dt.Columns.Add(TestId);
             dt.Columns.Add(TestNameCol);
             dt.Columns.Add(TestDescriptionCol);
+            dt.Columns.Add(TestDateCol);
             //var testClasses = TestClass.GetTestClasses();
             foreach (var test in testClasses)
             {
-                dt.Rows.Add(new object[] { test.TestId, test.TestName, test.TestDescription });
+                dt.Rows.Add(new object[] { test.TestId, test.TestName, test.TestDescription, test.TestDate });
             }
             
             var res = dt.ToDataSourceResult(request);
@@ -83,7 +85,43 @@ namespace Kendo_Example.Controllers
 
             //test local creating
             int maxId = testClasses.Max( el => el.TestId );
-            testClasses.Add(new TestClass(++maxId, param["TestName"], param["TestDescription"]));
+            testClasses.Add(new TestClass(++maxId, param["TestName"], param["TestDescription"], param["TestDate"]));
+
+            return Json("OK");
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult GridProcedure_Edite([DataSourceRequest] DataSourceRequest request, string link)
+        {
+            // full example post body 
+
+            // sort=&group=&filter=&TestId=1&TestName=Kirill123&TestDescription=Kirill+descripstion123
+
+            //merge post params with xml by link
+
+            var param = Request.Form;
+
+            //test local creating
+            testClasses.Where(el => el.TestId == Convert.ToInt32(param["TestId"]))
+                .Each(e => { e.TestDescription = param["TestDescription"];
+                    e.TestName = param["TestName"]; e.TestDate = param["TestDate"]; });
+
+            return Json("OK");
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult GridProcedure_Delete([DataSourceRequest] DataSourceRequest request, string link)
+        {
+            // full example post body 
+
+            // sort=&group=&filter=&TestId=1&TestName=Kirill123&TestDescription=Kirill+descripstion123
+
+            //merge post params with xml by link
+
+            var param = Request.Form;
+
+            //test local creating
+            testClasses.RemoveAll( el => el.TestId == Convert.ToInt32(param["TestId"]) );
 
             return Json("OK");
         }

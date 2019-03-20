@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Grid type="mainGrid" id="jsTestGrid" width="1000"
-          height="700" tableId="1"
+          height="800" tableId="1"
           caption="This is test table caption"
           selectCountRows="5" tablePrimaryKeyName="TestId">
 
@@ -10,17 +10,23 @@
     <DataSource action="GridProcedure_Update" controller_name="AutoComplete" key_link="TestProcedure.xml" />
   </Update>
   
-  <!--<Edit>
-    <DataSource action="GridProcedure_Edite" controller_name="AutoComplete" db_key_link="TestProcedure.xml" />
-  </Edit>-->
+  <Edit>
+    <DataSource action="GridProcedure_Edite" controller_name="AutoComplete" key_link="TestProcedure.xml" />
+  </Edit>
+  
+  <Delete>
+    <DataSource action="GridProcedure_Delete" controller_name="AutoComplete" key_link="TestProcedure.xml" />
+  </Delete>
   
   <COLUMNS>
 
-    <column type="simple" name="TestId" label="Id теста" width="50" hidden="false" visible="true" edittype="Integer"/>
+    <column type="simple" name="TestId" label="Id теста" width="150" hidden="false" visible="true" edittype="Integer"/>
 
-    <column type="simple" name="TestName" label="Имя" width="50" hidden="false" visible="true" edittype="String"/>
+    <column type="simple" name="TestName" label="Имя" width="150" hidden="false" visible="true" edittype="String"/>
     
-    <column type="simple" name="TestDescription" label="Описание" width="50" hidden="false" visible="true" edittype="String"/>
+    <column type="simple" name="TestDescription" label="Описание" width="150" hidden="false" visible="true" edittype="String"/>
+    
+    <column type="simple" name="TestDate" label="Дата" width="150" hidden="false" visible="true" edittype="Date" />
 
   </COLUMNS>
   <Export_Pdf file_name="Test_Export_File.pdf" caption="EXPORT TO PDF">
