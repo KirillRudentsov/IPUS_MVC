@@ -10,14 +10,20 @@ function on_Alertify(message, alertType) {
     popup.show(message, alertType);
 }
 
-function reload_Grid(e) {
+function reload_Grid(e, id) {
 
-    console.log( e );
+    console.log(e);
 
-    e.sender.one("dataBound", function () {
-        e.sender.dataSource.read();
-    });
+    console.log(id);
 
-    if (e.type === "create" && e.response === "OK")
+    if (e.type === "create" && e.response === "OK") {
         on_Alertify("Новая запись добавлена!", "success");
-};
+
+        //var grid = $("#jsTestGrid").data("kendoGrid");
+        //grid.dataSource.read();
+    }
+}
+
+function sync_Grid(e) {
+    this.read();
+}

@@ -49,6 +49,7 @@
 
                                 .Events(events => { events.Error("onHTTPError_Alertify");
                                     events.RequestEnd("reload_Grid");
+                                    events.Sync("sync_Grid");
                                 })
                                 .PageSize(Model.SelectCountRows)
                         )
