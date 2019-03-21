@@ -10,6 +10,19 @@ namespace Kendo_Example.Models
     {
     }
 
+    [XmlRoot(ElementName = "Model")]
+    public class Model
+    {
+        [XmlElement(ElementName = "default_value")]
+        public string Default_value { get; set; }
+        [XmlAttribute(AttributeName = "edittype")]
+        public string Edittype { get; set; }
+        [XmlAttribute(AttributeName = "format")]
+        public string Format { get; set; }
+        [XmlAttribute(AttributeName = "editable")]
+        public bool editable { get; set; }
+    }
+
     [XmlRoot(ElementName = "Update")]
     public class Update
     {
@@ -68,8 +81,10 @@ namespace Kendo_Example.Models
         public bool hidden { get; set; }
         [XmlAttribute(AttributeName = "visible")]
         public bool visible { get; set; }
-        [XmlAttribute(AttributeName = "edittype")]
-        public string edittype { get; set; }
+        [XmlElement(ElementName = "Model")]
+        public Model Model { get; set; }
+        [XmlAttribute(AttributeName = "key")]
+        public bool key { get; set; }
     }
 
     [XmlRoot(ElementName = "COLUMNS")]
@@ -100,8 +115,6 @@ namespace Kendo_Example.Models
         public string Caption { get; set; }
         [XmlAttribute(AttributeName = "selectCountRows")]
         public int SelectCountRows { get; set; }
-        [XmlAttribute(AttributeName = "tablePrimaryKeyName")]
-        public string tablePrimaryKeyName { get; set; }
         [XmlElement(ElementName = "Export_Pdf")]
         public Export_Pdf Export_Pdf { get; set; }
         [XmlElement(ElementName = "Export_Excel")]

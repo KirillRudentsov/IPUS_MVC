@@ -2,7 +2,7 @@
 <Grid type="mainGrid" id="jsTestGrid" width="1000"
           height="800" tableId="1"
           caption="This is test table caption"
-          selectCountRows="5" tablePrimaryKeyName="TestId">
+          selectCountRows="5">
 
   <DataSource action="GetGridData" controller_name="AutoComplete" key_link="GetTestAu" />
 
@@ -20,15 +20,35 @@
   
   <COLUMNS>
 
-    <column type="simple" name="TestId" label="Id теста" width="150" hidden="false" visible="true" edittype="Integer"/>
+    <column type="simple" name="TestId" label="Id теста" width="150" hidden="false" visible="true" key="true">
+      <Model editable="false" edittype="Integer" format="{0:0}">
+       <default_value>0</default_value>
+      </Model>
+    </column>
 
-    <column type="simple" name="TestName" label="Имя" width="150" hidden="false" visible="true" edittype="String"/>
+    <column type="simple" name="TestName" label="Имя" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="">
+        <default_value>TestName_Default</default_value>
+      </Model>
+    </column>
     
-    <column type="simple" name="TestDescription" label="Описание" width="150" hidden="false" visible="true" edittype="String"/>
+    <column type="simple" name="TestDescription" label="Описание" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="">
+        <default_value>TestDescription_Default</default_value>
+      </Model>
+    </column>
     
-    <column type="simple" name="TestDate" label="Дата" width="150" hidden="false" visible="true" edittype="Date" />
+    <column type="simple" name="TestDate" label="Дата" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Date" format="{0:d}">
+        <default_value></default_value>
+      </Model>
+    </column>
 
-    <column type="simple" name="TestBoolean" label="Да, нет" width="100" hidden="false" visible="true" edittype="Boolean" />
+    <column type="simple" name="TestBoolean" label="Да, нет" width="100" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Boolean" format="">
+        <default_value>false</default_value>
+      </Model>
+    </column>
 
   </COLUMNS>
   <Export_Pdf file_name="Test_Export_File.pdf" caption="EXPORT TO PDF">

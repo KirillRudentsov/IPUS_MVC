@@ -1,12 +1,17 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+
+@{
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
+}
+
 <html>
 <head>
     @Styles.Render("~/Content/kendo")
     @Scripts.Render("~/Scripts/kendo")
     @Scripts.Render("~/Scripts/Custom")
-    @Scripts.Render("~/Scripts/Cultures")
+    @Scripts.Render("~/Scripts/Cultures/kendo.culture." + culture + ".min.js")
 </head>
 
 <body>
