@@ -25,7 +25,7 @@ namespace Kendo_Example.Controllers
         public JsonResult GetData([DataSourceRequest] DataSourceRequest request, string link)
         {
             //get data from db by link and return DataSet back
-            DataTable dt = new DataTable("Table");
+            DataTable dt = new DataTable("Data");
 
             DataColumn CityNameCol = new DataColumn("CityName");
             DataColumn CityDescriptionCol = new DataColumn("CityDescription");
@@ -57,14 +57,16 @@ namespace Kendo_Example.Controllers
             DataColumn TestNameCol = new DataColumn("TestName");
             DataColumn TestDescriptionCol = new DataColumn("TestDescription");
             DataColumn TestDateCol = new DataColumn("TestDate");
+            DataColumn TestBooleanCol = new DataColumn("TestBoolean");
             dt.Columns.Add(TestId);
             dt.Columns.Add(TestNameCol);
             dt.Columns.Add(TestDescriptionCol);
             dt.Columns.Add(TestDateCol);
+            dt.Columns.Add(TestBooleanCol);
             //var testClasses = TestClass.GetTestClasses();
             foreach (var test in testClasses)
             {
-                dt.Rows.Add(new object[] { test.TestId, test.TestName, test.TestDescription, test.TestDate });
+                dt.Rows.Add(new object[] { test.TestId, test.TestName, test.TestDescription, test.TestDate, test.TestBoolean });
             }
             
             var res = dt.ToDataSourceResult(request);
@@ -85,7 +87,8 @@ namespace Kendo_Example.Controllers
 
             //test local creating
             int maxId = testClasses.Max( el => el.TestId );
-            testClasses.Add(new TestClass(++maxId, param["TestName"], param["TestDescription"], param["TestDate"]));
+            testClasses.Add(new TestClass(++maxId, param["TestName"], param["TestDescription"],
+                param["TestDate"], bool.Parse(param["TestBoolean"]) ));
 
             return Json("OK");
         }
@@ -104,7 +107,8 @@ namespace Kendo_Example.Controllers
             //test local creating
             testClasses.Where(el => el.TestId == Convert.ToInt32(param["TestId"]))
                 .Each(e => { e.TestDescription = param["TestDescription"];
-                    e.TestName = param["TestName"]; e.TestDate = param["TestDate"]; });
+                    e.TestName = param["TestName"]; e.TestDate = param["TestDate"];
+                    e.TestBoolean = bool.Parse(param["TestBoolean"]); });
 
             return Json("OK");
         }
