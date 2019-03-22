@@ -14,6 +14,10 @@
                                          .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(item.Model.Edittype);
                                     if( !string.IsNullOrEmpty(item.Model.Format) )
                                         c.Format(item.Model.Format);
+
+                                    if (item.Model.Edittype == "Date")
+                                        c.ClientTemplate("#=kendo.toString(kendo.parseDate(" + item.Name + "), '" + item.Model.Format + "', 'en-US') #"
+                                            + "<input type='hidden' name='#= " + item.Name + "#' value='#= kendo.toString(kendo.parseDate(" + item.Name + "), '" + item.Model.Format + "', 'en-US') #'/>");
                                 }
                                 columns.Command(command => { command.Edit(); command.Destroy(); }).Width(150);
                             })
@@ -51,7 +55,7 @@
                                                     if (m.Model.Edittype == "String")
                                                         model.Field(m.Name, typeof(string)).DefaultValue(m.Model.Default_value).Editable(m.Model.editable);
                                                     if (m.Model.Edittype == "Date")
-                                                        model.Field(m.Name, typeof(DateTime)).DefaultValue(DateTime.Now.ToString(m.Model.Format)).Editable(m.Model.editable);
+                                                        model.Field(m.Name, typeof(DateTime)).Editable(m.Model.editable);
                                                     if (m.Model.Edittype == "Integer")
                                                         model.Field(m.Name, typeof(int)).DefaultValue(m.Model.Default_value).Editable(m.Model.editable);
                                                     if (m.Model.Edittype == "Boolean")
