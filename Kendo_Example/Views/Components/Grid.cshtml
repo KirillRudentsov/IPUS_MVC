@@ -10,11 +10,12 @@
                             {
                                 foreach (var item in Model.COLUMNS.Column)
                                 {
-                                    columns.Bound(item.Name).Title(item.Label).Width(item.Width)
-                                         .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(item.Model.Edittype)
-                                         .Format(item.Model.Format);
+                                    var c = columns.Bound(item.Name).Title(item.Label).Width(item.Width)
+                                         .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(item.Model.Edittype);
+                                    if( !string.IsNullOrEmpty(item.Model.Format) )
+                                        c.Format(item.Model.Format);
                                 }
-                                columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+                                columns.Command(command => { command.Edit(); command.Destroy(); }).Width(150);
                             })
                                     .ToolBar(toolbar => { toolbar.Create(); })
                                     .Editable(editable => editable.Mode(GridEditMode.InLine))
