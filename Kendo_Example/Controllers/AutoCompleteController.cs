@@ -88,7 +88,7 @@ namespace Kendo_Example.Controllers
             //test local creating
             int maxId = testClasses.Max( el => el.TestId );
             testClasses.Add(new TestClass(++maxId, param["TestName"], param["TestDescription"],
-                param["TestDate"], bool.Parse(param["TestBoolean"]) ));
+               param["TestDate"], bool.Parse(param["TestBoolean"]) ));
 
             return Json("OK");
         }
@@ -107,7 +107,7 @@ namespace Kendo_Example.Controllers
             //test local creating
             testClasses.Where(el => el.TestId == Convert.ToInt32(param["TestId"]))
                 .Each(e => { e.TestDescription = param["TestDescription"];
-                    e.TestName = param["TestName"]; e.TestDate = param["TestDate"];
+                    e.TestName = param["TestName"]; e.TestDate = param["TestDate"] ;
                     e.TestBoolean = bool.Parse(param["TestBoolean"]); });
 
             return Json("OK");

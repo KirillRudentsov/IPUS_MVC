@@ -11,13 +11,8 @@
                                 foreach (var item in Model.COLUMNS.Column)
                                 {
                                     var c = columns.Bound(item.Name).Title(item.Label).Width(item.Width)
-                                         .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(item.Model.Edittype);
-                                    if( !string.IsNullOrEmpty(item.Model.Format) )
-                                        c.Format(item.Model.Format);
-
-                                    if (item.Model.Edittype == "Date")
-                                        c.ClientTemplate("#=kendo.toString(kendo.parseDate(" + item.Name + "), '" + item.Model.Format + "', 'en-US') #"
-                                            + "<input type='hidden' name='#= " + item.Name + "#' value='#= kendo.toString(kendo.parseDate(" + item.Name + "), '" + item.Model.Format + "', 'en-US') #'/>");
+                                         .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(item.Model.Edittype)
+                                         .Format(item.Model.Format);
                                 }
                                 columns.Command(command => { command.Edit(); command.Destroy(); }).Width(150);
                             })
