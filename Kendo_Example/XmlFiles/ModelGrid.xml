@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Grid type="mainGrid" id="jsTestGrid" width="1000"
-          height="800" tableId="1"
+<Grid type="mainGrid" id="jsTestGrid" width="1250"
+          height="600" tableId="1"
           caption="This is test table caption"
-          selectCountRows="5">
+          selectCountRows="20">
 
   <DataSource action="GetGridData" controller_name="AutoComplete" key_link="GetTestAu" />
 
   <Update>
     <DataSource action="GridProcedure_Update" controller_name="AutoComplete" key_link="TestProcedure.xml" />
   </Update>
-  
+
   <Edit>
     <DataSource action="GridProcedure_Edite" controller_name="AutoComplete" key_link="TestProcedure.xml" />
   </Edit>
-  
+
   <Delete>
     <DataSource action="GridProcedure_Delete" controller_name="AutoComplete" key_link="TestProcedure.xml" />
   </Delete>
-  
+
   <COLUMNS>
 
     <column type="simple" name="TestId" label="Id теста" width="150" hidden="false" visible="true" key="true">
       <Model editable="false" edittype="Integer" format="{0:0}">
-       <default_value>0</default_value>
+        <default_value>0</default_value>
       </Model>
     </column>
 
@@ -31,15 +31,15 @@
         <default_value>TestName_Default</default_value>
       </Model>
     </column>
-    
+
     <column type="simple" name="TestDescription" label="Описание" width="150" hidden="false" visible="true" key="false">
       <Model editable="true" edittype="String" format="">
         <default_value>TestDescription_Default</default_value>
       </Model>
     </column>
-    
+
     <column type="simple" name="TestDate" label="Дата" width="150" hidden="false" visible="true" key="false">
-      <Model editable="true" edittype="Date" format="{0:HH:mm:ss yyyy.MM.dd}">
+      <Model editable="true" edittype="Date" format="{0:dd.MM.yyyy HH:mm}">
         <default_value></default_value>
       </Model>
     </column>

@@ -12,3 +12,24 @@
     });
     
 }
+
+// apply datepicker format
+function convertDatePickerCell(args, dateformat, cult)
+{
+
+    args.element.kendoDateTimePicker({
+        format: dateformat,
+        culture: cult
+    });
+}
+
+
+function convertDatePickerUI(element, dateformat, cult)
+{
+
+    element.kendoDateTimePicker({
+        format: dateformat,
+        culture: cult
+    });
+
+}

@@ -13,14 +13,22 @@
                                     var c = columns.Bound(item.Name).Title(item.Label).Width(item.Width)
                                          .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(item.Model.Edittype)
                                          .Format(item.Model.Format);
+                                    if (item.Model.Edittype == "Date")
+                                    {
+                                        c.Filterable( x => x.Cell( y => y.Template("function(args){ convertDatePickerCell(args, '" + item.Model.Format+"','ru-RU')}")));
+
+                                        c.Filterable(x => x.UI("function(element){ convertDatePickerUI(element, '" + item.Model.Format + "','ru-RU')}"));
+
+                                        c.Template(cell => "#=function(args){ convertDatePickerCell(args, '" + item.Model.Format + "','ru-RU')}=");
+                                    }
                                 }
                                 columns.Command(command => { command.Edit(); command.Destroy(); }).Width(150);
                             })
                                     .ToolBar(toolbar => { toolbar.Create(); })
                                     .Editable(editable => editable.Mode(GridEditMode.InLine))
-                                    .HtmlAttributes(new { style = "height: " + Model.Height + "px;" })
+                                    //.HtmlAttributes(new { style = "height: 1000px;" })
                                     .HtmlAttributes(new { style = "width: " + Model.Width + "px;" })
-                                    .Scrollable()
+                                    .Scrollable(scr => scr.Height(Model.Height))
                                     .Groupable()
                                     .Navigatable()
                                     .Resizable(resize => resize.Columns(true))

@@ -108,7 +108,7 @@ namespace Kendo_Example.Models
         [XmlAttribute(AttributeName = "width")]
         public string Width { get; set; }
         [XmlAttribute(AttributeName = "height")]
-        public string Height { get; set; }
+        public int Height { get; set; }
         [XmlAttribute(AttributeName = "tableId")]
         public string TableId { get; set; }
         [XmlAttribute(AttributeName = "caption")]
