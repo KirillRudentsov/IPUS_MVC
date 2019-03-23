@@ -1,2 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<DateTimePicker id="TestDate" format="dd/MM/yyyy hh:mm:ss" />
+<DateTimePicker id="TestDate" format="dd/MM/yyyy" />

@@ -19,7 +19,7 @@
 
                                         c.Filterable(x => x.UI("function(element){ convertDatePickerUI(element, '" + item.Model.Format + "','ru-RU')}"));
 
-                                        c.Template(cell => "#=function(args){ convertDatePickerCell(args, '" + item.Model.Format + "','ru-RU')}=");
+                                        //c.Template(cell => "#=convertEditeDatePicker#");
                                     }
                                 }
                                 columns.Command(command => { command.Edit(); command.Destroy(); }).Width(150);

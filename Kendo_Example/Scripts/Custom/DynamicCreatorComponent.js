@@ -33,3 +33,12 @@ function convertDatePickerUI(element, dateformat, cult)
     });
 
 }
+
+
+function convertEditeDatePicker(args, dateformat, cult) {
+
+    args.element.kendoDateTimePicker({
+        format: dateformat,
+        culture: cult
+    });
+}

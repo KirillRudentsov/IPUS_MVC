@@ -39,7 +39,7 @@
     </column>
 
     <column type="simple" name="TestDate" label="Дата" width="150" hidden="false" visible="true" key="false">
-      <Model editable="true" edittype="Date" format="{0:dd.MM.yyyy HH:mm}">
+      <Model editable="true" edittype="Date" format="{0:dd.MM.yyyy HH:mm:ss}">
         <default_value></default_value>
       </Model>
     </column>
