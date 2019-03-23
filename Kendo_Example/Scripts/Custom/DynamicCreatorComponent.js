@@ -34,11 +34,9 @@ function convertDatePickerUI(element, dateformat, cult)
 
 }
 
+function test(e, id, format) {
 
-function convertEditeDatePicker(args, dateformat, cult) {
 
-    args.element.kendoDateTimePicker({
-        format: dateformat,
-        culture: cult
-    });
+    setTimeout(function () { $('#' + id + '').kendoDateTimePicker({ format : format }) }, 50);
+
 }

@@ -13,13 +13,12 @@
                                     var c = columns.Bound(item.Name).Title(item.Label).Width(item.Width)
                                          .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(item.Model.Edittype)
                                          .Format(item.Model.Format);
+
                                     if (item.Model.Edittype == "Date")
                                     {
-                                        c.Filterable( x => x.Cell( y => y.Template("function(args){ convertDatePickerCell(args, '" + item.Model.Format+"','ru-RU')}")));
+                                        c.Filterable(x => x.Cell(y => y.Template("function(args){ convertDatePickerCell(args, '" + item.Model.Format + "','ru-RU')}")));
 
                                         c.Filterable(x => x.UI("function(element){ convertDatePickerUI(element, '" + item.Model.Format + "','ru-RU')}"));
-
-                                        //c.Template(cell => "#=convertEditeDatePicker#");
                                     }
                                 }
                                 columns.Command(command => { command.Edit(); command.Destroy(); }).Width(150);
@@ -52,7 +51,7 @@
                                             {
                                                 foreach (var m in Model.COLUMNS.Column)
                                                 {
-                                                    if(m.key)
+                                                    if (m.key)
                                                         model.Id(m.Name);
 
                                                     if (m.Model.Edittype == "String")
@@ -79,6 +78,7 @@
                                     )
                                     .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                                     .ColumnMenu()
+                                    .Events(ev => ev.BeforeEdit("function(){setTimeout(function () { $('#TestDate').kendoDateTimePicker({ format : '{0:dd.MM.yyyy HH:mm:ss}' }) }, 50);}") )
                                     .ToolBar(tools => { if (Model.Export_Pdf != null) tools.Pdf(); })
                                     .ToolBar(tools => { if (Model.Export_Excel != null) tools.Excel(); })
                                     .Pdf(pdf =>
