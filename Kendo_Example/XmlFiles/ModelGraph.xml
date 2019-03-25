@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Graph id="testGraph">
+
+  <DataSource action="GetGraphData" controller_name="AutoComplete" key_link="GetTestGraph" />
+  
+  
+  
+</Graph>

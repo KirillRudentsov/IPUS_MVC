@@ -113,6 +113,7 @@
     </Compile>
     <Compile Include="Models\ModelAu.cs" />
     <Compile Include="Models\ModelDateTimePicker.cs" />
+    <Compile Include="Models\ModelGraph.cs" />
     <Compile Include="Models\ModelGrid.cs" />
     <Compile Include="Models\ModelMenu.cs" />
     <Compile Include="Models\TestClass.cs" />
@@ -1465,6 +1466,7 @@
     <Content Include="Scripts\messages\kendo.messages.zh-TW.min.js" />
     <Content Include="XmlFiles\CustomComponents\Date\DateTimePicker_1.xml" />
     <Content Include="XmlFiles\ModelAu.xml" />
+    <Content Include="XmlFiles\ModelGraph.xml" />
     <Content Include="XmlFiles\ModelGrid.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -2677,6 +2679,7 @@
     <Content Include="Scripts\messages\kendo.messages.zh-CN.min.js.map" />
     <Content Include="Scripts\messages\kendo.messages.zh-HK.min.js.map" />
     <Content Include="Scripts\messages\kendo.messages.zh-TW.min.js.map" />
+    <Content Include="Views\Components\Graph.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

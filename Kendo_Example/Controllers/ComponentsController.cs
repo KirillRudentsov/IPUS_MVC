@@ -56,5 +56,16 @@ namespace Kendo_Example.Controllers
 
             return PartialView("DateTimePicker", dateTimePicker);
         }
+
+        public PartialViewResult LoadGraphComponent(string filename)
+        {
+            Graph g = new Graph();
+
+            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + filename));
+            XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(Graph));
+            g = (Graph)xmlSerizlizer.Deserialize(new StringReader(fileContents));
+
+            return PartialView("Graph", g);
+        }
     }
 }

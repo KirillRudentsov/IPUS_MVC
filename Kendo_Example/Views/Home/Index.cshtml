@@ -3,7 +3,8 @@
 }
 
 @{
-    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
+    //var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
+    var culture = "ru-RU";
 }
 
 <html>
@@ -13,7 +14,7 @@
     @Scripts.Render("~/Scripts/Custom")
     @Scripts.Render("~/Scripts/Cultures/kendo.culture." + culture + ".min.js")
     @Scripts.Render("~/Scripts/messages/kendo.messages." + culture + ".min.js")
-    <script>kendo.culture("ru-RU");</script>
+    <script>kendo.culture(@culture);</script>
 </head>
 
 <body>
@@ -27,6 +28,7 @@
     <kendo:grid name="asdasd"> </kendo:grid>
     <button id="showGrid">show grid</button>
     <br />
+    <button id="showGraph">show graph</button>
 
     <script>
         $('#i_menu').load('@Url.Content("~/Components/LoadMenuComponent?filename=ModelMenu.xml")');
@@ -40,6 +42,12 @@
         $(document).ready(function () {
             $('#showGrid').click(function () {
                 $('#control_content').load('@Url.Content("~/Components/LoadGridComponent?filename=ModelGrid.xml")');
+            });
+        });
+
+        $(document).ready(function () {
+            $('#showGraph').click(function () {
+                $('#control_content').load('@Url.Content("~/Components/LoadGraphComponent?filename=ModelGraph.xml")');
             });
         });
 

@@ -1,0 +1,80 @@
+﻿{"edges": [
+        {
+            "from": "202",
+            "to": "203",
+            "title": "ON_ERROR",
+            "arrows": "to",
+            "physics": false,
+            "label": "ON_ERROR",
+            "smooth": {
+                "type": "cubicBezier"
+            }
+        },
+        {
+            "from": "201",
+            "to": "206",
+            "title": "ON_INPUT",
+            "arrows": "to",
+            "physics": false,
+            "label": "ON_INPUT",
+            "smooth": {
+                "type": "cubicBezier"
+            }
+        },
+        {
+            "from": "202",
+            "to": "202",
+            "title": "ON_IT_ERROR",
+            "arrows": "to",
+            "physics": false,
+            "label": "ON_IT_ERROR",
+            "smooth": {
+                "type": "cubicBezier"
+            }
+        },
+        {
+            "from": "204",
+            "to": "205",
+            "title": "ON_ERROR",
+            "arrows": "to",
+            "physics": false,
+            "label": "ON_ERROR",
+            "smooth": {
+                "type": "cubicBezier"
+            }
+        },
+        {
+            "from": "202",
+            "to": "204",
+            "title": "ON_SUCCESS",
+            "arrows": "to",
+            "physics": false,
+            "label": "ON_SUCCESS",
+            "smooth": {
+                "type": "cubicBezier"
+            }
+        },
+        {
+            "from": "204",
+            "to": "208",
+            "title": "ON_SUCCESS",
+            "arrows": "to",
+            "physics": false,
+            "label": "ON_SUCCESS",
+            "smooth": {
+                "type": "cubicBezier"
+            }
+        },
+        {
+            "from": "212",
+            "to": "213",
+            "title": "ON_ERROR",
+            "arrows": "to",
+            "physics": false,
+            "label": "ON_ERROR",
+            "smooth": {
+                "type": "cubicBezier"
+            }
+        }
+    ]
+}

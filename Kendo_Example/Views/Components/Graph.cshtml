@@ -1,0 +1,19 @@
+﻿
+@model Kendo_Example.Models.Graph
+
+@(Html.Kendo().Diagram()
+    .Name(Model.Id)
+    .DataSource(source =>
+        source.Read(read => read.Action(Model.DataSource.Action, Model.DataSource.Controller_name, new { link = Model.DataSource.key_link }))
+    )
+    .ConnectionDefaults(def => def.Stroke(str => str.Width(2).Color("green")) )
+    .Layout(l => l.Type(DiagramLayoutType.Tree) )
+    .ConnectionsDataSource( conn => conn.Read( read => read.Action("","") ) )
+    
+)
+
+
+<script>
+
+
+</script>

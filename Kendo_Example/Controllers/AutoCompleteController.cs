@@ -129,5 +129,15 @@ namespace Kendo_Example.Controllers
 
             return Json("OK");
         }
+
+        public JsonResult GetGraphData([DataSourceRequest] DataSourceRequest request, string link)
+        {
+            //get data from db by link and return DataSet back
+
+            string jsonGraphData = "[{\"week\": \"W1\",\"value\": 3000 },{\"week\": \"W2\",\"value\": 4000},{\"week\": \"W3\",\"value\": 2500}]";
+
+            
+            return Json(jsonGraphData);
+        }
     }
 }
