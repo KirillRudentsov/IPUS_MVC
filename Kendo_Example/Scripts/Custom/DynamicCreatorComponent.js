@@ -56,29 +56,30 @@ function visualTemplate(options) {
             stroke: {
                 width: 0
             },
-            fill: {
-                gradient: {
-                    type: "linear",
-                    stops: [{
-                        color: dataItem.color,
-                        offset: 0,
-                        opacity: 0.5
-                    }, {
-                        color: dataItem.color,
-                        offset: 1,
-                        opacity: 1
-                    }]
-                }
-            }
+            fill: dataItem.color
+            //fill: {
+            //    gradient: {
+            //        type: "linear",
+            //        stops: [{
+            //            color: dataItem.color,
+            //            offset: 0,
+            //            opacity: 0.5
+            //        }, {
+            //            color: dataItem.color,
+            //            offset: 1,
+            //            opacity: 1
+            //        }]
+            //    }
+            //}
         }));
-        g.append(new dataviz.diagram.Rectangle({
-            width: 8,
-            height: dataItem.size,
-            fill: "orange",
-            stroke: {
-                width: 0
-            }
-        }));
+        //g.append(new dataviz.diagram.Rectangle({
+        //    width: 8,
+        //    height: dataItem.size,
+        //    fill: "orange",
+        //    stroke: {
+        //        width: 0
+        //    }
+        //}));
     }
     if (dataItem.shape === 'Circle') {
         g.append(new dataviz.diagram.Circle({
@@ -102,15 +103,15 @@ function visualTemplate(options) {
         }));
     }
 
-    g.append(new dataviz.diagram.TextBlock({
-        text: dataItem.label,
-        fontSize: 22,
-        x: 10,
-        y: 10,
-        fill: "#0D0D0C",
-        //height: 20,
-        //width: 80
-    }));
+    //g.append(new dataviz.diagram.TextBlock({
+    //    text: dataItem.label,
+    //    fontSize: 22,
+    //    x: 25,
+    //    y: 25,
+    //    fill: "#0D0D0C",
+    //    //height: 20,
+    //    //width: 80
+    //}));
 
     //}
 

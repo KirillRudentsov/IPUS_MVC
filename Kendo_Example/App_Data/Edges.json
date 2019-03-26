@@ -1,115 +1,95 @@
-﻿{"edges": [
-  {
-    "id": "1",
-    "from": "202",
-    "to": "203",
-    "title": "ON_ERROR",
-    "arrows": "to",
-    "FromPointX": null,
-    "FromPointY": null,
-    "ToPointX": null,
-    "ToPointY": null,
-    "physics": false,
-    "label": "ON_ERROR",
-    "smooth": {
-      "type": "cubicBezier"
+﻿{
+  "edges": [
+    {
+      "id": "1",
+      "from": "202",
+      "to": "203",
+      "title": "ON_ERROR",
+      "arrows": "to",
+      "FromPointX": null,
+      "FromPointY": null,
+      "ToPointX": null,
+      "ToPointY": null,
+      "physics": false,
+      "label": "ON_ERROR"
+    },
+    {
+      "id": "2",
+      "from": "201",
+      "to": "206",
+      "title": "ON_INPUT",
+      "arrows": "to",
+      "FromPointX": null,
+      "FromPointY": null,
+      "ToPointX": null,
+      "ToPointY": null,
+      "physics": false,
+      "label": "ON_INPUT"
+    },
+    {
+      "id": "3",
+      "from": "202",
+      "to": "202",
+      "title": "ON_IT_ERROR",
+      "arrows": "to",
+      "physics": false,
+      "FromPointX": null,
+      "FromPointY": null,
+      "ToPointX": null,
+      "ToPointY": null,
+      "label": "ON_IT_ERROR"
+    },
+    {
+      "id": "4",
+      "from": "204",
+      "to": "205",
+      "title": "ON_ERROR",
+      "arrows": "to",
+      "FromPointX": null,
+      "FromPointY": null,
+      "ToPointX": null,
+      "ToPointY": null,
+      "physics": false,
+      "label": "ON_ERROR"
+    },
+    {
+      "id": "5",
+      "from": "202",
+      "to": "204",
+      "title": "ON_SUCCESS",
+      "arrows": "to",
+      "physics": false,
+      "FromPointX": null,
+      "FromPointY": null,
+      "ToPointX": null,
+      "ToPointY": null,
+      "label": "ON_SUCCESS"
+    },
+    {
+      "id": "6",
+      "from": "204",
+      "to": "208",
+      "title": "ON_SUCCESS",
+      "arrows": "to",
+      "physics": false,
+      "FromPointX": null,
+      "FromPointY": null,
+      "ToPointX": null,
+      "ToPointY": null,
+      "label": "ON_SUCCESS"
+    },
+    {
+      "id": "7",
+      "from": "212",
+      "to": "213",
+      "title": "ON_ERROR",
+      "arrows": "to",
+      "physics": false,
+      "FromPointX": null,
+      "FromPointY": null,
+      "ToPointX": null,
+      "ToPointY": null,
+      "label": "ON_ERROR"
     }
-  },
-  {
-    "id": "2",
-    "from": "201",
-    "to": "206",
-    "title": "ON_INPUT",
-    "arrows": "to",
-    "FromPointX": null,
-    "FromPointY": null,
-    "ToPointX": null,
-    "ToPointY": null,
-    "physics": false,
-    "label": "ON_INPUT",
-    "smooth": {
-      "type": "cubicBezier"
-    }
-  },
-  {
-    "id": "3",
-    "from": "202",
-    "to": "202",
-    "title": "ON_IT_ERROR",
-    "arrows": "to",
-    "physics": false,
-    "FromPointX": null,
-    "FromPointY": null,
-    "ToPointX": null,
-    "ToPointY": null,
-    "label": "ON_IT_ERROR",
-    "smooth": {
-      "type": "cubicBezier"
-    }
-  },
-  {
-    "id": "4",
-    "from": "204",
-    "to": "205",
-    "title": "ON_ERROR",
-    "arrows": "to",
-    "FromPointX": null,
-    "FromPointY": null,
-    "ToPointX": null,
-    "ToPointY": null,
-    "physics": false,
-    "label": "ON_ERROR",
-    "smooth": {
-      "type": "cubicBezier"
-    }
-  },
-  {
-    "id": "5",
-    "from": "202",
-    "to": "204",
-    "title": "ON_SUCCESS",
-    "arrows": "to",
-    "physics": false,
-    "FromPointX": null,
-    "FromPointY": null,
-    "ToPointX": null,
-    "ToPointY": null,
-    "label": "ON_SUCCESS",
-    "smooth": {
-      "type": "cubicBezier"
-    }
-  },
-  {
-    "id": "6",
-    "from": "204",
-    "to": "208",
-    "title": "ON_SUCCESS",
-    "arrows": "to",
-    "physics": false,
-    "FromPointX": null,
-    "FromPointY": null,
-    "ToPointX": null,
-    "ToPointY": null,
-    "label": "ON_SUCCESS",
-    "smooth": {
-      "type": "cubicBezier"
-    }
-  },
-  {
-    "id": "7",
-    "from": "212",
-    "to": "213",
-    "title": "ON_ERROR",
-    "arrows": "to",
-    "physics": false,
-    "FromPointX": null,
-    "FromPointY": null,
-    "ToPointX": null,
-    "ToPointY": null,
-    "label": "ON_ERROR",
-    "smooth": {
-      "type": "cubicBezier"
-    }
-  }
-    ]
+  ]
 } 

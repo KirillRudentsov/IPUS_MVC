@@ -5,11 +5,6 @@ using System.Web;
 
 namespace Kendo_Example.SupportClasses
 {
-    public class Smooth
-    {
-        public string type { get; set; }
-    }
-
     public class Edge
     {
         public string id { get; set; }
@@ -23,7 +18,6 @@ namespace Kendo_Example.SupportClasses
         public string ToPointX { get; set; }
         public string ToPointY { get; set; }
         public string label { get; set; }
-        public Smooth smooth { get; set; }
     }
     
     public class Edges

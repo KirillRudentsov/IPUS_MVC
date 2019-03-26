@@ -161,7 +161,7 @@ namespace Kendo_Example.Controllers
 
             var res = edge.edges.ToDataSourceResult(request);
 
-            return Json(jsonGraphEdges);
+            return Json(res);
         }
     }
 }

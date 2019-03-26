@@ -38,7 +38,7 @@
 
                                     m.From(c => c.from);
                                     m.To(c => c.to);
-                                    m.FromX(c => c.FromPointX );
+                                    m.FromX(c => c.FromPointX);
                                     m.FromY(c => c.FromPointY);
                                     m.ToX(c => c.ToPointX);
                                     m.ToY(c => c.ToPointY);
@@ -53,12 +53,12 @@
                           )
                           .ShapeDefaults(sd => sd
                               .Visual("visualTemplate")
-                          //.Content(c => c
-                          //    .Template("#= dataItem.label #")
-                          //    .FontSize(17)
-                          //    .Color("#= dataItem.color #")
-                          //    .Text("#= dataItem.label #")
-                          //)
+                          .Content(c => c
+                              .Template("#= dataItem.label #")
+                              .FontSize(22)
+                              .Color("#= dataItem.color #")
+                              //.Text("#= dataItem.label #")
+                          )
                           )
                         .ConnectionDefaults(cd => cd
                             .Stroke(s => s
