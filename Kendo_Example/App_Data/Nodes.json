@@ -13,7 +13,7 @@
       "id": "201",
       "size": "150",
       "title": "",
-      "label": "<b>INPUT</b>\n<b>CHECK_BALANCE</b>\n<i>A_PHONE : </i>\n<i>BALANCE : </i>\n<i>ERROR : </i>\n<i>MARTI_BALANCE : </i>\n<i>RESULT : </i>\n<i>URL : </i>",
+      "label": "MARTI_CHECK_BALANCE",
       "color": "yellow",
       "shape": "Rectangle" // Circle, Rectangle, Line, TextBlock, Image, Polyline
     },
@@ -30,7 +30,7 @@
       "id": "202",
       "size": "150",
       "title": "",
-      "label": "<b>ROBOT</b>\n<b>CHECK_BALANCE</b>",
+      "label": "ROBOT CHECK_BALANCE",
       "color": "#aaFFaa",
       "shape": "Rectangle"
     },
@@ -47,7 +47,7 @@
       "id": "203",
       "size": "150",
       "title": "Ошибка 202",
-      "label": "<b>FINISH</b>\n<b>Err </b>",
+      "label": "FINISH->Err",
       "color": "#FFCFCF",
       "shape": "Rectangle"
     },
@@ -64,7 +64,7 @@
       "id": "204",
       "size": "150",
       "title": "",
-      "label": "<b>FUNCTION</b>\n<b>COMPARE_BALANCE</b>",
+      "label": "FUNCTION->COMPARE_BALANCE",
       "color": "lavender",
       "shape": "Rectangle"
     },
@@ -81,7 +81,7 @@
       "id": "205",
       "size": "150",
       "title": "Ошибка F_COMP_BALANCE204",
-      "label": "<b>FINISH</b>\n<b>Err F_COMP_BALANCE</b>",
+      "label": "FINISH=>Err F_COMP_BALANCE",
       "color": "#FFCFCF",
       "shape": "Rectangle"
     },
@@ -98,7 +98,7 @@
       "id": "207",
       "size": "150",
       "title": "Ошибка F_URL206",
-      "label": "<b>FINISH</b>\n<b>Err F_URL</b>",
+      "label": "FINISH=>Err F_URL",
       "color": "#FFCFCF",
       "shape": "Circle"
     },
@@ -115,7 +115,7 @@
       "id": "208",
       "size": "150",
       "title": "",
-      "label": "<b>FINISH</b>\n<b>FINISH</b>",
+      "label": "FINISH",
       "color": "#FFCFCF",
       "shape": "Rectangle"
     },
@@ -132,7 +132,7 @@
       "id": "212",
       "size": "150",
       "title": "",
-      "label": "<b>FUNCTION</b>\n<b>GET_URL_FOR_MARTI</b>",
+      "label": "FUNCTION=>GET_URL_FOR_MARTI",
       "color": "lavender",
       "shape": "Rectangle"
     },
@@ -149,7 +149,7 @@
       "id": "213",
       "size": "150",
       "title": "Ошибка 212",
-      "label": "<b>FINISH</b>\n<b>Err </b>",
+      "label": "FINISH->Err",
       "color": "#FFCFCF",
       "shape": "Rectangle"
     }

@@ -42,8 +42,8 @@ function test(e, id, format) {
 
 function visualTemplate(options) {
 
-    console.log("visualTemplate handle!");
-    console.log(options);
+    //console.log("visualTemplate handle!");
+    //console.log(options);
 
     var dataviz = kendo.dataviz;
     var g = new dataviz.diagram.Group();
@@ -104,7 +104,7 @@ function visualTemplate(options) {
 
     g.append(new dataviz.diagram.TextBlock({
         text: dataItem.label,
-        fontSize: dataItem.font.size,
+        fontSize: 22,
         x: 10,
         y: 10,
         fill: "#0D0D0C",
