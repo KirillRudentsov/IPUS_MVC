@@ -32,17 +32,17 @@
                 "type": "cubicBezier"
             }
         },
-        {
-            "from": "204",
-            "to": "205",
-            "title": "ON_ERROR",
-            "arrows": "to",
-            "physics": false,
-            "label": "ON_ERROR",
-            "smooth": {
-                "type": "cubicBezier"
-            }
-        },
+  {
+    "from": "204",
+    "to": "205",
+    "title": "ON_ERROR",
+    "arrows": "to",
+    "physics": false,
+    "label": "ON_ERROR",
+    "smooth": {
+      "type": "cubicBezier"
+    }
+  },
         {
             "from": "202",
             "to": "204",
@@ -77,4 +77,4 @@
             }
         }
     ]
-}
+} 

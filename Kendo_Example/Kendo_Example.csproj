@@ -113,12 +113,14 @@
     </Compile>
     <Compile Include="Models\ModelAu.cs" />
     <Compile Include="Models\ModelDateTimePicker.cs" />
-    <Compile Include="Models\ModelGraph.cs" />
     <Compile Include="Models\ModelGrid.cs" />
     <Compile Include="Models\ModelMenu.cs" />
     <Compile Include="Models\TestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupportClasses\edges.cs" />
+    <Compile Include="SupportClasses\GraphView.cs" />
     <Compile Include="SupportClasses\GridBuilder.cs" />
+    <Compile Include="SupportClasses\nodes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -1466,12 +1468,13 @@
     <Content Include="Scripts\messages\kendo.messages.zh-TW.min.js" />
     <Content Include="XmlFiles\CustomComponents\Date\DateTimePicker_1.xml" />
     <Content Include="XmlFiles\ModelAu.xml" />
-    <Content Include="XmlFiles\ModelGraph.xml" />
     <Content Include="XmlFiles\ModelGrid.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="XmlFiles\ModelMenu.xml" />
     <Content Include="XmlFiles\ProcedureDefinition\TestProcedure.xml" />
+    <Content Include="App_Data\Edges.json" />
+    <Content Include="App_Data\Nodes.json" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Kirill.pubxml" />
@@ -2688,9 +2691,7 @@
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
   </ItemGroup>

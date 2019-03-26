@@ -1,19 +1,67 @@
 ﻿
-@model Kendo_Example.Models.Graph
+@(Html.Kendo().Diagram<Kendo_Example.SupportClasses.Node, Kendo_Example.SupportClasses.Edge>()
+                        .Name("ProcessDesigner")
+                        .DataSource(source => source
+                                    .ShapeDataSource()
+                                    .Model(m =>
+                                    {
+                                        m.Id(s => s.id);
 
-@(Html.Kendo().Diagram()
-    .Name(Model.Id)
-    .DataSource(source =>
-        source.Read(read => read.Action(Model.DataSource.Action, Model.DataSource.Controller_name, new { link = Model.DataSource.key_link }))
-    )
-    .ConnectionDefaults(def => def.Stroke(str => str.Width(2).Color("green")) )
-    .Layout(l => l.Type(DiagramLayoutType.Tree) )
-    .ConnectionsDataSource( conn => conn.Read( read => read.Action("","") ) )
-    
+                                        m.Field(s => s.label).Editable(true);
+                                        m.Field(s => s.title).Editable(true);
+                                        m.Field(s => s.color).Editable(true);
+                                        m.Field(s => s.shape).Editable(true);
+                                        m.Field(s => s.size).Editable(true);
+
+                                        m.Field(s => s.font.align).Editable(true);
+                                        m.Field(s => s.font.size).Editable(true);
+                                        m.Field(s => s.font.multi).Editable(true);
+
+                                        m.Field(s => s.attributes.id).Editable(true);
+                                        m.Field(s => s.attributes.type).Editable(true);
+
+                                    })
+                            .Read("GetGraphNodes", "AutoComplete")
+                            .Create("CreateShape", "DiagramData")
+                            .Destroy("DestroyShape", "DiagramData")
+                            .Update("UpdateShape", "DiagramData")
+                        )
+                        .Editable(true)
+                          //.ConnectionsDataSource(d => d
+                          //      .Model(m =>
+                          //      {
+                          //          m.Id(c => Model.edges.edges[0].from);
+
+                          //          m.From(c => Model.edges.edges[0].from);
+                          //          m.To(c => Model.edges.edges[0].to);
+                          //          //m.FromX(1);
+                          //          //m.FromY(c => c.FromPointY);
+                          //          //m.ToX(c => c.ToPointX);
+                          //          //m.ToY(c => c.ToPointY);
+                          //      })
+                          //      .Read("GetGraphEdges", "AutoComplete")
+                          //  )
+                          .Events(e => e.DataBound("onDataBound"))
+                          .Layout(l => l
+                              .Type(DiagramLayoutType.Tree)
+                              .Subtype(DiagramLayoutSubtype.Tipover)
+                              .UnderneathHorizontalOffset(140)
+                          )
+                          .ShapeDefaults(sd => sd
+                              .Visual("visualTemplate")
+                          //.Content(c => c
+                          //    .Template("#= dataItem.label #")
+                          //    .FontSize(17)
+                          //    .Color("#= dataItem.color #")
+                          //    .Text("#= dataItem.label #")
+                          //)
+                          )
+//.ConnectionDefaults(cd => cd
+//    .Stroke(s => s
+//        .Color("#586477")
+//        .Width(2)
+//    )
+//)
+
 )
 
-
-<script>
-
-
-</script>

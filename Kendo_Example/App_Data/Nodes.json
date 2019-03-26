@@ -1,156 +1,158 @@
 ﻿{
-    "nodes": [
-        {
-            "font": {
-                "multi": "html",
-                "size": "20",
-                "align": "left"
-            },
-            "attributes": {
-                "id": "201",
-                "type": "INPUT"
-            },
-            "id": "201",
-            "size": "150",
-            "title": "",
-            "label": "<b>INPUT</b>\n<b>CHECK_BALANCE</b>\n<i>A_PHONE : </i>\n<i>BALANCE : </i>\n<i>ERROR : </i>\n<i>MARTI_BALANCE : </i>\n<i>RESULT : </i>\n<i>URL : </i>",
-            "color": "yellow",
-            "shape": "box"
-        },
-        {
-            "font": {
-                "multi": "html",
-                "size": "20",
-                "align": "left"
-            },
-            "attributes": {
-                "id": "202",
-                "type": "ROBOT"
-            },
-            "id": "202",
-            "size": "150",
-            "title": "",
-            "label": "<b>ROBOT</b>\n<b>CHECK_BALANCE</b>",
-            "color": "#aaFFaa",
-            "shape": "box"
-        },
-        {
-            "font": {
-                "multi": "html",
-                "size": "20",
-                "align": "left"
-            },
-            "attributes": {
-                "id": "203",
-                "type": "Finish"
-            },
-            "id": "203",
-            "size": "150",
-            "title": "Ошибка 202",
-            "label": "<b>FINISH</b>\n<b>Err </b>",
-            "color": "#FFCFCF",
-            "shape": "box"
-        },
-        {
-            "font": {
-                "multi": "html",
-                "size": "20",
-                "align": "left"
-            },
-            "attributes": {
-                "id": "204",
-                "type": "FUNC"
-            },
-            "id": "204",
-            "size": "150",
-            "title": "",
-            "label": "<b>FUNCTION</b>\n<b>COMPARE_BALANCE</b>",
-            "color": "lavender",
-            "shape": "box"
-        },
-        {
-            "font": {
-                "multi": "html",
-                "size": "20",
-                "align": "left"
-            },
-            "attributes": {
-                "id": "205",
-                "type": "Finish"
-            },
-            "id": "205",
-            "size": "150",
-            "title": "Ошибка F_COMP_BALANCE204",
-            "label": "<b>FINISH</b>\n<b>Err F_COMP_BALANCE</b>",
-            "color": "#FFCFCF",
-            "shape": "box"
-        },
-        {
-            "font": {
-                "multi": "html",
-                "size": "20",
-                "align": "left"
-            },
-            "attributes": {
-                "id": "207",
-                "type": "Finish"
-            },
-            "id": "207",
-            "size": "150",
-            "title": "Ошибка F_URL206",
-            "label": "<b>FINISH</b>\n<b>Err F_URL</b>",
-            "color": "#FFCFCF",
-            "shape": "box"
-        },
-        {
-            "font": {
-                "multi": "html",
-                "size": "20",
-                "align": "left"
-            },
-            "attributes": {
-                "id": "208",
-                "type": "Finish"
-            },
-            "id": "208",
-            "size": "150",
-            "title": "",
-            "label": "<b>FINISH</b>\n<b>FINISH</b>",
-            "color": "#FFCFCF",
-            "shape": "box"
-        },
-        {
-            "font": {
-                "multi": "html",
-                "size": "20",
-                "align": "left"
-            },
-            "attributes": {
-                "id": "212",
-                "type": "FUNC"
-            },
-            "id": "212",
-            "size": "150",
-            "title": "",
-            "label": "<b>FUNCTION</b>\n<b>GET_URL_FOR_MARTI</b>",
-            "color": "lavender",
-            "shape": "box"
-        },
-        {
-            "font": {
-                "multi": "html",
-                "size": "20",
-                "align": "left"
-            },
-            "attributes": {
-                "id": "213",
-                "type": "Finish"
-            },
-            "id": "213",
-            "size": "150",
-            "title": "Ошибка 212",
-            "label": "<b>FINISH</b>\n<b>Err </b>",
-            "color": "#FFCFCF",
-            "shape": "box"
-        }
-    ],}
+  "nodes": [
+    {
+      "font": {
+        "multi": "html",
+        "size": "22",
+        "align": "left"
+      },
+      "attributes": {
+        "id": "201",
+        "type": "INPUT"
+      },
+      "id": "201",
+      "size": "150",
+      "title": "",
+      "label": "<b>INPUT</b>\n<b>CHECK_BALANCE</b>\n<i>A_PHONE : </i>\n<i>BALANCE : </i>\n<i>ERROR : </i>\n<i>MARTI_BALANCE : </i>\n<i>RESULT : </i>\n<i>URL : </i>",
+      "color": "yellow",
+      "shape": "Rectangle" // Circle, Rectangle, Line, TextBlock, Image, Polyline
+    },
+    {
+      "font": {
+        "multi": "html",
+        "size": "20",
+        "align": "left"
+      },
+      "attributes": {
+        "id": "202",
+        "type": "ROBOT"
+      },
+      "id": "202",
+      "size": "150",
+      "title": "",
+      "label": "<b>ROBOT</b>\n<b>CHECK_BALANCE</b>",
+      "color": "#aaFFaa",
+      "shape": "Rectangle"
+    },
+    {
+      "font": {
+        "multi": "html",
+        "size": "20",
+        "align": "left"
+      },
+      "attributes": {
+        "id": "203",
+        "type": "Finish"
+      },
+      "id": "203",
+      "size": "150",
+      "title": "Ошибка 202",
+      "label": "<b>FINISH</b>\n<b>Err </b>",
+      "color": "#FFCFCF",
+      "shape": "Rectangle"
+    },
+    {
+      "font": {
+        "multi": "html",
+        "size": "20",
+        "align": "left"
+      },
+      "attributes": {
+        "id": "204",
+        "type": "FUNC"
+      },
+      "id": "204",
+      "size": "150",
+      "title": "",
+      "label": "<b>FUNCTION</b>\n<b>COMPARE_BALANCE</b>",
+      "color": "lavender",
+      "shape": "Rectangle"
+    },
+    {
+      "font": {
+        "multi": "html",
+        "size": "20",
+        "align": "left"
+      },
+      "attributes": {
+        "id": "205",
+        "type": "Finish"
+      },
+      "id": "205",
+      "size": "150",
+      "title": "Ошибка F_COMP_BALANCE204",
+      "label": "<b>FINISH</b>\n<b>Err F_COMP_BALANCE</b>",
+      "color": "#FFCFCF",
+      "shape": "Rectangle"
+    },
+    {
+      "font": {
+        "multi": "html",
+        "size": "20",
+        "align": "left"
+      },
+      "attributes": {
+        "id": "207",
+        "type": "Finish"
+      },
+      "id": "207",
+      "size": "150",
+      "title": "Ошибка F_URL206",
+      "label": "<b>FINISH</b>\n<b>Err F_URL</b>",
+      "color": "#FFCFCF",
+      "shape": "Circle"
+    },
+    {
+      "font": {
+        "multi": "html",
+        "size": "20",
+        "align": "left"
+      },
+      "attributes": {
+        "id": "208",
+        "type": "Finish"
+      },
+      "id": "208",
+      "size": "150",
+      "title": "",
+      "label": "<b>FINISH</b>\n<b>FINISH</b>",
+      "color": "#FFCFCF",
+      "shape": "Rectangle"
+    },
+    {
+      "font": {
+        "multi": "html",
+        "size": "20",
+        "align": "left"
+      },
+      "attributes": {
+        "id": "212",
+        "type": "FUNC"
+      },
+      "id": "212",
+      "size": "150",
+      "title": "",
+      "label": "<b>FUNCTION</b>\n<b>GET_URL_FOR_MARTI</b>",
+      "color": "lavender",
+      "shape": "Rectangle"
+    },
+    {
+      "font": {
+        "multi": "html",
+        "size": "20",
+        "align": "left"
+      },
+      "attributes": {
+        "id": "213",
+        "type": "Finish"
+      },
+      "id": "213",
+      "size": "150",
+      "title": "Ошибка 212",
+      "label": "<b>FINISH</b>\n<b>Err </b>",
+      "color": "#FFCFCF",
+      "shape": "Rectangle"
+    }
+  ]
+
+}

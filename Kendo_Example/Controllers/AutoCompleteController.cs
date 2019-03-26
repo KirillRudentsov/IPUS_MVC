@@ -130,14 +130,38 @@ namespace Kendo_Example.Controllers
             return Json("OK");
         }
 
-        public JsonResult GetGraphData([DataSourceRequest] DataSourceRequest request, string link)
+        public JsonResult GetGraphNodes([DataSourceRequest] DataSourceRequest request, string link)
         {
             //get data from db by link and return DataSet back
 
-            string jsonGraphData = "[{\"week\": \"W1\",\"value\": 3000 },{\"week\": \"W2\",\"value\": 4000},{\"week\": \"W3\",\"value\": 2500}]";
+            //string jsonGraphData = "[{\"week\": \"W1\",\"value\": 3000 },{\"week\": \"W2\",\"value\": 4000},{\"week\": \"W3\",\"value\": 2500}]";
 
-            
-            return Json(jsonGraphData);
+            var jsonGraphNodes = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/Nodes.json"));
+
+            Nodes n = new Nodes();
+
+            n = Newtonsoft.Json.JsonConvert.DeserializeObject<Nodes>(jsonGraphNodes);
+
+            var res = n.nodes.ToDataSourceResult(request);
+
+            return Json(res);
+        }
+
+        public JsonResult GetGraphEdges([DataSourceRequest] DataSourceRequest request, string link)
+        {
+            //get data from db by link and return DataSet back
+
+            //string jsonGraphData = "[{\"week\": \"W1\",\"value\": 3000 },{\"week\": \"W2\",\"value\": 4000},{\"week\": \"W3\",\"value\": 2500}]";
+
+            var jsonGraphEdges = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/Edges.json"));
+
+            Edges edge = new Edges();
+
+            edge = Newtonsoft.Json.JsonConvert.DeserializeObject<Edges>(jsonGraphEdges);
+
+            var res = edge.edges.ToDataSourceResult(request);
+
+            return Json(jsonGraphEdges);
         }
     }
 }

@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using System.Xml.Serialization;
 using Kendo_Example.Models;
 using System.Data;
+using Kendo_Example.SupportClasses;
+using System.Web.Script.Serialization;
 
 namespace Kendo_Example.Controllers
 {
@@ -59,13 +61,7 @@ namespace Kendo_Example.Controllers
 
         public PartialViewResult LoadGraphComponent(string filename)
         {
-            Graph g = new Graph();
-
-            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + filename));
-            XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(Graph));
-            g = (Graph)xmlSerizlizer.Deserialize(new StringReader(fileContents));
-
-            return PartialView("Graph", g);
+            return PartialView("Graph");
         }
     }
 }
