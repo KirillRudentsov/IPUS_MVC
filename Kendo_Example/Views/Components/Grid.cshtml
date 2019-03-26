@@ -13,6 +13,9 @@
                                     var c = columns.Bound(item.Name).Title(item.Label).Width(item.Width)
                                          .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(item.Model.Edittype)
                                          .Format(item.Model.Format);
+                                    if (item.Name == "TestName")
+                                        c.ClientTemplate( Html.ActionLink(item.Name, "LoadGraphComponent", "Components", new { filename= "ModelGraph.xml" }, null).ToHtmlString() );
+
 
                                     if (item.Model.Edittype == "Date")
                                     {
