@@ -121,6 +121,7 @@
     <Compile Include="SupportClasses\GraphView.cs" />
     <Compile Include="SupportClasses\GridBuilder.cs" />
     <Compile Include="SupportClasses\nodes.cs" />
+    <Compile Include="SupportClasses\KendoSQLBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
