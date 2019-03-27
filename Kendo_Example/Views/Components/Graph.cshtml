@@ -1,4 +1,5 @@
 ﻿
+@model string
 
 <html>
 <head>
@@ -37,7 +38,7 @@
                                             m.Field(s => s.attributes.id).Editable(true);
                                             m.Field(s => s.attributes.type).Editable(true);
                                         })
-                                .Read("GetGraphNodes", "AutoComplete")
+                                .Read("GetGraphNodes", "ComponentData", new { link = Model })
                                 .Create("CreateShape", "DiagramData")
                                 .Destroy("DestroyShape", "DiagramData")
                                 .Update("UpdateShape", "DiagramData")
@@ -58,7 +59,7 @@
                                         m.ToX(c => c.ToPointX);
                                         m.ToY(c => c.ToPointY);
                                     })
-                                    .Read("GetGraphEdges", "AutoComplete")
+                                    .Read("GetGraphEdges", "ComponentData", new { link = Model })
                                 )
                               .Events(e => e.DataBound("onDataBound"))
                               .Layout(l => l

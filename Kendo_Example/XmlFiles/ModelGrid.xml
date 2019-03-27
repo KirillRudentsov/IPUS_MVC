@@ -4,18 +4,18 @@
           caption="This is test table caption"
           selectCountRows="20">
 
-  <DataSource action="GetGridData" controller_name="AutoComplete" key_link="GetTestAu" />
+  <DataSource action="GetGridData" controller_name="ComponentData" key_link="GetTestAu" />
 
   <Update>
-    <DataSource action="GridProcedure_Update" controller_name="AutoComplete" key_link="TestProcedure.xml" />
+    <DataSource action="GridProcedure_Update" controller_name="ComponentData" key_link="TestProcedure.xml" />
   </Update>
 
   <Edit>
-    <DataSource action="GridProcedure_Edite" controller_name="AutoComplete" key_link="TestProcedure.xml" />
+    <DataSource action="GridProcedure_Edite" controller_name="ComponentData" key_link="TestProcedure.xml" />
   </Edit>
 
   <Delete>
-    <DataSource action="GridProcedure_Delete" controller_name="AutoComplete" key_link="TestProcedure.xml" />
+    <DataSource action="GridProcedure_Delete" controller_name="ComponentData" key_link="TestProcedure.xml" />
   </Delete>
 
   <COLUMNS>
@@ -26,7 +26,7 @@
       </Model>
     </column>
 
-    <column type="simple" name="TestName" label="Имя" width="150" hidden="false" visible="true" key="false">
+    <column type="ProcessDesignerLink" name="TestName" label="Имя" width="150" hidden="false" visible="true" key="false">
       <Model editable="true" edittype="String" format="">
         <default_value>TestName_Default</default_value>
       </Model>

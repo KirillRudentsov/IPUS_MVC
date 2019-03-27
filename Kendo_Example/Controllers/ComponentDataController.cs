@@ -14,7 +14,7 @@ using Kendo_Example.SupportClasses;
 
 namespace Kendo_Example.Controllers
 {
-    public class AutoCompleteController : Controller
+    public class ComponentDataController : Controller
     {
         // GET: AutoComplete
         public ActionResult Index()

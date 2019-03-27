@@ -10,13 +10,27 @@ namespace Kendo_Example.Models
     {
     }
 
+    public enum Edittype
+    {
+        [XmlEnum(Name = "Integer")]
+        Integer = 0,
+        [XmlEnum(Name = "String")]
+        String = 1,
+        [XmlEnum(Name = "Date")]
+        Date = 2,
+        [XmlEnum(Name = "Boolean")]
+        Boolean = 3
+    }
+
     [XmlRoot(ElementName = "Model")]
     public class Model
     {
         [XmlElement(ElementName = "default_value")]
         public string Default_value { get; set; }
+
         [XmlAttribute(AttributeName = "edittype")]
-        public string Edittype { get; set; }
+        public Edittype edittype { get; set; }
+        
         [XmlAttribute(AttributeName = "format")]
         public string Format { get; set; }
         [XmlAttribute(AttributeName = "editable")]
@@ -66,11 +80,19 @@ namespace Kendo_Example.Models
         public DataSource DataSource { get; set; }
     }
 
+    public enum ColumnType
+    {
+        [XmlEnum(Name = "simple")]
+        simple = 0,
+        [XmlEnum(Name = "ProcessDesignerLink")]
+        ProcessDesignerLink = 1
+    }
+    
     [XmlRoot(ElementName = "column")]
     public class Column
     {
         [XmlAttribute(AttributeName = "type")]
-        public string Type { get; set; }
+        public ColumnType Type { get; set; }
         [XmlAttribute(AttributeName = "name")]
         public string Name { get; set; }
         [XmlAttribute(AttributeName = "label")]

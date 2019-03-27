@@ -11,16 +11,16 @@
                                 foreach (var item in Model.COLUMNS.Column)
                                 {
                                     var c = columns.Bound(item.Name).Title(item.Label).Width(item.Width)
-                                         .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(item.Model.Edittype)
+                                         .Hidden(item.hidden).Visible(item.visible).EditorTemplateName( Enum.GetName(typeof(Kendo_Example.Models.Edittype), item.Model.edittype))
                                          .Format(item.Model.Format);
-                                    if (item.Name == "TestName")
-                                        c.ClientTemplate( Html.ActionLink(item.Name, "LoadGraphComponent", "Components", new { filename= "ModelGraph.xml" }, null).ToHtmlString() );
+
+                                    if(item.Type == Kendo_Example.Models.ColumnType.ProcessDesignerLink)
+                                        c.ClientTemplate( Html.ActionLink("#=" + item.Name + "#", "LoadGraphComponent", "Components", new { link = "#=" + item.Name + "#" }, null).ToHtmlString() );
 
 
-                                    if (item.Model.Edittype == "Date")
+                                    if (item.Model.edittype == Kendo_Example.Models.Edittype.Date)
                                     {
                                         c.Filterable(x => x.Cell(y => y.Template("function(args){ convertDatePickerCell(args, '" + item.Model.Format + "','ru-RU')}")));
-
                                         c.Filterable(x => x.UI("function(element){ convertDatePickerUI(element, '" + item.Model.Format + "','ru-RU')}"));
                                     }
                                 }
@@ -57,13 +57,13 @@
                                                     if (m.key)
                                                         model.Id(m.Name);
 
-                                                    if (m.Model.Edittype == "String")
+                                                    if (m.Model.edittype == Kendo_Example.Models.Edittype.String)
                                                         model.Field(m.Name, typeof(string)).DefaultValue(m.Model.Default_value).Editable(m.Model.editable);
-                                                    if (m.Model.Edittype == "Date")
+                                                    if (m.Model.edittype == Kendo_Example.Models.Edittype.Date)
                                                         model.Field(m.Name, typeof(DateTime)).Editable(m.Model.editable);
-                                                    if (m.Model.Edittype == "Integer")
+                                                    if (m.Model.edittype == Kendo_Example.Models.Edittype.Integer)
                                                         model.Field(m.Name, typeof(int)).DefaultValue(m.Model.Default_value).Editable(m.Model.editable);
-                                                    if (m.Model.Edittype == "Boolean")
+                                                    if (m.Model.edittype == Kendo_Example.Models.Edittype.Boolean)
                                                         model.Field(m.Name, typeof(bool)).DefaultValue(m.Model.Default_value).Editable(m.Model.editable);
                                                 }
                                             })
@@ -81,7 +81,14 @@
                                     )
                                     .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                                     .ColumnMenu()
-                                    .Events(ev => ev.BeforeEdit("function(){setTimeout(function () { $('#TestDate').kendoDateTimePicker({ format : '{0:dd.MM.yyyy HH:mm:ss}' }) }, 50);}") )
+                                    .Events(ev => {
+                                        string functionBuilder = "";
+                                        Model.COLUMNS.Column.ForEach( el => {
+                                            if (el.Model.edittype == Kendo_Example.Models.Edittype.Date)
+                                                functionBuilder += "$('#" + el.Name + "').kendoDateTimePicker({ format : '" + el.Model.Format + "' }) }, 50);";
+                                        });
+                                        ev.BeforeEdit("function(){setTimeout(function () { " + functionBuilder +" }");
+                                    })
                                     .ToolBar(tools => { if (Model.Export_Pdf != null) tools.Pdf(); })
                                     .ToolBar(tools => { if (Model.Export_Excel != null) tools.Excel(); })
                                     .Pdf(pdf =>
