@@ -12,17 +12,17 @@ using MainServer.Extension;
 
 namespace MainServer
 {
+    public enum eType
+    {
+        MSSQL = 0,
+        Oracle = 1
+    }
+
     public class DBAccess
     {
         private SQL objSQL = null;
         private ORA objORA = null;
         private bool bMSSQL;
-
-        public enum eType
-        {
-            MSSQL = 0,
-            Oracle = 1
-        };
 
         public DBAccess(eType type)
         {
@@ -54,7 +54,7 @@ namespace MainServer
 
         public static eType GetDbTypeByName(string sDBType)
         {
-            return sDBType.ToUpper() == "MSSQL" ? eType.MSSQL : DBAccess.eType.Oracle;
+            return sDBType.ToUpper() == "MSSQL" ? eType.MSSQL : eType.Oracle;
         }
 
         /*
@@ -210,6 +210,11 @@ namespace MainServer
         public string ProcCall(string sProcName, List<ProcedureParameter> listParam)
         {
             return bMSSQL ? objSQL.ProcCall(sProcName, listParam) : objORA.ProcCall(sProcName, listParam);
+        }
+        
+        public Dictionary<string, string> ProcCallOutParam(string sProcName, List<ProcedureParameter> listParam)
+        {
+            return bMSSQL ? objSQL.ProcCallOutParam(sProcName, listParam) : objORA.ProcCallOutParam(sProcName, listParam);
         }
 
         public string[,] ProcCallCursor(string sProcName, List<ProcedureParameter> listParam)

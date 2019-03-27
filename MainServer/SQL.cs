@@ -856,6 +856,30 @@ namespace MainServer
             return "OK";
         }
 
+        public Dictionary<string, string> ProcCallOutParam(string sProcName, List<ProcedureParameter> listParam)
+        {
+
+            SqlCommand cmd = new SqlCommand(sProcName, objConn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            foreach (var param in listParam)
+            {
+                cmd.Parameters.Add(GetMSSQLParameter(param.ParameterName, param.ParameterValue, param.ParameterType, param.ParameterDirection));
+            }
+
+            cmd.ExecuteNonQuery();
+
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+
+            foreach (var param in listParam)
+            {
+                if (param.ParameterDirection == "OUT")
+                    dic.Add(param.ParameterName, cmd.Parameters[param.ParameterName].Value.ToString().Trim());
+            }
+
+            return dic;
+        }
+
         /// <summary>
         /// Call Strored Procedure. Rerurn OracleDataReader
         /// </summary>
@@ -953,6 +977,7 @@ namespace MainServer
             {
                 case "VARCHAR":
                     sqlParam.SqlDbType = SqlDbType.VarChar;
+                    sqlParam.Size = 4000;
 
                     break;
                 case "NUMBER":

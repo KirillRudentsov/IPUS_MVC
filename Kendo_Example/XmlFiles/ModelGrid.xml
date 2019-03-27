@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Grid type="mainGrid" id="jsTestGrid" width="1250"
+<Grid type="mainGrid" id="jsTestGrid" width="1800"
           height="600" tableId="1"
           caption="This is test table caption"
           selectCountRows="20">
 
-  <DataSource action="GetGridData" controller_name="ComponentData" key_link="GetTestAu" />
+  <DataSource action="GetGridData" controller_name="ComponentData" key_link="processes" />
 
   <Update>
     <DataSource action="GridProcedure_Update" controller_name="ComponentData" key_link="TestProcedure.xml" />
@@ -20,33 +20,63 @@
 
   <COLUMNS>
 
-    <column type="simple" name="TestId" label="Id теста" width="150" hidden="false" visible="true" key="true">
+    <column type="simple" name="ID" label="Id теста" width="100" hidden="false" visible="true" key="true">
       <Model editable="false" edittype="Integer" format="{0:0}">
         <default_value>0</default_value>
       </Model>
     </column>
 
-    <column type="ProcessDesignerLink" name="TestName" label="Имя" width="150" hidden="false" visible="true" key="false">
+    <column type="ProcessDesignerLink" name="NAME" label="Имя" width="150" hidden="false" visible="true" key="false">
       <Model editable="true" edittype="String" format="">
         <default_value>TestName_Default</default_value>
       </Model>
     </column>
 
-    <column type="simple" name="TestDescription" label="Описание" width="150" hidden="false" visible="true" key="false">
+    <column type="simple" name="INFO" label="Описание" width="150" hidden="false" visible="true" key="false">
       <Model editable="true" edittype="String" format="">
         <default_value>TestDescription_Default</default_value>
       </Model>
     </column>
 
-    <column type="simple" name="TestDate" label="Дата" width="150" hidden="false" visible="true" key="false">
+    <column type="simple" name="VERSION" label="Версия" width="100" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Integer" format="{0:0}">
+        <default_value>1</default_value>
+      </Model>
+    </column>
+
+    <column type="simple" name="CREATED" label="Дата создания" width="150" hidden="false" visible="true" key="false">
       <Model editable="true" edittype="Date" format="{0:dd.MM.yyyy HH:mm:ss}">
         <default_value></default_value>
       </Model>
     </column>
 
-    <column type="simple" name="TestBoolean" label="Да, нет" width="100" hidden="false" visible="true" key="false">
-      <Model editable="true" edittype="Boolean" format="">
-        <default_value>false</default_value>
+    <column type="simple" name="ACTIVE_FROM" label="Активно с" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Date" format="{0:dd.MM.yyyy HH:mm:ss}">
+        <default_value></default_value>
+      </Model>
+    </column>
+
+    <column type="simple" name="ACTIVE_TO" label="Активно до" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Date" format="{0:dd.MM.yyyy HH:mm:ss}">
+        <default_value></default_value>
+      </Model>
+    </column>
+
+    <column type="simple" name="DELETED" label="Время удаления" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Date" format="{0:dd.MM.yyyy HH:mm:ss}">
+        <default_value></default_value>
+      </Model>
+    </column>
+
+    <column type="simple" name="TRACE" label="Шаг" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="">
+        <default_value>TestDescription_Default</default_value>
+      </Model>
+    </column>
+
+    <column type="simple" name="DEBUG" label="Отладка" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="">
+        <default_value>TestDescription_Default</default_value>
       </Model>
     </column>
 

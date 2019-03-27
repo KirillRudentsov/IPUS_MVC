@@ -11,6 +11,8 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Kendo_Example.Models;
 using Kendo_Example.SupportClasses;
+using MainServer;
+using MainServer.Extension;
 
 namespace Kendo_Example.Controllers
 {
@@ -20,6 +22,29 @@ namespace Kendo_Example.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        DBAccess _db;
+        private string SQL_Matchlist_query;
+
+        public void ConnectDB()
+        {
+            SQL_Matchlist_query = Config.MatchlistRequest;
+
+            if (_db == null)
+            {
+                var dbType = DBAccess.GetDbTypeByName(Config.sDbType);
+                _db = new DBAccess(dbType);
+                //_log.Debug("Db Type : " + _db.DbType.ToString());
+
+                //_log.Debug("Matchlist Request : " + selectAction);
+
+                string status = _db.Login2SQL(Config.sConnSTR, Config.sLoginSTR, Config.sPasswordSTR);
+                if (status != "OK")
+                {
+                    throw new Exception("Couldn't connect to DB");
+                }
+            }
         }
 
         public JsonResult GetData([DataSourceRequest] DataSourceRequest request, string link)
@@ -51,23 +76,18 @@ namespace Kendo_Example.Controllers
         {
             //get data from db by link and return DataSet back
 
-            DataTable dt = new DataTable("Data");
+            ConnectDB();
 
-            DataColumn TestId = new DataColumn("TestId");
-            DataColumn TestNameCol = new DataColumn("TestName");
-            DataColumn TestDescriptionCol = new DataColumn("TestDescription");
-            DataColumn TestDateCol = new DataColumn("TestDate");
-            DataColumn TestBooleanCol = new DataColumn("TestBoolean");
-            dt.Columns.Add(TestId);
-            dt.Columns.Add(TestNameCol);
-            dt.Columns.Add(TestDescriptionCol);
-            dt.Columns.Add(TestDateCol);
-            dt.Columns.Add(TestBooleanCol);
-            //var testClasses = TestClass.GetTestClasses();
-            foreach (var test in testClasses)
-            {
-                dt.Rows.Add(new object[] { test.TestId, test.TestName, test.TestDescription, test.TestDate, test.TestBoolean });
-            }
+            List<ProcedureParameter> paramList = new List<ProcedureParameter>();
+            paramList.Add(new ProcedureParameter("KEY_NAME",link,"VARCHAR","IN"));
+            paramList.Add(new ProcedureParameter("MATCHLIST_SELECT", "", "VARCHAR", "OUT"));
+            paramList.Add(new ProcedureParameter("MATCHLIST_TOTAL", "", "VARCHAR", "OUT"));
+            Dictionary<string, string> dic = _db.ProcCallOutParam("GET_MATCHLIST_INFO", paramList);
+
+            int total = _db.Execute2Int( dic["MATCHLIST_TOTAL"] );
+
+            var ds = _db.Execute2DataSet( dic["MATCHLIST_SELECT"], "Data" );
+            var dt = ds.Tables["Data"];
             
             var res = dt.ToDataSourceResult(request);
             

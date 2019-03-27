@@ -83,11 +83,12 @@
                                     .ColumnMenu()
                                     .Events(ev => {
                                         string functionBuilder = "";
-                                        Model.COLUMNS.Column.ForEach( el => {
+                                        Model.COLUMNS.Column.ForEach(el =>
+                                        {
                                             if (el.Model.edittype == Kendo_Example.Models.Edittype.Date)
-                                                functionBuilder += "$('#" + el.Name + "').kendoDateTimePicker({ format : '" + el.Model.Format + "' }) }, 50);";
+                                                functionBuilder += "$('#" + el.Name + "').kendoDateTimePicker({ format : '" + el.Model.Format + "' });" + "\n";
                                         });
-                                        ev.BeforeEdit("function(){setTimeout(function () { " + functionBuilder +" }");
+                                        ev.BeforeEdit("function(){setTimeout(function () { " + functionBuilder + " }, 50); }");
                                     })
                                     .ToolBar(tools => { if (Model.Export_Pdf != null) tools.Pdf(); })
                                     .ToolBar(tools => { if (Model.Export_Excel != null) tools.Excel(); })

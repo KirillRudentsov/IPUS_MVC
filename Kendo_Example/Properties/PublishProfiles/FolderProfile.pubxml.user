@@ -49,10 +49,16 @@
       <publishTime>02/20/2019 04:17:46</publishTime>
     </File>
     <File Include="bin/Kendo_Example.dll">
-      <publishTime>03/27/2019 14:43:15</publishTime>
+      <publishTime>03/27/2019 17:31:19</publishTime>
     </File>
     <File Include="bin/Kendo_Example.pdb">
-      <publishTime>03/27/2019 14:43:15</publishTime>
+      <publishTime>03/27/2019 17:31:19</publishTime>
+    </File>
+    <File Include="bin/MainServer.dll">
+      <publishTime>03/27/2019 17:31:18</publishTime>
+    </File>
+    <File Include="bin/MainServer.pdb">
+      <publishTime>03/27/2019 17:31:18</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>07/25/2012 11:48:56</publishTime>
@@ -62,6 +68,9 @@
     </File>
     <File Include="bin/nl-NL/Kendo.Mvc.resources.dll">
       <publishTime>02/20/2019 04:17:46</publishTime>
+    </File>
+    <File Include="bin/Oracle.ManagedDataAccess.dll">
+      <publishTime>03/18/2019 02:05:56</publishTime>
     </File>
     <File Include="bin/pl-PL/Kendo.Mvc.resources.dll">
       <publishTime>02/20/2019 04:17:46</publishTime>
@@ -110,6 +119,15 @@
     </File>
     <File Include="bin/uk-UA/Kendo.Mvc.resources.dll">
       <publishTime>02/20/2019 04:17:46</publishTime>
+    </File>
+    <File Include="bin/Web.config">
+      <publishTime>03/27/2019 17:31:25</publishTime>
+    </File>
+    <File Include="bin/Web.Debug.config">
+      <publishTime>03/18/2019 15:44:07</publishTime>
+    </File>
+    <File Include="bin/Web.Release.config">
+      <publishTime>03/18/2019 16:56:14</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 13:57:34</publishTime>
@@ -7735,7 +7753,7 @@
       <publishTime>03/18/2019 11:50:29</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/27/2019 14:43:20</publishTime>
+      <publishTime>03/27/2019 17:31:25</publishTime>
     </File>
     <File Include="XmlFiles/CustomComponents/Date/DateTimePicker_1.xml">
       <publishTime>03/25/2019 11:48:16</publishTime>

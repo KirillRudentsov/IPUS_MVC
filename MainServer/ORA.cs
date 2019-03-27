@@ -902,6 +902,29 @@ namespace MainServer
         /// <param name="sProcName"></param>
         /// <param name="listParam"></param>
         /// <returns>OK</returns>
+        public Dictionary<string, string> ProcCallOutParam(string sProcName, List<ProcedureParameter> listParam)
+        {
+
+            OracleCommand cmd = new OracleCommand(sProcName, objConn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            foreach (var param in listParam)
+            {
+                cmd.Parameters.Add(GetOracleParameter(param.ParameterName, param.ParameterValue, param.ParameterType, param.ParameterDirection));
+            }
+
+            cmd.ExecuteNonQuery();
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+
+            foreach (var param in listParam)
+            {
+                if (param.ParameterDirection == "OUT")
+                    dic.Add(param.ParameterName, cmd.Parameters[param.ParameterName].Value.ToString().Trim());
+            }
+
+            return dic;
+        }
+
         public string ProcCall(string sProcName, List<ProcedureParameter> listParam)
         {
 
@@ -1027,6 +1050,7 @@ namespace MainServer
                 case "VARCHAR":
                     orclCONN = new OracleParameter(sParameterName.ToUpper(),
                                                  OracleDbType.Varchar2,
+                                                 4000,
                                                  sParameterValue,
                                                  p_dir);
                     break;
