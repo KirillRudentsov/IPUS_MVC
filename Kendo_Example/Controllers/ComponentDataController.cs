@@ -14,6 +14,7 @@ using Kendo_Example.SupportClasses;
 using MainServer;
 using MainServer.Extension;
 using Kendo_Example.SQL_Helper;
+using Newtonsoft.Json;
 
 namespace Kendo_Example.Controllers
 {
@@ -87,10 +88,10 @@ namespace Kendo_Example.Controllers
             Dictionary<string, string> dic = _db.ProcCallOutParam("GET_MATCHLIST_INFO", paramList);
             int total_table_records = _db.Execute2Int( dic["MATCHLIST_TOTAL"] );
             int start = 0, end = 0;
-            if (request.Page == 1) { end = request.PageSize; }
-            if (request.Page == 2) { start = request.PageSize; end = request.PageSize * 2; }
+            if (request.Page == 1) { start = start + 1; end = request.PageSize; }
+            if (request.Page == 2) { start = request.PageSize + 1; end = request.PageSize * 2; }
             if(request.Page != 1 && request.Page !=2 )
-            { start = request.PageSize * request.Page; end = (request.Page * request.PageSize) + request.PageSize; }
+            { start = request.PageSize * request.Page + 1; end = (request.Page * request.PageSize) + request.PageSize; }
 
             string sql_select = KendoSQLBuilder.BuildFilterableAndSortableSQLQuery( request,
                 dic["MATCHLIST_SELECT"], dic["MATCHLIST_PREFFIX"] ).Replace("##start##", start.ToString())
@@ -99,13 +100,22 @@ namespace Kendo_Example.Controllers
             var ds = _db.Execute2DataSet(sql_select, "Data" );
             var dt = ds.Tables["Data"];
 
-           //DataSourceResult res = new DataSourceResult();
-            //res.Data = dt;
+            DataSourceResult res = new DataSourceResult();
 
+            DataSourceRequest serializeDataTable = new DataSourceRequest(); //for serialize data table
 
+            serializeDataTable.Aggregates = null;
+            serializeDataTable.Filters = null;
+            serializeDataTable.Groups = null;
+            serializeDataTable.Sorts = null;
+            serializeDataTable.Page = 1;
+            serializeDataTable.PageSize = request.PageSize;
 
-            var res = dt.ToDataSourceResult(request);
-            res.Total = total_table_records;
+            res.Data = dt.ToDataSourceResult(serializeDataTable).Data;
+
+            res.AggregateResults = null;
+            res.Errors = null;
+            res.Total = total_table_records; 
 
             return Json(res);
         }
