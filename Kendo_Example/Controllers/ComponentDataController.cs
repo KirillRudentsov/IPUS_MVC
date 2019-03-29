@@ -15,6 +15,7 @@ using MainServer;
 using MainServer.Extension;
 using Kendo_Example.SQL_Helper;
 using Newtonsoft.Json;
+using Kendo_Example.Extensions;
 
 namespace Kendo_Example.Controllers
 {
@@ -102,17 +103,7 @@ namespace Kendo_Example.Controllers
 
             DataSourceResult res = new DataSourceResult();
 
-            DataSourceRequest serializeDataTable = new DataSourceRequest(); //for serialize data table
-
-            serializeDataTable.Aggregates = null;
-            serializeDataTable.Filters = null;
-            serializeDataTable.Groups = null;
-            serializeDataTable.Sorts = null;
-            serializeDataTable.Page = 1;
-            serializeDataTable.PageSize = request.PageSize;
-
-            res.Data = dt.ToDataSourceResult(serializeDataTable).Data;
-
+            res.Data = dt.ToDictionary();
             res.AggregateResults = null;
             res.Errors = null;
             res.Total = total_table_records; 
