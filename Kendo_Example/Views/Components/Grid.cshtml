@@ -11,7 +11,7 @@
                                 foreach (var item in Model.COLUMNS.Column)
                                 {
                                     var c = columns.Bound(item.Name).Title(item.Label).Width(item.Width)
-                                         .Hidden(item.hidden).Visible(item.visible).EditorTemplateName( Enum.GetName(typeof(Kendo_Example.Models.Edittype), item.Model.edittype))
+                                         .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(Enum.GetName(typeof(Kendo_Example.Models.Edittype), item.Model.edittype))
                                          .Format(item.Model.Format);
 
                                     if(item.Type == Kendo_Example.Models.ColumnType.ProcessDesignerLink)

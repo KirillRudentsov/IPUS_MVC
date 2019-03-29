@@ -13,6 +13,7 @@ using Kendo_Example.Models;
 using Kendo_Example.SupportClasses;
 using MainServer;
 using MainServer.Extension;
+using Kendo_Example.SQL_Helper;
 
 namespace Kendo_Example.Controllers
 {
@@ -82,15 +83,30 @@ namespace Kendo_Example.Controllers
             paramList.Add(new ProcedureParameter("KEY_NAME",link,"VARCHAR","IN"));
             paramList.Add(new ProcedureParameter("MATCHLIST_SELECT", "", "VARCHAR", "OUT"));
             paramList.Add(new ProcedureParameter("MATCHLIST_TOTAL", "", "VARCHAR", "OUT"));
+            paramList.Add(new ProcedureParameter("MATCHLIST_PREFFIX", "", "VARCHAR", "OUT"));
             Dictionary<string, string> dic = _db.ProcCallOutParam("GET_MATCHLIST_INFO", paramList);
+            int total_table_records = _db.Execute2Int( dic["MATCHLIST_TOTAL"] );
+            int start = 0, end = 0;
+            if (request.Page == 1) { end = request.PageSize; }
+            if (request.Page == 2) { start = request.PageSize; end = request.PageSize * 2; }
+            if(request.Page != 1 && request.Page !=2 )
+            { start = request.PageSize * request.Page; end = (request.Page * request.PageSize) + request.PageSize; }
 
-            int total = _db.Execute2Int( dic["MATCHLIST_TOTAL"] );
-
-            var ds = _db.Execute2DataSet( dic["MATCHLIST_SELECT"], "Data" );
+            string sql_select = KendoSQLBuilder.BuildFilterableAndSortableSQLQuery( request,
+                dic["MATCHLIST_SELECT"], dic["MATCHLIST_PREFFIX"] ).Replace("##start##", start.ToString())
+                .Replace("##end##", end.ToString());
+            
+            var ds = _db.Execute2DataSet(sql_select, "Data" );
             var dt = ds.Tables["Data"];
-            
+
+           //DataSourceResult res = new DataSourceResult();
+            //res.Data = dt;
+
+
+
             var res = dt.ToDataSourceResult(request);
-            
+            res.Total = total_table_records;
+
             return Json(res);
         }
 
