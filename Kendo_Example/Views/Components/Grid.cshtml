@@ -96,9 +96,9 @@
                                     {
                                         if (Model.Export_Pdf != null)
                                         {
-                                            pdf.AllPages()
+                                            pdf
                                             .AvoidLinks()
-                                            .PaperSize("A4")
+                                            .PaperSize("auto")
                                             .Scale(0.8)
                                             .Margin("2cm", "1cm", "1cm", "1cm")
                                             .Landscape()
@@ -106,19 +106,18 @@
                                             .TemplateId("page-template")
                                             .Title(Model.Export_Pdf.Caption)
                                             .FileName(Model.Export_Pdf.File_name)
-                                            .ProxyURL(Url.Action(Model.Export_Pdf.DataSource.Action, Model.Export_Pdf.DataSource.Controller_name,
-                                                new { link = Model.Export_Pdf.DataSource.key_link }));
+                                            .ProxyURL(Url.Action(Model.Export_Pdf.DataSource.Action, Model.Export_Pdf.DataSource.Controller_name));
                                         }
                                     })
                                     .Excel(excel =>
                                     {
                                         if (Model.Export_Excel != null)
                                         {
-                                            excel.AllPages(true)
+                                            excel
+                                            .Filterable(true)
                                              .FileName(Model.Export_Excel.File_name)
                                              .Filterable(true)
-                                             .ProxyURL(Url.Action(Model.Export_Excel.DataSource.Action, Model.Export_Excel.DataSource.Controller_name,
-                                                new { link = Model.Export_Excel.DataSource.key_link }));
+                                             .ProxyURL(Url.Action(Model.Export_Excel.DataSource.Action, Model.Export_Excel.DataSource.Controller_name));
                                         }
                                     })
 

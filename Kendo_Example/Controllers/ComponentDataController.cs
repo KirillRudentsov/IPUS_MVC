@@ -78,24 +78,32 @@ namespace Kendo_Example.Controllers
         public JsonResult GetGridData([DataSourceRequest] DataSourceRequest request, string link)
         {
             //get data from db by link and return DataSet back
-
-            ConnectDB();
-            
-            SQL_Grid_Query sql_select = KendoSQLBuilder.BuildSQLQuery( request, link, _db.DbType );
-
-            var total = Convert.ToInt32( _db.Execute2Str(sql_select.SQL_Total) );
-
-            var ds = _db.Execute2DataSet( sql_select.SQL_Select, "Data" );
-            var dt = ds.Tables["Data"];
-
             DataSourceResult res = new DataSourceResult();
 
-            res.Data = dt.ToDictionary();
-            res.AggregateResults = null;
-            res.Errors = null;
-            res.Total = total; 
+            try
+            {
+                ConnectDB();
 
-            return Json(res);
+                SQL_Grid_Query sql_select = KendoSQLBuilder.BuildSQLQuery(request, link, _db.DbType);
+
+                var total = Convert.ToInt32(_db.Execute2Str(sql_select.SQL_Total));
+
+                var ds = _db.Execute2DataSet(sql_select.SQL_Select, "Data");
+                var dt = ds.Tables["Data"];
+
+                res.Data = dt.ToDictionary();
+                res.AggregateResults = null;
+                res.Errors = null;
+                res.Total = total;
+            }
+            catch (Exception ex) { res.Errors = ex.Message; }
+            finally { _db.Close(); }
+
+            return new System.Web.Mvc.JsonResult()
+            {
+                MaxJsonLength = Int32.MaxValue,
+                Data = res
+            };
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
