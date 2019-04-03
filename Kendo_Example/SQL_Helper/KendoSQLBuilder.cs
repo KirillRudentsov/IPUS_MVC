@@ -23,8 +23,6 @@ namespace Kendo_Example.SQL_Helper
             else
                 SQLCompiler = new SqlServerCompiler();
 
-            SqlResult totalQuery_Result = SQLCompiler.Compile( new Query().From(view_name).AsCount() );
-
             // build select
             Query QselectBody = new Query().From(view_name);
 
@@ -42,6 +40,8 @@ namespace Kendo_Example.SQL_Helper
 
             //in the end compile full SQLQuery result
             SqlResult SQLQuery_Result = SQLCompiler.Compile( QselectBody );
+
+            SqlResult totalQuery_Result = SQLCompiler.Compile( QselectBody.Clone().AsCount() );
 
             return new SQL_Grid_Query(SQLQuery_Result.ToString(), totalQuery_Result.ToString());
         }
