@@ -4,7 +4,7 @@
           caption="This is test table caption"
           selectCountRows="20">
 
-  <DataSource action="GetGridData" controller_name="ComponentData" key_link="processes" />
+  <DataSource action="GetGridData" controller_name="ComponentData" key_link="V_RPA_TEMPLATE" />
 
   <Update>
     <DataSource action="GridProcedure_Update" controller_name="ComponentData" key_link="TestProcedure.xml" />

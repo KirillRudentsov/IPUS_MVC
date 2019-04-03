@@ -80,25 +80,12 @@ namespace Kendo_Example.Controllers
             //get data from db by link and return DataSet back
 
             ConnectDB();
-
-            List<ProcedureParameter> paramList = new List<ProcedureParameter>();
-            paramList.Add(new ProcedureParameter("KEY_NAME",link,"VARCHAR","IN"));
-            paramList.Add(new ProcedureParameter("MATCHLIST_SELECT", "", "VARCHAR", "OUT"));
-            paramList.Add(new ProcedureParameter("MATCHLIST_TOTAL", "", "VARCHAR", "OUT"));
-            paramList.Add(new ProcedureParameter("MATCHLIST_PREFFIX", "", "VARCHAR", "OUT"));
-            Dictionary<string, string> dic = _db.ProcCallOutParam("GET_MATCHLIST_INFO", paramList);
-            int total_table_records = _db.Execute2Int( dic["MATCHLIST_TOTAL"] );
-            int start = 0, end = 0;
-            if (request.Page == 1) { start = start + 1; end = request.PageSize; }
-            if (request.Page == 2) { start = request.PageSize + 1; end = request.PageSize * 2; }
-            if(request.Page != 1 && request.Page !=2 )
-            { start = request.PageSize * request.Page + 1; end = (request.Page * request.PageSize) + request.PageSize; }
-
-            string sql_select = KendoSQLBuilder.BuildFilterableAndSortableSQLQuery( request,
-                dic["MATCHLIST_SELECT"], dic["MATCHLIST_PREFFIX"] ).Replace("##start##", start.ToString())
-                .Replace("##end##", end.ToString());
             
-            var ds = _db.Execute2DataSet(sql_select, "Data" );
+            SQL_Grid_Query sql_select = KendoSQLBuilder.BuildSQLQuery( request, link, _db.DbType );
+
+            var total = Convert.ToInt32( _db.Execute2Str(sql_select.SQL_Total) );
+
+            var ds = _db.Execute2DataSet( sql_select.SQL_Select, "Data" );
             var dt = ds.Tables["Data"];
 
             DataSourceResult res = new DataSourceResult();
@@ -106,7 +93,7 @@ namespace Kendo_Example.Controllers
             res.Data = dt.ToDictionary();
             res.AggregateResults = null;
             res.Errors = null;
-            res.Total = total_table_records; 
+            res.Total = total; 
 
             return Json(res);
         }

@@ -1,106 +1,193 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using MainServer;
-using System.Text;
 using Kendo.Mvc;
+using SqlKata.Compilers;
+using SqlKata;
+using Kendo.Mvc.Infrastructure.Implementation;
 
 namespace Kendo_Example.SQL_Helper
 {
     public class KendoSQLBuilder
     {
-        public static string BuildFilterableAndSortableSQLQuery(DataSourceRequest request, string sql_select, string sql_preffix)
+        public static SQL_Grid_Query BuildSQLQuery(DataSourceRequest request, string view_name, eType dbType)
         {
-            if (sql_select == null && sql_preffix == null)
+            if (view_name == null)
                 throw new ArgumentNullException();
 
-            string filter = (ApplyFilters(request.Filters as IList<FilterDescriptor>, sql_preffix) );
-            string sorting = (ApplySorting(request.Sorts, sql_preffix));
-            string groups = (ApplyGrouping(request.Groups, sql_preffix));
+            Compiler SQLCompiler;
 
-            return sql_select.Replace("##filters##", filter).Replace("##sorting##", sorting)
-                .Replace("##group##", groups);
+            if (dbType == eType.Oracle)
+                SQLCompiler = new OracleCompiler();
+            else
+                SQLCompiler = new SqlServerCompiler();
+
+            SqlResult totalQuery_Result = SQLCompiler.Compile( new Query().From(view_name).AsCount() );
+
+            // build select
+            Query QselectBody = new Query().From(view_name);
+
+            ApplyFilters(request.Filters, ref QselectBody);
+
+            // build select with sorting
+            ApplySorting(request.Sorts, ref QselectBody);
+
+
+            // string groups = ApplyGrouping(request.Groups);
+
+            // build select with paging
+            QselectBody.ForPage(request.Page, request.PageSize);
+
+
+            //in the end compile full SQLQuery result
+            SqlResult SQLQuery_Result = SQLCompiler.Compile( QselectBody );
+
+            return new SQL_Grid_Query(SQLQuery_Result.ToString(), totalQuery_Result.ToString());
         }
 
-        private static string ApplyFilters(IList<FilterDescriptor> fds,string pref)
+        private static void ApplyFilters(IList<IFilterDescriptor> fds, ref Query query)
         {
-            if (fds == null)
-                return " ";
+            if (fds.Count == 0)
+                return;
 
-            StringBuilder filtered_sql_req = new StringBuilder();
+            FilterDescriptorCollection fd = new FilterDescriptorCollection();
+            FilterCompositionLogicalOperator filterComposition = FilterCompositionLogicalOperator.Or;
+
+            if (fds[0] is FilterDescriptor) {
+                fd.Add(fds[0] as FilterDescriptor);
+                filterComposition = FilterCompositionLogicalOperator.And;
+            }
+            if (fds[0] is CompositeFilterDescriptor) {
+                fd = ((fds[0] as IFilterDescriptor) as CompositeFilterDescriptor).FilterDescriptors;
+                filterComposition = ((fds[0] as IFilterDescriptor) as CompositeFilterDescriptor).LogicalOperator;
+            }
 
             //apply filters
-            foreach (var f in fds)
+            foreach (FilterDescriptor f in fd)
             {
                 switch (f.Operator)
                 {
                     case FilterOperator.IsLessThan:
-                        filtered_sql_req.Append(" and " + pref + "." + f.Member + " < " + " '" + ParseSQLValue(f.Value) + "' "); break;
+                        if(filterComposition == FilterCompositionLogicalOperator.And)
+                            query.Where(f.Member, "<", f.Value);
+                        else
+                            query.OrWhere(f.Member, "<", f.Value);
+                        break;
                     case FilterOperator.IsLessThanOrEqualTo:
-                        filtered_sql_req.Append(" and " + pref + "." + f.Member + "" + " <= " + " '" + ParseSQLValue(f.Value) + "' "); break;
+                        if (filterComposition == FilterCompositionLogicalOperator.And)
+                            query.Where(f.Member, "<=", f.Value);
+                        else
+                            query.OrWhere(f.Member, "<=", f.Value);
+                        break;
                     case FilterOperator.IsEqualTo:
-                        filtered_sql_req.Append(" and " + pref + "." + f.Member + " = " + " '" + ParseSQLValue(f.Value) + "' "); break;
+                        if (filterComposition == FilterCompositionLogicalOperator.And)
+                            query.Where(f.Member, "=", f.Value);
+                        else
+                            query.OrWhere(f.Member, "=", f.Value);
+                        break;
                     case FilterOperator.IsNotEqualTo:
-                        filtered_sql_req.Append(" and " + pref + "." + f.Member + " <> " + " '" + ParseSQLValue(f.Value) + "' "); break;
+                        if (filterComposition == FilterCompositionLogicalOperator.And)
+                            query.Where(f.Member, "!=", f.Value);
+                        else
+                            query.OrWhere(f.Member, "!=", f.Value);
+                        break;
                     case FilterOperator.IsGreaterThanOrEqualTo:
-                        filtered_sql_req.Append(" and " + pref + "." + f.Member + " >= " + " '" + ParseSQLValue(f.Value) + "' "); break;
+                        if (filterComposition == FilterCompositionLogicalOperator.And)
+                            query.Where(f.Member, ">=", f.Value);
+                        else
+                            query.OrWhere(f.Member, ">=", f.Value);
+                        break;
                     case FilterOperator.IsGreaterThan:
-                        filtered_sql_req.Append(" and " + pref + "." + f.Member + " > " + " '" + ParseSQLValue(f.Value) + "' "); break;
+                        if (filterComposition == FilterCompositionLogicalOperator.And)
+                            query.Where(f.Member, ">", f.Value);
+                        else
+                            query.OrWhere(f.Member, ">", f.Value);
+                        break;
                     case FilterOperator.StartsWith:
-                        filtered_sql_req.Append(" and " + pref + "." + f.Member + " like '%" + ParseSQLValue(f.Value) + "' "); break;
+                        if (filterComposition == FilterCompositionLogicalOperator.And)
+                            query.WhereStarts(f.Member, f.Value.ToString());
+                        else
+                            query.OrWhereStarts(f.Member, f.Value.ToString());
+                        break;
                     case FilterOperator.EndsWith:
-                        filtered_sql_req.Append(" and " + pref + "." + f.Member + " like " + ParseSQLValue(f.Value) + "' "); break;
+                        if (filterComposition == FilterCompositionLogicalOperator.And)
+                            query.WhereEnds(f.Member, f.Value.ToString());
+                        else
+                            query.OrWhereEnds(f.Member, f.Value.ToString());
+                        break;
                     case FilterOperator.Contains:
-                        filtered_sql_req.Append( " and " + pref + "." + f.Member + " like '%" + ParseSQLValue(f.Value) + "%' "); break;
+                        if (filterComposition == FilterCompositionLogicalOperator.And)
+                            query.WhereContains(f.Member, f.Value.ToString());
+                        else
+                            query.WhereContains(f.Member, f.Value.ToString());
+                        break;
                     case FilterOperator.IsContainedIn:
-                        throw new Exception("There is no translator for [" + f.Member + "]" + " " + f.Operator + " " + f.Value.ToString());
+                        if (filterComposition == FilterCompositionLogicalOperator.And)
+                            query.WhereIn(f.Member, f.Value.ToString());
+                        else
+                            query.OrWhereIn(f.Member, f.Value.ToString());
+                        break;
                     case FilterOperator.DoesNotContain:
-                        filtered_sql_req.Append( " and " + pref + "." + f.Member + " not like '%" + ParseSQLValue(f.Value) + "' "); break;
+                        if (filterComposition == FilterCompositionLogicalOperator.And)
+                            query.WhereNotContains(f.Member, f.Value.ToString());
+                        else
+                            query.OrWhereNotContains(f.Member, f.Value.ToString());
+                        break;
                     case FilterOperator.IsNull:
-                        filtered_sql_req.Append( " and " + pref + "." + f.Member + " IS NULL "); break;
+                        if (filterComposition == FilterCompositionLogicalOperator.And)
+                            query.WhereNull(f.Member);
+                        else
+                            query.OrWhereNull(f.Member);
+                        break;
                     case FilterOperator.IsNotNull:
-                        filtered_sql_req.Append(  " and " + pref + "." + f.Member + " IS NOT NULL "); break;
+                        if (filterComposition == FilterCompositionLogicalOperator.And)
+                            query.WhereNotNull(f.Member);
+                        else
+                            query.OrWhereNotNull(f.Member);
+                        break;
                     case FilterOperator.IsEmpty:
-                        filtered_sql_req.Append( " and " + pref + "." + f.Member + " = ''"); break;
+                        if (filterComposition == FilterCompositionLogicalOperator.And)
+                            query.Where(f.Member,"=","");
+                        else
+                            query.OrWhere(f.Member, "=", "");
+                        break;
                     case FilterOperator.IsNotEmpty:
-                        filtered_sql_req.Append( " and " + pref + "." + f.Member + " <> ''"); break;
+                        if (filterComposition == FilterCompositionLogicalOperator.And)
+                            query.Where(f.Member, "!=","");
+                        else
+                            query.OrWhere(f.Member, "!=", "");
+                        break;
                 }
             }
-            return filtered_sql_req.ToString();
+
         }
 
-        private static string ApplySorting(IList<SortDescriptor> sd, string preffix)
+        private static void ApplySorting(IList<SortDescriptor> sd,ref Query sqlRes)
         {
-            if (sd.Count == 0)
-                return " ";
-
-            StringBuilder sorted_sql_req = new StringBuilder();
-
-            string sort = (sd[0].SortDirection == System.ComponentModel.ListSortDirection.Ascending) ? "Ask" : "Desc" ;
-
-            // apply sorting
-            sorted_sql_req.Append( " order by " + preffix + "." + sd[0].Member + " " + sort + " ");
-
-
-            return sorted_sql_req.ToString();
+            if (sd.Count != 0) {
+                if (sd[0].SortDirection == System.ComponentModel.ListSortDirection.Ascending)
+                    sqlRes.OrderBy(sd[0].Member);
+                else
+                    sqlRes.OrderByDesc(sd[0].Member);
+            }
+            else
+                sqlRes.OrderBy("ID"); // by default
         }
 
-        private static string ApplyGrouping(IList<GroupDescriptor> gd, string preffix)
-        {
-            if (gd.Count == 0)
-                return " ";
+        //private static string ApplyGrouping(IList<GroupDescriptor> gd)
+        //{
+        //    if (gd.Count == 0)
+        //        return " ";
 
-            StringBuilder grouped_sql_req = new StringBuilder();
+        //    StringBuilder grouped_sql_req = new StringBuilder();
 
-            // apply grouping
+        //    // apply grouping
 
 
 
-            return "";
-        }
+        //    return "";
+        //}
 
         private static string ParseSQLValue(object value)
         {
