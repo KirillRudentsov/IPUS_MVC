@@ -41,6 +41,8 @@ namespace Kendo_Example.Controllers
         {
             Grid grid = new Models.Grid();
 
+            ViewData[""] = "";
+
             var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + filename));
             XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(Grid));
             grid = (Grid)xmlSerizlizer.Deserialize(new StringReader(fileContents));

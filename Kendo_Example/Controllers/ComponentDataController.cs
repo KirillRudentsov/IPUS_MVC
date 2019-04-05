@@ -16,6 +16,7 @@ using MainServer.Extension;
 using Kendo_Example.SQL_Helper;
 using Newtonsoft.Json;
 using Kendo_Example.Extensions;
+using SqlKata;
 
 namespace Kendo_Example.Controllers
 {
@@ -50,27 +51,31 @@ namespace Kendo_Example.Controllers
             }
         }
 
-        public JsonResult GetData([DataSourceRequest] DataSourceRequest request, string link)
+        public JsonResult GetAuData([DataSourceRequest] DataSourceRequest request, string link)
         {
-            //get data from db by link and return DataSet back
-            DataTable dt = new DataTable("Data");
+            DataSourceResult res = new DataSourceResult();
 
-            DataColumn CityNameCol = new DataColumn("CityName");
-            DataColumn CityDescriptionCol = new DataColumn("CityDescription");
-
-            dt.Columns.Add(CityNameCol);
-            dt.Columns.Add(CityDescriptionCol);
-
-            var cities = City.GetCities();
-
-            foreach (var city in cities)
+            try
             {
-                dt.Rows.Add(new object[] { city.CityName, city.CityDescription });
+                ConnectDB();
+               
+                string query = CompilerQueryHelper.GetCompilerResult(_db.DbType, new Query().From(link));
+
+                var dt = _db.Execute2DataSet( query, "Data" ).Tables[0];
+
+                res.Data = dt.ToDictionary();
+                res.Errors = null;
+                res.Total = dt.Rows.Count;
+                res.AggregateResults = null;
             }
+            catch (Exception ex) { res.Errors = ex.Message; }
+            finally { _db.Close(); }
 
-            var res = dt.ToDataSourceResult(request);
-
-            return Json(res);
+            return new JsonResult
+            {
+                MaxJsonLength = Int32.MaxValue,
+                Data = res
+            };
         }
 
         private static List<TestClass> testClasses = TestClass.GetTestClasses();

@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<AutoComplete id="Au_City" data_text_field="CityName">
-  <DataSource action="GetData" controller_name="ComponentData" key_link="GetCityAu" />
+<AutoComplete id="NAME" data_text_field="NAME">
+  <DataSource action="GetAuData" controller_name="ComponentData" key_link="V_RPATEMPLATE_AU_NAME" />
 </AutoComplete>

@@ -35,6 +35,9 @@ namespace Kendo_Example.Models
         public string Format { get; set; }
         [XmlAttribute(AttributeName = "editable")]
         public bool editable { get; set; }
+
+        [XmlAttribute(AttributeName = "link")]
+        public string link { get; set; }
     }
 
     [XmlRoot(ElementName = "Update")]
