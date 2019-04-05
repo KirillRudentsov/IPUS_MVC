@@ -58,8 +58,12 @@ namespace Kendo_Example.Controllers
             try
             {
                 ConnectDB();
-               
-                string query = CompilerQueryHelper.GetCompilerResult(_db.DbType, new Query().From(link));
+
+                Query q = new Query().From(link);
+
+                KendoSQLBuilder.ApplyFilters(request.Filters, ref q);
+
+                string query = CompilerQueryHelper.GetCompilerResult(_db.DbType, q);
 
                 var dt = _db.Execute2DataSet( query, "Data" ).Tables[0];
 

@@ -46,7 +46,7 @@ namespace Kendo_Example.SQL_Helper
             return new SQL_Grid_Query(SQLQuery_Result.ToString(), totalQuery_Result.ToString());
         }
 
-        private static void ApplyFilters(IList<IFilterDescriptor> fds, ref Query query)
+        public static void ApplyFilters(IList<IFilterDescriptor> fds, ref Query query)
         {
             if (fds.Count == 0)
                 return;
@@ -163,7 +163,7 @@ namespace Kendo_Example.SQL_Helper
 
         }
 
-        private static void ApplySorting(IList<SortDescriptor> sd,ref Query sqlRes)
+        public static void ApplySorting(IList<SortDescriptor> sd,ref Query sqlRes)
         {
             if (sd.Count != 0) {
                 if (sd[0].SortDirection == System.ComponentModel.ListSortDirection.Ascending)
