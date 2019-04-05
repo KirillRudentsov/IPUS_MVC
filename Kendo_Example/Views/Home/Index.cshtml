@@ -10,6 +10,7 @@
 <html>
 <head>
     @Styles.Render("~/Content/kendo")
+    @Styles.Render("~/Content/kendo/2019.1.220/kendo.moonlight.min.css")
     @Scripts.Render("~/Scripts/kendo")
     @Scripts.Render("~/Scripts/Custom")
     @Scripts.Render("~/Scripts/Cultures/kendo.culture." + culture + ".min.js")
@@ -41,9 +42,15 @@
 
         $(document).ready(function () {
             $('#showGrid').click(function () {
-                $('#control_content').load('@Url.Content("~/Components/LoadGridComponent?filename=ModelGrid.xml")');
+                $('#control_content').load('@Url.Content("~/Components/LoadGridComponent?filename=ModelGrid.xml")', { field_name: "name", field_value:"testname2" });
             });
         });
+
+        @*$(document).ready(function () {
+            $('#showGrid').click(function () {
+                $('#control_content').load('@Url.Content("~/Components/LoadGridComponent?filename=ModelGrid_Details.xml")');
+            });
+        });*@
 
         $(document).ready(function () {
             $('#showGraph').click(function () {

@@ -35,6 +35,9 @@ namespace Kendo_Example.Models
         public string Format { get; set; }
         [XmlAttribute(AttributeName = "editable")]
         public bool editable { get; set; }
+
+        [XmlAttribute(AttributeName = "link")]
+        public string link { get; set; }
     }
 
     [XmlRoot(ElementName = "Update")]
@@ -85,7 +88,9 @@ namespace Kendo_Example.Models
         [XmlEnum(Name = "simple")]
         simple = 0,
         [XmlEnum(Name = "ProcessDesignerLink")]
-        ProcessDesignerLink = 1
+        ProcessDesignerLink = 1,
+        [XmlEnum(Name = "GridLink")]
+        GridLink = 2
     }
     
     [XmlRoot(ElementName = "column")]

@@ -16,6 +16,8 @@ using MainServer.Extension;
 using Kendo_Example.SQL_Helper;
 using Newtonsoft.Json;
 using Kendo_Example.Extensions;
+using System.Data.SQLite;
+using SqlKata.Compilers;
 
 namespace Kendo_Example.Controllers
 {
@@ -53,22 +55,20 @@ namespace Kendo_Example.Controllers
         public JsonResult GetData([DataSourceRequest] DataSourceRequest request, string link)
         {
             //get data from db by link and return DataSet back
+            DataSourceResult res = new DataSourceResult();
+            IDbConnection DBConnection = new SQLiteConnection(@"Data Source=F:\DB\DataBase;Version=3;");
+            DBConnection.Open();
+
+            var sql_select_command = new SQLiteCommand(new SqliteCompiler().Compile(new SqlKata.Query().From(link)).ToString(), DBConnection as SQLiteConnection);
+
             DataTable dt = new DataTable("Data");
 
-            DataColumn CityNameCol = new DataColumn("CityName");
-            DataColumn CityDescriptionCol = new DataColumn("CityDescription");
+            dt.Load(sql_select_command.ExecuteReader());
 
-            dt.Columns.Add(CityNameCol);
-            dt.Columns.Add(CityDescriptionCol);
-
-            var cities = City.GetCities();
-
-            foreach (var city in cities)
-            {
-                dt.Rows.Add(new object[] { city.CityName, city.CityDescription });
-            }
-
-            var res = dt.ToDataSourceResult(request);
+            res.Errors = null;
+            res.AggregateResults = null;
+            res.Data = dt.ToDictionary();
+            res.Total = dt.Rows.Count;
 
             return Json(res);
         }
@@ -79,25 +79,36 @@ namespace Kendo_Example.Controllers
         {
             //get data from db by link and return DataSet back
             DataSourceResult res = new DataSourceResult();
+            IDbConnection DBConnection = new SQLiteConnection(@"Data Source=F:\DB\DataBase;Version=3;");
 
             try
             {
-                ConnectDB();
+                //ConnectDB();
 
-                SQL_Grid_Query sql_select = KendoSQLBuilder.BuildSQLQuery(request, link, _db.DbType);
+                //SQL_Grid_Query sql_select = KendoSQLBuilder.BuildSQLQuery(request, link, _db.DbType);
+                DBConnection.Open();
 
-                var total = Convert.ToInt32(_db.Execute2Str(sql_select.SQL_Total));
+                SQL_Grid_Query sql_select = KendoSQLBuilder.BuildSQLQuery(request, link);
 
-                var ds = _db.Execute2DataSet(sql_select.SQL_Select, "Data");
-                var dt = ds.Tables["Data"];
+                //var sql_select = new SqliteCompiler().Compile(new SqlKata.Query().From(link));
+                //var sql_total = new SqliteCompiler().Compile(new SqlKata.Query().From(link).Clone().AsCount());
+
+
+                var sql_select_command = new SQLiteCommand(sql_select.SQL_Select.ToString(), DBConnection as SQLiteConnection);
+                var sql_select_total = new SQLiteCommand(sql_select.SQL_Total.ToString(), DBConnection as SQLiteConnection);
+
+                DataTable dt = new DataTable();
+                //var total = Convert.ToInt32( _db.Execute2Str(sql_total.ToString()) );
+                //var ds = _db.Execute2DataSet(sql_select.ToString(), "Data");
+                dt.Load(sql_select_command.ExecuteReader());
 
                 res.Data = dt.ToDictionary();
                 res.AggregateResults = null;
                 res.Errors = null;
-                res.Total = total;
-            }
+                res.Total = Convert.ToInt32( sql_select_total.ExecuteScalar().ToString() );
+            } 
             catch (Exception ex) { res.Errors = ex.Message; }
-            finally { _db.Close(); }
+            finally { DBConnection.Close(); }
 
             return new System.Web.Mvc.JsonResult()
             {

@@ -3,8 +3,8 @@
 
 
 @(Html.Kendo().AutoComplete()
-              .Name(Model.Id)
-              .DataTextField(Model.Data_text_field)
+              .Name("name")
+              .DataTextField("name")
               .Filter(FilterType.Contains)
               .MinLength(1)
               .Placeholder("Enter the text")
@@ -24,4 +24,5 @@
                             .Total("Total");
                     });
               })
+              //.ToClientTemplate()
 )

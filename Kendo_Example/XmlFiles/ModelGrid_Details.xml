@@ -4,7 +4,7 @@
           caption="This is test table caption"
           selectCountRows="20">
 
-  <DataSource action="GetGridData" controller_name="ComponentData" key_link="V_TEST" />
+  <DataSource action="GetGridData" controller_name="ComponentData" key_link="V_DETAIL" />
 
   <Update>
     <DataSource action="GridProcedure_Update" controller_name="ComponentData" key_link="TestProcedure.xml" />
@@ -20,32 +20,26 @@
 
   <COLUMNS>
 
-    <column type="simple" name="ID" label="Id теста" width="100" hidden="false" visible="true" key="true">
+    <column type="simple" name="ID" label="Id" width="100" hidden="false" visible="true" key="true">
       <Model editable="false" edittype="Integer" format="{0:0}">
         <default_value>0</default_value>
       </Model>
     </column>
 
-    <column type="GridLink" name="name" label="Имя" width="150" hidden="false" visible="true" key="false">
-      <Model editable="true" edittype="String" format="" link="ModelGrid_Details.xml">
+    <column type="simple" name="name" label="Название" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="">
         <default_value>TestName_Default</default_value>
       </Model>
     </column>
 
-    <column type="simple" name="date" label="Дата создания" width="150" hidden="false" visible="true" key="false">
+    <column type="simple" name="datetime" label="Дата" width="150" hidden="false" visible="true" key="false">
       <Model editable="true" edittype="Date" format="{0:yyyy-MM-dd HH:mm:ss}">
         <default_value></default_value>
       </Model>
     </column>
 
-    <column type="simple" name="bool" label="логический" width="150" hidden="false" visible="true" key="false">
-      <Model editable="true" edittype="Boolean" format="">
-        <default_value>0</default_value>
-      </Model>
-    </column>
-
-    <column type="simple" name="number" label="числовой" width="150" hidden="false" visible="true" key="false">
-      <Model editable="true" edittype="Integer" format="{0:0}">
+    <column type="simple" name="number" label="Detail number" width="100" hidden="false" visible="true" key="true">
+      <Model editable="false" edittype="Integer" format="{0:0}">
         <default_value>0</default_value>
       </Model>
     </column>

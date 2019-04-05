@@ -11,17 +11,12 @@ namespace Kendo_Example.SQL_Helper
 {
     public class KendoSQLBuilder
     {
-        public static SQL_Grid_Query BuildSQLQuery(DataSourceRequest request, string view_name, eType dbType)
+        public static SQL_Grid_Query BuildSQLQuery(DataSourceRequest request, string view_name)
         {
             if (view_name == null)
                 throw new ArgumentNullException();
 
-            Compiler SQLCompiler;
-
-            if (dbType == eType.Oracle)
-                SQLCompiler = new OracleCompiler();
-            else
-                SQLCompiler = new SqlServerCompiler();
+            Compiler SQLCompiler = new SqliteCompiler();
 
             // build select
             Query QselectBody = new Query().From(view_name);

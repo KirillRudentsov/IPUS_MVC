@@ -37,10 +37,15 @@ namespace Kendo_Example.Controllers
             return PartialView("AutoComplete", au);
         }
 
-        public PartialViewResult LoadGridComponent(string filename)
+        public PartialViewResult LoadGridComponent(string filename, string field_name, string field_value)
         {
-            Grid grid = new Models.Grid();
+            Grid grid = new Grid();
 
+            if (field_name != null && field_value != null) {
+                ViewData["field_name"] = field_name;
+                ViewData["field_value"] = field_value;
+            }
+            
             var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + filename));
             XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(Grid));
             grid = (Grid)xmlSerizlizer.Deserialize(new StringReader(fileContents));
