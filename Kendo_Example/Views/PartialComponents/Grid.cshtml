@@ -1,5 +1,6 @@
 ﻿@using System.Data;
 @using Kendo.Mvc;
+@using System.Text;
 
 @model Kendo_Example.Models.Grid
 
@@ -17,12 +18,12 @@
 
                                     // link section
                                     if (item.Type == Kendo_Example.Models.ColumnType.ProcessDesignerLink) {
-                                        c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "LoadGraphComponent",
-                                            "PartialComponents", new { link = "#=" + item.Name + "#" }, null).ToHtmlString());
+                                        c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "DynamicGraph",
+                                            "Home", new { param = "#=" + item.Name + "#" }, null).ToHtmlString());
                                     }
                                     if (item.Type == Kendo_Example.Models.ColumnType.GridLink) {
-                                        c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "LoadGridComponent",
-                                            "PartialComponents", new { filename = item.Model.link, field_name = item.Name, field_value = "#=" + item.Name + "#" }, null).ToHtmlString());
+                                        c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "DynamicGrid",
+                                            "Home", new { filename = item.to_type_link, field_name = item.Name, field_value = "#=" + item.Name + "#" }, null).ToHtmlString());
                                     }
                                     // link section
 
@@ -100,11 +101,16 @@
                                     .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                                     .ColumnMenu()
                                     .Events(ev => {
-                                        string functionBuilder = "";
+                                        StringBuilder functionBuilder = new StringBuilder();
                                         Model.COLUMNS.Column.ForEach(el =>
                                         {
                                             if (el.Model.edittype == Kendo_Example.Models.Edittype.Date)
-                                                functionBuilder += "$('#" + el.Name + "').kendoDateTimePicker({ format : '" + el.Model.Format + "' });" + "\n";
+                                                functionBuilder.Append("convertDatePickerUI($('#" + el.Name + "'),'" + el.Model.Format + "','ru-RU');" + "\n");
+                                            if (el.Model.edittype == Kendo_Example.Models.Edittype.Integer)
+                                                functionBuilder.Append("convertNumericTextBox($('#" + el.Name + "'),'" + el.Model.Format + "');" + "\n");
+                                            if (el.Model.edittype == Kendo_Example.Models.Edittype.String)
+                                                functionBuilder.Append("convertAU($('#" + el.Name + "'),'" + Url.Action("GetAuData", "ComponentData",
+                                                    new { link = el.Model.link }) + "','" + el.Name + "');" + "\n");
                                         });
                                         ev.BeforeEdit("function(){setTimeout(function () { " + functionBuilder + " }, 50); }");
                                     })

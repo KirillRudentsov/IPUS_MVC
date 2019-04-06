@@ -140,6 +140,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GraphUrlParam.cs" />
+    <Compile Include="Models\GridUrlParam.cs" />
     <Compile Include="Models\ModelAu.cs" />
     <Compile Include="Models\ModelDateTimePicker.cs" />
     <Compile Include="Models\ModelGrid.cs" />
@@ -2721,8 +2723,10 @@
     <Content Include="Scripts\messages\kendo.messages.zh-CN.min.js.map" />
     <Content Include="Scripts\messages\kendo.messages.zh-HK.min.js.map" />
     <Content Include="Scripts\messages\kendo.messages.zh-TW.min.js.map" />
-    <Content Include="Views\PartialComponents\Graph.cshtml" />
     <Content Include="Views\Home\Default.cshtml" />
+    <Content Include="Views\Home\DynamicGrid.cshtml" />
+    <Content Include="Views\Home\DynamicGraph.cshtml" />
+    <Content Include="Views\PartialComponents\Graph.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

@@ -26,8 +26,13 @@
       </Model>
     </column>
 
-    <column type="GridLink" name="name" label="Имя" width="150" hidden="false" visible="true" key="false">
-      <Model editable="true" edittype="String" format="" link="ModelGrid_Details.xml">
+    <!--<column type="GridLink" to_type_link="ModelGrid_Details.xml" name="name" label="Имя" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="" link="v_distinct_names">
+        <default_value>TestName_Default</default_value>
+      </Model>
+    </column>-->
+    <column type="ProcessDesignerLink" name="name" label="Имя" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="" link="v_distinct_names">
         <default_value>TestName_Default</default_value>
       </Model>
     </column>

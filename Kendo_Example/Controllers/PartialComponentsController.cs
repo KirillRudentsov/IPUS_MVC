@@ -15,11 +15,11 @@ namespace Kendo_Example.Controllers
     public class PartialComponentsController : Controller
     {
         // GET: Component
-        public PartialViewResult LoadMenuComponent(string filename)
+        public PartialViewResult LoadMenuComponent(/*string filename*/)
         {
             Menu menu = new Menu();
 
-            var fileContents = /*Session["user_role"].ToString();*/ System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + filename));
+            var fileContents = Session["user_role"].ToString(); // System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + filename));
             XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(Menu));
             menu = (Menu)xmlSerizlizer.Deserialize(new StringReader(fileContents));
 
@@ -37,16 +37,16 @@ namespace Kendo_Example.Controllers
             return PartialView("AutoComplete", au);
         }
 
-        public PartialViewResult LoadGridComponent(string filename, string field_name, string field_value)
+        public PartialViewResult LoadGridComponent(GridUrlParam param)
         {
             Grid grid = new Grid();
 
-            if (field_name != null && field_value != null) {
-                ViewData["field_name"] = field_name;
-                ViewData["field_value"] = field_value;
+            if (param.field_name != null && param.field_value != null) {
+                ViewData["field_name"] = param.field_name;
+                ViewData["field_value"] = param.field_value;
             }
             
-            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + filename));
+            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + param.filename));
             XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(Grid));
             grid = (Grid)xmlSerizlizer.Deserialize(new StringReader(fileContents));
 
@@ -64,9 +64,9 @@ namespace Kendo_Example.Controllers
             return PartialView("DateTimePicker", dateTimePicker);
         }
 
-        public ViewResult LoadGraphComponent(string processName)
+        public PartialViewResult LoadGraphComponent(string link)
         {
-            return View("Graph", processName);
+            return PartialView("Graph", link);
         }
     }
 }

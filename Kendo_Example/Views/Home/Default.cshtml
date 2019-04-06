@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Default Page";
 }
 
 @{
@@ -29,8 +29,7 @@
     <script>
         $('#i_menu').load('@Url.Content("~/PartialComponents/LoadMenuComponent?filename=ModelMenu.xml")');
     </script>
-
-
+    
 
     @(Html.Kendo().Notification().Name("popupNotification"))
 </body>

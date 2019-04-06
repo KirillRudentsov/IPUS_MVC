@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 using Kendo_Example.Extensions;
 using System.Data.SQLite;
 using SqlKata.Compilers;
+using SqlKata;
 
 namespace Kendo_Example.Controllers
 {
@@ -52,14 +53,18 @@ namespace Kendo_Example.Controllers
             }
         }
 
-        public JsonResult GetData([DataSourceRequest] DataSourceRequest request, string link)
+        public JsonResult GetAuData([DataSourceRequest] DataSourceRequest request, string link)
         {
             //get data from db by link and return DataSet back
             DataSourceResult res = new DataSourceResult();
             IDbConnection DBConnection = new SQLiteConnection(@"Data Source=F:\DB\DataBase;Version=3;");
             DBConnection.Open();
 
-            var sql_select_command = new SQLiteCommand(new SqliteCompiler().Compile(new SqlKata.Query().From(link)).ToString(), DBConnection as SQLiteConnection);
+            Query q = new Query().From(link);
+
+            KendoSQLBuilder.ApplyFilters(request.Filters, ref q);
+
+            var sql_select_command = new SQLiteCommand(new SqliteCompiler().Compile(q).ToString(), DBConnection as SQLiteConnection);
 
             DataTable dt = new DataTable("Data");
 
@@ -189,7 +194,7 @@ namespace Kendo_Example.Controllers
 
             return Json(res);
         }
-
+        
         public JsonResult GetGraphEdges([DataSourceRequest] DataSourceRequest request, string link)
         {
             //get data from db by link and return DataSet back

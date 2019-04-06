@@ -10,12 +10,11 @@
             dateInput: true
         });
     });
-    
+
 }
 
 // apply datepicker format
-function convertDatePickerCell(args, dateformat, cult)
-{
+function convertDatePickerCell(args, dateformat, cult) {
 
     args.element.kendoDateTimePicker({
         format: dateformat,
@@ -24,8 +23,7 @@ function convertDatePickerCell(args, dateformat, cult)
 }
 
 
-function convertDatePickerUI(element, dateformat, cult)
-{
+function convertDatePickerUI(element, dateformat, cult) {
 
     element.kendoDateTimePicker({
         format: dateformat,
@@ -34,9 +32,37 @@ function convertDatePickerUI(element, dateformat, cult)
 
 }
 
+function convertAU(element, urlRead, dataFieldText) {
+    element.kendoAutoComplete({
+        dataSource: {
+            type: "aspnetmvc-ajax",
+            transport: {
+                read: {
+                    url: urlRead
+                }
+            },
+            serverFiltering: true,
+            schema: { data: "Data", total: "Total" }
+        },
+        dataTextField: dataFieldText,
+        filter: "contains",
+        ignoreCase: false,
+        minLength: 1,
+        placeholder: "Enter the text"
+    })
+}
+
+function convertNumericTextBox(element, format) {
+
+    element.kendoNumericTextBox({
+        format: format,
+    })
+
+}
+
 function test(e, id, format) {
 
-    setTimeout(function () { $('#' + id + '').kendoDateTimePicker({ format : format }) }, 50);
+    setTimeout(function () { $('#' + id + '').kendoDateTimePicker({ format: format }) }, 50);
 
 }
 
@@ -84,7 +110,7 @@ function visualTemplate(options) {
     if (dataItem.shape === 'Circle') {
         g.append(new dataviz.diagram.Circle({
             radius: 60,
-            
+
             fill: {
                 gradient: {
                     type: "linear",

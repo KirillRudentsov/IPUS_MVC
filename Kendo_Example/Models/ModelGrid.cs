@@ -112,6 +112,9 @@ namespace Kendo_Example.Models
         public Model Model { get; set; }
         [XmlAttribute(AttributeName = "key")]
         public bool key { get; set; }
+
+        [XmlAttribute(AttributeName = "to_type_link")]
+        public string to_type_link { get; set; }
     }
 
     [XmlRoot(ElementName = "COLUMNS")]

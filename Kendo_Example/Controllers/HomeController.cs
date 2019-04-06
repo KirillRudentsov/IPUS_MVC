@@ -15,7 +15,11 @@ namespace Kendo_Example.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
+            //ViewBag.Message = "Welcome to ASP.NET MVC!";
+
+            Session.Abandon();
+            Request.Cookies.Clear();
+
 
             return View();
         }
@@ -32,6 +36,14 @@ namespace Kendo_Example.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult DynamicGrid(GridUrlParam param)
+        {
+            if (Request.Cookies.Get("hstr") == null)
+                return View("Index");
+
+            return View("DynamicGrid", param);
         }
 
         [HttpPost]
@@ -59,9 +71,6 @@ namespace Kendo_Example.Controllers
 
                     return RedirectToAction("Default");
                 }
-                else
-                    return View("Error");
-
             }
             return View("Error");
         }
@@ -77,6 +86,11 @@ namespace Kendo_Example.Controllers
             
 
             return View("Default");
+        }
+
+        public ActionResult DynamicGraph(GraphUrlParam param)
+        {
+            return View("DynamicGraph", param);
         }
     }
 }
