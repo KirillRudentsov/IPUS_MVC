@@ -18,7 +18,11 @@ namespace Kendo_Example.Controllers
             //ViewBag.Message = "Welcome to ASP.NET MVC!";
 
             Session.Abandon();
-            Request.Cookies.Clear();
+            Session.Clear();
+
+            var c = new HttpCookie("hstr");
+            c.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(c);
 
 
             return View();
@@ -90,6 +94,9 @@ namespace Kendo_Example.Controllers
 
         public ActionResult DynamicGraph(GraphUrlParam param)
         {
+            if (Request.Cookies.Get("hstr") == null)
+                return View("Index");
+
             return View("DynamicGraph", param);
         }
     }
