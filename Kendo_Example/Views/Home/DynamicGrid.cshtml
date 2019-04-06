@@ -21,18 +21,20 @@
 </head>
 
 <body>
-    <div id="i_menu"> </div>
+    <div id="i_menu">
+        @Html.Action("LoadMenuComponent", "PartialComponents")
+    </div>
     <br />
-    <div id="component_content"> </div>
+    <div id="component_content">
+        @Html.Action("LoadGridComponent", "PartialComponents", Model)
+    </div>
 
     <script>
 
-        $('#i_menu').load('@Url.Content("~/PartialComponents/LoadMenuComponent")');
-
-        $(document).ready(function () {
+        @*$(document).ready(function () {
             $('#component_content').load('@Url.Content("~/PartialComponents/LoadGridComponent")', {
                 filename: '@Model.filename', field_name: '@Model.field_name', field_value: '@Model.field_value' });
-        });
+        });*@
 
     </script>
 
