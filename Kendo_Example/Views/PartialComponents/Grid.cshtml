@@ -17,12 +17,12 @@
 
                                     // link section
                                     if (item.Type == Kendo_Example.Models.ColumnType.ProcessDesignerLink) {
-                                        c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "LoadGraphComponent", 
-                                            "Components", new { link = "#=" + item.Name + "#" }, null).ToHtmlString());
+                                        c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "LoadGraphComponent",
+                                            "PartialComponents", new { link = "#=" + item.Name + "#" }, null).ToHtmlString());
                                     }
                                     if (item.Type == Kendo_Example.Models.ColumnType.GridLink) {
-                                        c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "LoadGridComponent", 
-                                            "Components", new { filename = item.Model.link, field_name = item.Name, field_value = "#=" + item.Name + "#" }, null).ToHtmlString());
+                                        c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "LoadGridComponent",
+                                            "PartialComponents", new { filename = item.Model.link, field_name = item.Name, field_value = "#=" + item.Name + "#" }, null).ToHtmlString());
                                     }
                                     // link section
 

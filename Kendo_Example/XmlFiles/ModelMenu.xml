@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <menu>
 
-  <firstlevel name="GSOL Company" url="http://gsol.ru/" />
+  <firstlevel name="GSOL Company" url="PartialComponents/LoadGridComponent?filename=ModelGrid.xml" />
   
   <firstlevel name="Sites" url="http://localhost:56466/">
     <secondlevel name="Searching" url="http://localhost:56466/">

@@ -12,14 +12,14 @@ using System.Web.Script.Serialization;
 
 namespace Kendo_Example.Controllers
 {
-    public class ComponentsController : Controller
+    public class PartialComponentsController : Controller
     {
         // GET: Component
         public PartialViewResult LoadMenuComponent(string filename)
         {
             Menu menu = new Menu();
 
-            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + filename));
+            var fileContents = /*Session["user_role"].ToString();*/ System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + filename));
             XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(Menu));
             menu = (Menu)xmlSerizlizer.Deserialize(new StringReader(fileContents));
 

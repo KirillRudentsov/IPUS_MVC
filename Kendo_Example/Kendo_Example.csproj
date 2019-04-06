@@ -133,7 +133,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ComponentDataController.cs" />
-    <Compile Include="Controllers\ComponentsController.cs" />
+    <Compile Include="Controllers\PartialComponentsController.cs" />
     <Compile Include="Controllers\ExportFilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extensions\RequestResult.cs" />
@@ -2647,10 +2647,10 @@
     <Content Include="Scripts\kendo\2019.1.220\kendo.virtuallist.min.js.map" />
     <Content Include="Scripts\kendo\2019.1.220\kendo.web.min.js.map" />
     <Content Include="Scripts\kendo\2019.1.220\kendo.window.min.js.map" />
-    <Content Include="Views\Components\Menu.cshtml" />
-    <Content Include="Views\Components\AutoComplete.cshtml" />
-    <Content Include="Views\Components\Grid.cshtml" />
-    <Content Include="Views\Components\DateTimePicker.cshtml" />
+    <Content Include="Views\PartialComponents\Menu.cshtml" />
+    <Content Include="Views\PartialComponents\AutoComplete.cshtml" />
+    <Content Include="Views\PartialComponents\Grid.cshtml" />
+    <Content Include="Views\PartialComponents\DateTimePicker.cshtml" />
     <Content Include="Scripts\messages\kendo.messages.bg-BG.min.js.map" />
     <Content Include="Scripts\messages\kendo.messages.cs-CZ.min.js.map" />
     <Content Include="Scripts\messages\kendo.messages.da-DK.min.js.map" />
@@ -2721,7 +2721,8 @@
     <Content Include="Scripts\messages\kendo.messages.zh-CN.min.js.map" />
     <Content Include="Scripts\messages\kendo.messages.zh-HK.min.js.map" />
     <Content Include="Scripts\messages\kendo.messages.zh-TW.min.js.map" />
-    <Content Include="Views\Components\Graph.cshtml" />
+    <Content Include="Views\PartialComponents\Graph.cshtml" />
+    <Content Include="Views\Home\Default.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
@@ -2742,6 +2743,7 @@
   <ItemGroup>
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
