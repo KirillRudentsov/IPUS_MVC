@@ -64,7 +64,7 @@ namespace Kendo_Example.Controllers
             return PartialView("DateTimePicker", dateTimePicker);
         }
 
-        public PartialViewResult LoadGraphComponent(string link)
+        public PartialViewResult LoadGraphComponent(GridUrlParam link)
         {
             return PartialView("Graph", link);
         }

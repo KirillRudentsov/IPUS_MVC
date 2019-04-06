@@ -19,7 +19,7 @@
                                     // link section
                                     if (item.Type == Kendo_Example.Models.ColumnType.ProcessDesignerLink) {
                                         c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "DynamicGraph",
-                                            "Home", new { param = "#=" + item.Name + "#" }, null).ToHtmlString());
+                                            "Home", new { link = "#=" + item.Name + "#" }, null).ToHtmlString());
                                     }
                                     if (item.Type == Kendo_Example.Models.ColumnType.GridLink) {
                                         c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "DynamicGrid",

@@ -28,7 +28,7 @@
         $('#i_menu').load('@Url.Content("~/PartialComponents/LoadMenuComponent")');
 
         $(document).ready(function () {
-            $('#component_content').load('@Url.Content("~/PartialComponents/LoadGraphComponent?param=" + Model.link)');
+            $('#component_content').load('@Url.Content("~/PartialComponents/LoadGraphComponent?link=" + Model.link)');
         });
 
     </script>

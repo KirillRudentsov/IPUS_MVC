@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <menu>
 
-  <firstlevel name="Show test grid" url="DynamicPage?filename=ModelGrid.xml" />
-  <firstlevel name="Show detail grid" url="DynamicPage?filename=ModelGrid_Details.xml">
+  <firstlevel name="Show test grid" url="DynamicGrid?filename=ModelGrid.xml" />
+  <firstlevel name="Show detail grid" url="DynamicGrid?filename=ModelGrid_Details.xml">
     <secondlevel name="Searching" url="http://localhost:56466/">
       <thirdlevel name="Yandex" url="https://ya.ru" />
       <thirdlevel name="Google" url="https://www.google.com/" />
@@ -15,7 +15,7 @@
     </secondlevel>
   </firstlevel>
 
-  <firstlevel name="Customers" url="http://localhost:56466/">
+  <firstlevel name="Show process designer" url="DynamicGraph?link=CHECK_BALANCE">
     <secondlevel name="Storage" url="http://localhost:56466/">
       <thirdlevel name="Yandex" url="https://ya.ru" />
       <thirdlevel name="Google" url="https://www.google.com/" />
