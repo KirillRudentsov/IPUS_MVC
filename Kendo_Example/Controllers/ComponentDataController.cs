@@ -85,6 +85,7 @@ namespace Kendo_Example.Controllers
             //get data from db by link and return DataSet back
             DataSourceResult res = new DataSourceResult();
             IDbConnection DBConnection = new SQLiteConnection(@"Data Source=F:\DB\DataBase;Version=3;");
+            bool isGroupBy = request.Groups.Count == 0 ? false : true ;
 
             try
             {
@@ -110,7 +111,7 @@ namespace Kendo_Example.Controllers
                 res.Data = dt.ToDictionary();
                 res.AggregateResults = null;
                 res.Errors = null;
-                res.Total = Convert.ToInt32( sql_select_total.ExecuteScalar().ToString() );
+                res.Total = isGroupBy ? dt.Rows.Count : Convert.ToInt32( sql_select_total.ExecuteScalar().ToString() );
             } 
             catch (Exception ex) { res.Errors = ex.Message; }
             finally { DBConnection.Close(); }
@@ -134,9 +135,9 @@ namespace Kendo_Example.Controllers
             var param = Request.Form;
 
             //test local creating
-            int maxId = testClasses.Max( el => el.TestId );
-            testClasses.Add(new TestClass(++maxId, param["TestName"], param["TestDescription"],
-               param["TestDate"], bool.Parse(param["TestBoolean"]) ));
+            //int maxId = testClasses.Max( el => el.TestId );
+            //testClasses.Add(new TestClass(++maxId, param["TestName"], param["TestDescription"],
+            //   param["TestDate"], bool.Parse(param["TestBoolean"]) ));
 
             return Json("OK");
         }
@@ -153,10 +154,10 @@ namespace Kendo_Example.Controllers
             var param = Request.Form;
 
             //test local creating
-            testClasses.Where(el => el.TestId == Convert.ToInt32(param["TestId"]))
-                .Each(e => { e.TestDescription = param["TestDescription"];
-                    e.TestName = param["TestName"]; e.TestDate = param["TestDate"] ;
-                    e.TestBoolean = bool.Parse(param["TestBoolean"]); });
+            //testClasses.Where(el => el.TestId == Convert.ToInt32(param["TestId"]))
+            //    .Each(e => { e.TestDescription = param["TestDescription"];
+            //        e.TestName = param["TestName"]; e.TestDate = param["TestDate"] ;
+            //        e.TestBoolean = bool.Parse(param["TestBoolean"]); });
 
             return Json("OK");
         }
@@ -173,7 +174,7 @@ namespace Kendo_Example.Controllers
             var param = Request.Form;
 
             //test local creating
-            testClasses.RemoveAll( el => el.TestId == Convert.ToInt32(param["TestId"]) );
+            //testClasses.RemoveAll( el => el.TestId == Convert.ToInt32(param["TestId"]) );
 
             return Json("OK");
         }

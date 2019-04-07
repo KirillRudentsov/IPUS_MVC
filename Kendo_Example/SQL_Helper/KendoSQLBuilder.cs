@@ -26,8 +26,7 @@ namespace Kendo_Example.SQL_Helper
             // build select with sorting
             ApplySorting(request.Sorts, ref QselectBody);
 
-
-            // string groups = ApplyGrouping(request.Groups);
+            ApplyGrouping(request.Groups, ref QselectBody);
 
             // build select with paging
             QselectBody.ForPage(request.Page, request.PageSize);
@@ -170,19 +169,17 @@ namespace Kendo_Example.SQL_Helper
                 sqlRes.OrderBy("ID"); // by default
         }
 
-        //private static string ApplyGrouping(IList<GroupDescriptor> gd)
-        //{
-        //    if (gd.Count == 0)
-        //        return " ";
+        private static void ApplyGrouping(IList<GroupDescriptor> gd, ref Query query)
+        {
+            if (gd.Count == 0)
+                return;
 
-        //    StringBuilder grouped_sql_req = new StringBuilder();
+            // apply grouping
 
-        //    // apply grouping
+            foreach (var item in gd)
+                query.GroupBy(item.Member);
 
-
-
-        //    return "";
-        //}
+        }
 
         private static string ParseSQLValue(object value)
         {
