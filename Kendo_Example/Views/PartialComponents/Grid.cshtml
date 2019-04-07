@@ -1,6 +1,7 @@
 ﻿@using System.Data;
 @using Kendo.Mvc;
 @using System.Text;
+@using Kendo_Example.SupportClasses;
 
 @model Kendo_Example.Models.Grid
 
@@ -15,7 +16,7 @@
                                     var c = columns.Bound(item.Name).Title(item.Label).Width(item.Width)
                                          .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(Enum.GetName(typeof(Kendo_Example.Models.Edittype), item.Model.edittype))
                                          .Format(item.Model.Format).Filterable(true);
-
+                                    
                                     // link section
                                     if (item.Type == Kendo_Example.Models.ColumnType.ProcessDesignerLink) {
                                         c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "DynamicGraph",
@@ -51,6 +52,26 @@
                                         .ButtonCount(5))
                                         .DataSource(dataSource => dataSource
                                             .Ajax()
+                                            .ServerOperation(true)
+                                            //.Aggregates( aggregates => {
+                                            //    foreach (var col in Model.COLUMNS.Column) {
+                                            //        if (col.Aggregates != null) {
+                                            //            foreach (var ag in col.Aggregates.Add) {
+
+                                            //                if(ag.AggregateType == Kendo_Example.Models.AggregateType.sum)
+                                            //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Sum();
+                                            //                if (ag.AggregateType == Kendo_Example.Models.AggregateType.min)
+                                            //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Min();
+                                            //                if (ag.AggregateType == Kendo_Example.Models.AggregateType.max)
+                                            //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Max();
+                                            //                if (ag.AggregateType == Kendo_Example.Models.AggregateType.count)
+                                            //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Count();
+                                            //                if (ag.AggregateType == Kendo_Example.Models.AggregateType.average)
+                                            //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Average();
+                                            //            }
+                                            //        }
+                                            //    }
+                                            //})
                                             .Filter(filtersDefault =>
                                             {
                                                 // Apply default filters
@@ -61,7 +82,6 @@
                                                     filtersDefault.AddRange(filterDescriptors.AsEnumerable());
                                                 }
                                             })
-                                            .ServerOperation(true)
                                             .Read(read =>
                                             {
                                                 read.Action(Model.DataSource.Action, Model.DataSource.Controller_name,
@@ -76,14 +96,8 @@
                                                     if (m.key)
                                                         model.Id(m.Name);
 
-                                                    if (m.Model.edittype == Kendo_Example.Models.Edittype.String)
-                                                        model.Field(m.Name, typeof(string)).DefaultValue(m.Model.Default_value).Editable(m.Model.editable);
-                                                    if (m.Model.edittype == Kendo_Example.Models.Edittype.Date)
-                                                        model.Field(m.Name, typeof(DateTime)).Editable(m.Model.editable);
-                                                    if (m.Model.edittype == Kendo_Example.Models.Edittype.Integer)
-                                                        model.Field(m.Name, typeof(int)).DefaultValue(m.Model.Default_value).Editable(m.Model.editable);
-                                                    if (m.Model.edittype == Kendo_Example.Models.Edittype.Boolean)
-                                                        model.Field(m.Name, typeof(bool)).DefaultValue(m.Model.Default_value).Editable(m.Model.editable);
+                                                    model.Field(m.Name, TypeWrapper.GetGridColumnType(m.Model.edittype))
+                                                     .DefaultValue(m.Model.Default_value).Editable(m.Model.editable);
                                                 }
                                             })
                                             .Update(update => update.Action(Model.Edit.DataSource.Action,

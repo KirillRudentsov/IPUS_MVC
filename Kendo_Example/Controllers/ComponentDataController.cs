@@ -86,7 +86,7 @@ namespace Kendo_Example.Controllers
             DataSourceResult res = new DataSourceResult();
             IDbConnection DBConnection = new SQLiteConnection(@"Data Source=F:\DB\DataBase;Version=3;");
             bool isGroupBy = request.Groups.Count == 0 ? false : true ;
-
+            
             try
             {
                 //ConnectDB();
@@ -108,10 +108,21 @@ namespace Kendo_Example.Controllers
                 //var ds = _db.Execute2DataSet(sql_select.ToString(), "Data");
                 dt.Load(sql_select_command.ExecuteReader());
 
-                res.Data = dt.ToDictionary();
+                if (isGroupBy)
+                {
+                    DataSourceRequest req = new DataSourceRequest();
+                    req.Groups = request.Groups;
+                    req.Page = request.Page;
+                    req.PageSize = request.PageSize;
+
+                    res.Data = dt.ToDataSourceResult(req).Data;
+                }
+                else
+                    res.Data = dt.ToDictionary();
+
                 res.AggregateResults = null;
                 res.Errors = null;
-                res.Total = isGroupBy ? dt.Rows.Count : Convert.ToInt32( sql_select_total.ExecuteScalar().ToString() );
+                res.Total = isGroupBy ? dt.Rows.Count : Convert.ToInt32(sql_select_total.ExecuteScalar().ToString());
             } 
             catch (Exception ex) { res.Errors = ex.Message; }
             finally { DBConnection.Close(); }

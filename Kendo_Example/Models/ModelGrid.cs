@@ -115,6 +115,37 @@ namespace Kendo_Example.Models
 
         [XmlAttribute(AttributeName = "to_type_link")]
         public string to_type_link { get; set; }
+
+        [XmlElement(ElementName = "Aggregates")]
+        public Aggregates Aggregates { get; set; }
+    }
+    
+    public enum AggregateType
+    {
+        [XmlEnum(Name = "min")]
+        min = 0,
+        [XmlEnum(Name = "max")]
+        max = 1,
+        [XmlEnum(Name = "count")]
+        count = 2,
+        [XmlEnum(Name = "sum")]
+        sum = 3,
+        [XmlEnum(Name = "average")]
+        average = 4
+    }
+
+    [XmlRoot(ElementName = "add")]
+    public class Add
+    {
+        [XmlAttribute(AttributeName = "type")]
+        public AggregateType AggregateType { get; set; }
+    }
+    
+    [XmlRoot(ElementName = "Aggregates")]
+    public class Aggregates
+    {
+        [XmlElement(ElementName = "add")]
+        public List<Add> Add { get; set; }
     }
 
     [XmlRoot(ElementName = "COLUMNS")]
