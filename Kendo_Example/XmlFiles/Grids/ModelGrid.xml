@@ -26,14 +26,20 @@
       </Model>
     </column>
 
+    <!--<column type="GridLink" to_type_link="ModelGrid_Details.xml" name="name" label="Имя" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="" link="v_distinct_names">
+        <default_value>TestName_Default</default_value>
+      </Model>
+    </column>-->
+
     <column type="ProcessDesignerLink" name="NAME" label="Имя" width="150" hidden="false" visible="true" key="false">
       <Model editable="true" edittype="String" format="NAME" link="V_RPATEMPLATE_AU_NAME">
         <default_value></default_value>
       </Model>
     </column>
 
-    <column type="simple" name="INFO" label="Описание" width="150" hidden="false" visible="true" key="false">
-      <Model editable="true" edittype="String" format="INFO" link="V_RPATEMPLATE_AU_NAME">
+    <column type="GridLink" to_type_link="ModelGrid_Details.xml" name="INFO" label="Описание" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="INFO" link="V_RPATEMPLATE_AU_INFO">
         <default_value></default_value>
       </Model>
     </column>
@@ -69,7 +75,7 @@
     </column>
 
     <column type="simple" name="TRACE" label="Шаг" width="150" hidden="false" visible="true" key="false">
-      <Model editable="true" edittype="Boolean" format="{0:0}">
+      <Model editable="true" edittype="Integer" format="{0:0}">
         <default_value>0</default_value>
       </Model>
     </column>

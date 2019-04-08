@@ -1,0 +1,32 @@
+﻿
+@model Kendo_Example.Models.Menu
+
+
+@(Html.Kendo().Menu()
+                      .Name("VerticalMenu")
+                      .Items(items =>
+                      {
+                          foreach (var fl in Model.Firstlevel)
+                          {
+                              items.Add().Text(fl.Name).Items(firstChildren =>
+                              {
+                                  foreach (var sl in fl.Secondlevel)
+                                  {
+                                      firstChildren.Add().Text(sl.Name).Items(secondChildren =>
+                                      {
+                                          foreach (var tl in sl.Thirdlevel)
+                                          {
+                                              secondChildren.Add().Text(tl.Name).Url(tl.Url);
+                                          }
+                                      }).Url(sl.Url);
+                                  }
+                              }).Url( fl.Url );
+                          }
+
+                          //for exit
+                          items.Add().Text("Выход").Url(Url.Action("Index", "Home"));
+
+                          //
+                          items.Add().Text("Login as " + Session["user_name"].ToString()).HtmlAttributes(new { @style ="float:right;" });
+                      })
+)

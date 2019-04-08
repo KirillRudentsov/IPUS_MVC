@@ -30,7 +30,7 @@ namespace Kendo_Example.Models
 
         [XmlAttribute(AttributeName = "edittype")]
         public Edittype edittype { get; set; }
-        
+
         [XmlAttribute(AttributeName = "format")]
         public string Format { get; set; }
         [XmlAttribute(AttributeName = "editable")]
@@ -46,7 +46,7 @@ namespace Kendo_Example.Models
         [XmlElement(ElementName = "DataSource")]
         public DataSource DataSource { get; set; }
     }
-    
+
     [XmlRoot(ElementName = "Delete")]
     public class Delete
     {
@@ -60,7 +60,7 @@ namespace Kendo_Example.Models
         [XmlElement(ElementName = "DataSource")]
         public DataSource DataSource { get; set; }
     }
-    
+
     [XmlRoot(ElementName = "Export_Excel")]
     public class Export_Excel
     {
@@ -88,9 +88,11 @@ namespace Kendo_Example.Models
         [XmlEnum(Name = "simple")]
         simple = 0,
         [XmlEnum(Name = "ProcessDesignerLink")]
-        ProcessDesignerLink = 1
+        ProcessDesignerLink = 1,
+        [XmlEnum(Name = "GridLink")]
+        GridLink = 2
     }
-    
+
     [XmlRoot(ElementName = "column")]
     public class Column
     {
@@ -110,6 +112,40 @@ namespace Kendo_Example.Models
         public Model Model { get; set; }
         [XmlAttribute(AttributeName = "key")]
         public bool key { get; set; }
+
+        [XmlAttribute(AttributeName = "to_type_link")]
+        public string to_type_link { get; set; }
+
+        [XmlElement(ElementName = "Aggregates")]
+        public Aggregates Aggregates { get; set; }
+    }
+
+    public enum AggregateType
+    {
+        [XmlEnum(Name = "min")]
+        min = 0,
+        [XmlEnum(Name = "max")]
+        max = 1,
+        [XmlEnum(Name = "count")]
+        count = 2,
+        [XmlEnum(Name = "sum")]
+        sum = 3,
+        [XmlEnum(Name = "average")]
+        average = 4
+    }
+
+    [XmlRoot(ElementName = "add")]
+    public class Add
+    {
+        [XmlAttribute(AttributeName = "type")]
+        public AggregateType AggregateType { get; set; }
+    }
+
+    [XmlRoot(ElementName = "Aggregates")]
+    public class Aggregates
+    {
+        [XmlElement(ElementName = "add")]
+        public List<Add> Add { get; set; }
     }
 
     [XmlRoot(ElementName = "COLUMNS")]

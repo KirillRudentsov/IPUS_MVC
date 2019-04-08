@@ -12,38 +12,42 @@ using System.Web.Script.Serialization;
 
 namespace Kendo_Example.Controllers
 {
-    public class ComponentsController : Controller
+    public class PartialComponentsController : Controller
     {
         // GET: Component
-        public PartialViewResult LoadMenuComponent(string filename)
+        public PartialViewResult LoadMenuComponent(/*string filename*/)
         {
             Menu menu = new Menu();
 
-            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + filename));
+            var fileContents = Session["user_role"].ToString(); // System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/Menu/" + filename));
             XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(Menu));
             menu = (Menu)xmlSerizlizer.Deserialize(new StringReader(fileContents));
 
-            return PartialView("Menu",menu);
+            return PartialView("Menu", menu);
         }
-        
+
         public PartialViewResult LoadAuComponent(string filename)
         {
             AutoComplete au = new Models.AutoComplete();
 
-            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + filename));
+            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/AutoComplete/" + filename));
             XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(AutoComplete));
             au = (AutoComplete)xmlSerizlizer.Deserialize(new StringReader(fileContents));
 
             return PartialView("AutoComplete", au);
         }
 
-        public PartialViewResult LoadGridComponent(string filename)
+        public PartialViewResult LoadGridComponent(GridUrlParam param)
         {
-            Grid grid = new Models.Grid();
+            Grid grid = new Grid();
 
-            ViewData[""] = "";
+            if (param.field_name != null && param.field_value != null)
+            {
+                ViewData["field_name"] = param.field_name;
+                ViewData["field_value"] = param.field_value;
+            }
 
-            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/" + filename));
+            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/Grids/" + param.filename));
             XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(Grid));
             grid = (Grid)xmlSerizlizer.Deserialize(new StringReader(fileContents));
 
@@ -54,16 +58,16 @@ namespace Kendo_Example.Controllers
         {
             DateTimePicker dateTimePicker = new DateTimePicker();
 
-            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/CustomComponents/Date/" + filename));
+            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/Date/" + filename));
             XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(DateTimePicker));
             dateTimePicker = (DateTimePicker)xmlSerizlizer.Deserialize(new StringReader(fileContents));
 
             return PartialView("DateTimePicker", dateTimePicker);
         }
 
-        public ViewResult LoadGraphComponent(string processName)
+        public PartialViewResult LoadGraphComponent(GridUrlParam link)
         {
-            return View("Graph", processName);
+            return PartialView("Graph", link);
         }
     }
 }

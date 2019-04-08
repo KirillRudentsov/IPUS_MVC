@@ -88,6 +88,7 @@ namespace Kendo_Example.Controllers
         {
             //get data from db by link and return DataSet back
             DataSourceResult res = new DataSourceResult();
+            bool isGroupBy = request.Groups.Count == 0 ? false : true;
 
             try
             {
@@ -100,7 +101,18 @@ namespace Kendo_Example.Controllers
                 var ds = _db.Execute2DataSet(sql_select.SQL_Select, "Data");
                 var dt = ds.Tables["Data"];
 
-                res.Data = dt.ToDictionary();
+                if (isGroupBy)
+                {
+                    DataSourceRequest req = new DataSourceRequest();
+                    req.Groups = request.Groups;
+                    //req.Page = request.Page;
+                    //req.PageSize = request.PageSize;
+
+                    res.Data = dt.ToDataSourceResult(req).Data;
+                }
+                else
+                    res.Data = dt.ToDictionary();
+
                 res.AggregateResults = null;
                 res.Errors = null;
                 res.Total = total;

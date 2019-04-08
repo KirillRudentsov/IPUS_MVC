@@ -1,6 +1,5 @@
-﻿
-@{
-    ViewBag.Title = "Login";
+﻿@{
+    ViewBag.Title = "Default Page";
 }
 
 @{
@@ -18,26 +17,21 @@
     @Scripts.Render("~/Scripts/messages/kendo.messages." + culture + ".min.js")
     <script>kendo.culture('@culture');</script>
 </head>
+
 <body>
+    <div id="i_menu">
+        @Html.Action("LoadMenuComponent", "PartialComponents")
+    </div>
 
-    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
-    {
-        <table>
-            <tr>
-                <td><p>Логин : </p></td>
-                <td><input type="text" name="Login" /> </td>
-            </tr>
-            <tr>
-                <td><p>Пароль :</p></td>
-                <td><input type="text" name="Password" /> </td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Войти" /> </td>
-                <td></td>
-            </tr>
-        </table>
-    }
+    <br />
 
+    <div id="control_content"> </div>
 
+    <script>
+        @*$('#i_menu').load('@Url.Content("~/PartialComponents/LoadMenuComponent?filename=ModelMenu.xml")');*@
+    </script>
+    
+
+    @(Html.Kendo().Notification().Name("popupNotification"))
 </body>
 </html>

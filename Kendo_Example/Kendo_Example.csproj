@@ -117,13 +117,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ComponentDataController.cs" />
-    <Compile Include="Controllers\ComponentsController.cs" />
+    <Compile Include="Controllers\PartialComponentsController.cs" />
     <Compile Include="Controllers\ExportFilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extensions\RequestResult.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GraphUrlParam.cs" />
+    <Compile Include="Models\GridUrlParam.cs" />
     <Compile Include="Models\ModelAu.cs" />
     <Compile Include="Models\ModelDateTimePicker.cs" />
     <Compile Include="Models\ModelGrid.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="SupportClasses\GridBuilder.cs" />
     <Compile Include="SupportClasses\nodes.cs" />
     <Compile Include="SQL_Helper\KendoSQLBuilder.cs" />
+    <Compile Include="SupportClasses\TypeWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -1482,12 +1485,13 @@
     <Content Include="Scripts\messages\kendo.messages.zh-CN.min.js" />
     <Content Include="Scripts\messages\kendo.messages.zh-HK.min.js" />
     <Content Include="Scripts\messages\kendo.messages.zh-TW.min.js" />
-    <Content Include="XmlFiles\CustomComponents\Date\DateTimePicker_1.xml" />
-    <Content Include="XmlFiles\ModelAu.xml" />
-    <Content Include="XmlFiles\ModelGrid.xml">
+    <Content Include="XmlFiles\Date\DateTimePicker_1.xml" />
+    <Content Include="XmlFiles\Grids\ModelGrid_Details.xml" />
+    <Content Include="XmlFiles\AutoComplete\ModelAu.xml" />
+    <Content Include="XmlFiles\Grids\ModelGrid.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="XmlFiles\ModelMenu.xml" />
+    <Content Include="XmlFiles\Menu\ModelMenu.xml" />
     <Content Include="XmlFiles\ProcedureDefinition\TestProcedure.xml" />
     <Content Include="App_Data\Nodes.json" />
     <Content Include="App_Data\Edges.json" />
@@ -2492,9 +2496,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\kendo\2019.1.220\jquery.min.map" />
@@ -2628,10 +2629,6 @@
     <Content Include="Scripts\kendo\2019.1.220\kendo.virtuallist.min.js.map" />
     <Content Include="Scripts\kendo\2019.1.220\kendo.web.min.js.map" />
     <Content Include="Scripts\kendo\2019.1.220\kendo.window.min.js.map" />
-    <Content Include="Views\Components\Menu.cshtml" />
-    <Content Include="Views\Components\AutoComplete.cshtml" />
-    <Content Include="Views\Components\Grid.cshtml" />
-    <Content Include="Views\Components\DateTimePicker.cshtml" />
     <Content Include="Scripts\messages\kendo.messages.bg-BG.min.js.map" />
     <Content Include="Scripts\messages\kendo.messages.cs-CZ.min.js.map" />
     <Content Include="Scripts\messages\kendo.messages.da-DK.min.js.map" />
@@ -2702,7 +2699,17 @@
     <Content Include="Scripts\messages\kendo.messages.zh-CN.min.js.map" />
     <Content Include="Scripts\messages\kendo.messages.zh-HK.min.js.map" />
     <Content Include="Scripts\messages\kendo.messages.zh-TW.min.js.map" />
-    <Content Include="Views\Components\Graph.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Default.cshtml" />
+    <Content Include="Views\Home\DynamicGraph.cshtml" />
+    <Content Include="Views\Home\DynamicGrid.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\PartialComponents\AutoComplete.cshtml" />
+    <Content Include="Views\PartialComponents\DateTimePicker.cshtml" />
+    <Content Include="Views\PartialComponents\Graph.cshtml" />
+    <Content Include="Views\PartialComponents\Grid.cshtml" />
+    <Content Include="Views\PartialComponents\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

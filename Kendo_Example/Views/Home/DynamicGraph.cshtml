@@ -1,0 +1,46 @@
+﻿
+
+@{
+    //var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
+    var culture = "ru-RU";
+}
+
+@model Kendo_Example.Models.GraphUrlParam
+
+<html>
+<head>
+    @Styles.Render("~/Content/kendo")
+    @Styles.Render("~/Content/kendo/2019.1.220/kendo.moonlight.min.css")
+    @Scripts.Render("~/Scripts/kendo")
+    @Scripts.Render("~/Scripts/Custom")
+    @Scripts.Render("~/Scripts/Cultures/kendo.culture." + culture + ".min.js")
+    @Scripts.Render("~/Scripts/messages/kendo.messages." + culture + ".min.js")
+    <script>kendo.culture('@culture');</script>
+</head>
+
+<body>
+    <div id="i_menu">
+        @Html.Action("LoadMenuComponent", "PartialComponents")
+    </div>
+
+    <br />
+    <div id="component_content">
+        @Html.Action("LoadGraphComponent", "PartialComponents", new { link = Model.link })
+
+    </div>
+
+    <script>
+
+        @*$('#i_menu').load('@Url.Content("~/PartialComponents/LoadMenuComponent")');*@
+
+        @*$(document).ready(function () {
+            $('#component_content').load('@Url.Content("~/PartialComponents/LoadGraphComponent?link=" + Model.link)');
+        });*@
+
+    </script>
+
+
+
+    @(Html.Kendo().Notification().Name("popupNotification"))
+</body>
+</html>
