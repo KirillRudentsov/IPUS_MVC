@@ -66,43 +66,98 @@ namespace Kendo_Example.SQL_Helper
             //apply filters
             foreach (FilterDescriptor f in fd)
             {
+                Type memberType = f.Value.GetType();
+                bool isDate = false;
+                string db_dateFormat = "dd.MM.yyyy HH24:mi:ss";
+                string csharp_dateFormat = "{0:dd.MM.yyyy HH:mm:ss}";
+                if (memberType == typeof(DateTime))
+                    isDate = true;
+                
                 switch (f.Operator)
                 {
                     case FilterOperator.IsLessThan:
-                        if(filterComposition == FilterCompositionLogicalOperator.And)
-                            query.Where(f.Member, "<", f.Value);
-                        else
-                            query.OrWhere(f.Member, "<", f.Value);
+                        if (filterComposition == FilterCompositionLogicalOperator.And) {
+                            if (isDate)
+                                query.WhereDate(f.Member, "<", string.Format(csharp_dateFormat, f.Value), db_dateFormat);
+                            else
+                                query.Where(f.Member, "<", f.Value);
+                        }
+                        else {
+                            if (isDate)
+                                query.OrWhereDate(f.Member, "<", string.Format(csharp_dateFormat, f.Value), db_dateFormat);
+                            else
+                                query.OrWhere(f.Member, "<", f.Value);
+                        }
                         break;
                     case FilterOperator.IsLessThanOrEqualTo:
-                        if (filterComposition == FilterCompositionLogicalOperator.And)
-                            query.Where(f.Member, "<=", f.Value);
-                        else
-                            query.OrWhere(f.Member, "<=", f.Value);
+                        if (filterComposition == FilterCompositionLogicalOperator.And) {
+                            if (isDate)
+                                query.WhereDate(f.Member, "<=", string.Format(csharp_dateFormat, f.Value), db_dateFormat);
+                            else
+                                query.Where(f.Member, "<=", f.Value);
+                        }
+                        else {
+                            if (isDate)
+                                query.OrWhereDate(f.Member, "<=", string.Format(csharp_dateFormat, f.Value), db_dateFormat);
+                            else
+                                query.OrWhere(f.Member, "<=", f.Value);
+                        }
                         break;
                     case FilterOperator.IsEqualTo:
-                        if (filterComposition == FilterCompositionLogicalOperator.And)
-                            query.Where(f.Member, "=", f.Value);
-                        else
-                            query.OrWhere(f.Member, "=", f.Value);
+                        if (filterComposition == FilterCompositionLogicalOperator.And) {
+                            if (isDate)
+                                query.WhereDate(f.Member, "=", string.Format(csharp_dateFormat, f.Value), db_dateFormat);
+                            else
+                                query.Where(f.Member, "=", f.Value);
+                        }
+                        else {
+                            if (isDate)
+                                query.OrWhereDate(f.Member, "=", string.Format(csharp_dateFormat, f.Value), db_dateFormat);
+                            else
+                                query.OrWhere(f.Member, "=", f.Value);
+                        }
                         break;
                     case FilterOperator.IsNotEqualTo:
-                        if (filterComposition == FilterCompositionLogicalOperator.And)
-                            query.Where(f.Member, "!=", f.Value);
-                        else
-                            query.OrWhere(f.Member, "!=", f.Value);
+                        if (filterComposition == FilterCompositionLogicalOperator.And) {
+                            if (isDate)
+                                query.WhereDate(f.Member, "!=", string.Format(csharp_dateFormat, f.Value), db_dateFormat);
+                            else
+                                query.Where(f.Member, "!=", f.Value);
+                        }
+                        else {
+                            if (isDate)
+                                query.OrWhereDate(f.Member, "!=", string.Format(csharp_dateFormat, f.Value), db_dateFormat);
+                            else
+                                query.OrWhere(f.Member, "!=", f.Value);
+                        }
                         break;
                     case FilterOperator.IsGreaterThanOrEqualTo:
-                        if (filterComposition == FilterCompositionLogicalOperator.And)
-                            query.Where(f.Member, ">=", f.Value);
-                        else
-                            query.OrWhere(f.Member, ">=", f.Value);
+                        if (filterComposition == FilterCompositionLogicalOperator.And) {
+                            if (isDate)
+                                query.WhereDate(f.Member, ">=", string.Format(csharp_dateFormat, f.Value), db_dateFormat);
+                            else
+                                query.Where(f.Member, ">=", f.Value);
+                        }
+                        else {
+                            if (isDate)
+                                query.OrWhereDate(f.Member, ">=", string.Format(csharp_dateFormat, f.Value), db_dateFormat);
+                            else
+                                query.OrWhere(f.Member, ">=", f.Value);
+                        }
                         break;
                     case FilterOperator.IsGreaterThan:
-                        if (filterComposition == FilterCompositionLogicalOperator.And)
-                            query.Where(f.Member, ">", f.Value);
-                        else
-                            query.OrWhere(f.Member, ">", f.Value);
+                        if (filterComposition == FilterCompositionLogicalOperator.And) {
+                            if (isDate)
+                                query.WhereDate(f.Member, ">", string.Format(csharp_dateFormat, f.Value), db_dateFormat);
+                            else
+                                query.Where(f.Member, ">", f.Value);
+                        }
+                        else {
+                            if (isDate)
+                                query.OrWhereDate(f.Member, ">", string.Format(csharp_dateFormat, f.Value), db_dateFormat);
+                            else
+                                query.OrWhere(f.Member, ">", f.Value);
+                        }
                         break;
                     case FilterOperator.StartsWith:
                         if (filterComposition == FilterCompositionLogicalOperator.And)
@@ -148,13 +203,13 @@ namespace Kendo_Example.SQL_Helper
                         break;
                     case FilterOperator.IsEmpty:
                         if (filterComposition == FilterCompositionLogicalOperator.And)
-                            query.Where(f.Member,"=","");
+                            query.Where(f.Member, "=", "");
                         else
                             query.OrWhere(f.Member, "=", "");
                         break;
                     case FilterOperator.IsNotEmpty:
                         if (filterComposition == FilterCompositionLogicalOperator.And)
-                            query.Where(f.Member, "!=","");
+                            query.Where(f.Member, "!=", "");
                         else
                             query.OrWhere(f.Member, "!=", "");
                         break;
@@ -191,21 +246,27 @@ namespace Kendo_Example.SQL_Helper
 
         }
 
-        private static string ParseSQLValue(object value)
+        private static Type GetType(object value)
         {
             switch (value.GetType().Name)
             {
                 case "Double":
+                    return typeof(double);
                 case "Float":
+                    return typeof(float);
                 case "Int32":
+                    return typeof(int);
                 case "Int64":
+                    return typeof(long);
                 case "Boolean":
+                    return typeof(bool);
                 case "String":
+                    return typeof(string);
                 case "DateTime":
-                    return value.ToString();
+                    return typeof(DateTime);
             }
 
-            return "";
+            return typeof(string);
         }
     }
 }
