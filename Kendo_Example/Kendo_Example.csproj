@@ -1501,15 +1501,16 @@
     <Content Include="Scripts\messages\kendo.messages.zh-CN.min.js" />
     <Content Include="Scripts\messages\kendo.messages.zh-HK.min.js" />
     <Content Include="Scripts\messages\kendo.messages.zh-TW.min.js" />
-    <Content Include="XmlFiles\CustomComponents\Date\DateTimePicker_1.xml" />
-    <Content Include="XmlFiles\ModelAu.xml" />
-    <Content Include="XmlFiles\ModelGrid_Details.xml">
+    <Content Include="XmlFiles\Date\DateTimePicker_1.xml" />
+    <Content Include="XmlFiles\AutoComplete\ModelAu.xml" />
+    <Content Include="XmlFiles\Grids\ModeGrid_Regions.xml" />
+    <Content Include="XmlFiles\Grids\ModelGrid_Details.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="XmlFiles\ModelGrid.xml">
+    <Content Include="XmlFiles\Grids\ModelGrid.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="XmlFiles\ModelMenu.xml" />
+    <Content Include="XmlFiles\Menu\ModelMenu.xml" />
     <Content Include="XmlFiles\ProcedureDefinition\TestProcedure.xml" />
     <Content Include="App_Data\Nodes.json" />
     <Content Include="App_Data\Edges.json" />
@@ -2728,6 +2729,7 @@
     <Content Include="Views\Home\DynamicGrid.cshtml" />
     <Content Include="Views\Home\DynamicGraph.cshtml" />
     <Content Include="Views\PartialComponents\Graph.cshtml" />
+    <Content Include="Views\PartialComponents\ContextMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

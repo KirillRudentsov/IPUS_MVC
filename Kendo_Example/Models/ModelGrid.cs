@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kendo.Mvc.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -186,5 +187,50 @@ namespace Kendo_Example.Models
         public Update Edit { get; set; }
         [XmlElement(ElementName = "Delete")]
         public Delete Delete { get; set; }
+
+        [XmlElement(ElementName = "ContextMenu")]
+        public ContextMenu ContextMenu { get; set; }
+    }
+
+    [XmlRoot(ElementName = "item")]
+    public class Item
+    {
+        [XmlElement(ElementName = "DataSource")]
+        public DataSource DataSource { get; set; }
+        [XmlAttribute(AttributeName = "type")]
+        public ContextMenuItemType ContextMenuItemType { get; set; }
+        [XmlAttribute(AttributeName = "action")]
+        public ColumnType Action { get; set; }
+        [XmlAttribute(AttributeName = "title")]
+        public string Title { get; set; }
+
+        [XmlElement(ElementName = "Items")]
+        public Items Items { get; set; }
+    }
+   
+    public enum ContextMenuItemType
+    {
+        [XmlEnum(Name = "Separator")]
+        Separator = 0,
+        [XmlEnum(Name = "notSeparator")]
+        notSeparator = 1
+    }
+    
+    [XmlRoot(ElementName = "Items")]
+    public class Items
+    {
+        [XmlElement(ElementName = "item")]
+        public List<Item> Item { get; set; }
+    }
+
+    [XmlRoot(ElementName = "ContextMenu")]
+    public class ContextMenu
+    {
+        [XmlElement(ElementName = "Items")]
+        public Items Items { get; set; }
+        [XmlAttribute(AttributeName = "ContextMenuOrientation")]
+        public ContextMenuOrientation ContextMenuOrientation { get; set; }
+        [XmlAttribute(AttributeName = "id")]
+        public string Id { get; set; }
     }
 }

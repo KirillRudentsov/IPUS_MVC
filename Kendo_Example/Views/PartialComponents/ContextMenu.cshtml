@@ -1,0 +1,67 @@
+﻿
+
+@( Html.Kendo().ContextMenu()
+    .Name("ContextMenu")
+    .Target("#jsTestGrid")
+    .Orientation(ContextMenuOrientation.Vertical)
+    .Animation(animation =>
+    {
+        //animation.Open(open =>
+        //{
+        //    open.Fade(FadeDirection.In);
+        //    open.Duration(500);
+        //    open.Zoom(ZoomDirection.In);
+        //});
+    })
+    .Items(items => {
+        items.Add().Text("Перейти к").Items(item =>
+        {
+            item.Add().Text("Тест сету").HtmlAttributes(new { action = "GridLink" })
+                .Action("DynamicGrid", "Home", new { filename = "ModelGrid_Details.xml" });
+
+            item.Add().Text("Региональному тест сету").HtmlAttributes(new { action = "GridLink" })
+                .Action("DynamicGrid", "Home", new { filename = "ModelGrid_Details.xml" });
+
+            item.Add().Text("Процессу").HtmlAttributes(new { action = "GridLink" })
+                .Action("DynamicGrid", "Home", new { filename = "ModelGrid_Details.xml" });
+        });
+
+        items.Add().Separator(true);
+        items.Add().Text("Show process designer").HtmlAttributes(new { action = "ProcessDesignerLink" });
+        items.Add().Separator(true);
+        items.Add().Text("Show column info").HtmlAttributes( new { action = "TempLink" });
+    })
+    .Filter("tr[role='row']")
+    .Events( events => {
+        events.Select("function (e){contextMenu_SelectEventHandler( e, 'sd' )}");
+    })
+)
+
+<script>
+
+    function contextMenu_SelectEventHandler(e, addData) {
+
+        var action = $(e.item).data("action");
+        console.log("Grid id : " + e.sender.target[0].id);
+
+        //var grid = $("#jsTestGrid").data("kendoGrid");
+        //var model = grid.dataItem(event.target);
+
+        var fn = $('#jsTestGrid thead tr th').eq($("td#jsTestGrid_active_cell").index())[0].dataset.field;
+        var cv = $("td#jsTestGrid_active_cell")[0].innerText;
+
+        console.log(e);
+
+        console.log('add data : ' + addData);
+        console.log("field name : " + fn);
+        console.log("cell value: " + cv);
+
+        //execute action
+        if (action == "GridLink") { }
+        if (action == "ProcessDesignerLink") { }
+        if (action == "TempLink") { }
+
+
+    }
+
+</script>

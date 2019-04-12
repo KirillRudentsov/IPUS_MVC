@@ -2,165 +2,292 @@
 @using Kendo.Mvc;
 @using System.Text;
 @using Kendo_Example.SupportClasses;
+@using Kendo_Example.Models;
+@using Kendo.Mvc.UI.Fluent;
 
 @model Kendo_Example.Models.Grid
 
 <script src="@Url.Content("~/Scripts/kendo/2019.1.220/jszip.min.js")"></script>
 
 @(Html.Kendo().Grid<dynamic>()
-                            .Name(Model.Id)
-                            .Columns(columns =>
-                            {
-                                foreach (var item in Model.COLUMNS.Column)
-                                {
-                                    var c = columns.Bound(TypeWrapper.GetGridColumnType(item.Model.edittype), item.Name).Title(item.Label).Width(item.Width)
-                                         .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(Enum.GetName(typeof(Kendo_Example.Models.Edittype), item.Model.edittype))
-                                         .Format(item.Model.Format).Filterable(true);
-
-                                    // link section
-                                    if (item.Type == Kendo_Example.Models.ColumnType.ProcessDesignerLink) {
-                                        c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "DynamicGraph",
-                                            "Home", new { link = "#=" + item.Name + "#" }, null).ToHtmlString());
-                                    }
-                                    if (item.Type == Kendo_Example.Models.ColumnType.GridLink) {
-                                        c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "DynamicGrid",
-                                            "Home", new { filename = item.to_type_link, field_name = item.Name, field_value = "#=" + item.Name + "#" }, null).ToHtmlString());
-                                    }
-                                    // link section
-
-                                    if (item.Model.edittype == Kendo_Example.Models.Edittype.Date)
+                                    .Name(Model.Id)
+                                    .Columns(columns =>
                                     {
-                                        c.Filterable(x => x.Cell(y => y.Template("function(args){ convertDatePickerCell(args, '" + item.Model.Format + "','ru-RU')}")));
-                                        c.Filterable(x => x.UI("function(element){ convertDatePickerUI(element, '" + item.Model.Format + "','ru-RU')}"));
-                                    }
-                                }
-                                columns.Command(command => { command.Edit(); command.Destroy(); }).Width(150);
-                            })
-                                    .ToolBar(toolbar => { toolbar.Create(); })
-                                    .Editable(editable => editable.Mode(GridEditMode.InLine))
-                                    //.HtmlAttributes(new { style = "height: 1000px;" })
-                                    .HtmlAttributes(new { style = "width: " + Model.Width + "px;" })
-                                    .Scrollable(scr => scr.Height(Model.Height))
-                                    .Groupable()
-                                    .Navigatable()
-                                    .Resizable(resize => resize.Columns(true))
-                                    .Reorderable(reorder => reorder.Columns(true))
-                                    .Sortable()
-                                    .Pageable(pageable => pageable
-                                        .Refresh(true)
-                                        .PageSizes(true)
-                                        .ButtonCount(5))
-                                        .DataSource(dataSource => dataSource
-                                            .Ajax()
-                                            .ServerOperation(true)
-                                            //.Aggregates(aggregates =>
-                                            //{
-                                            //    foreach (var col in Model.COLUMNS.Column)
-                                            //    {
-                                            //        if (col.Aggregates != null)
-                                            //        {
-                                            //            foreach (var ag in col.Aggregates.Add)
-                                            //            {
+                                        foreach (var item in Model.COLUMNS.Column)
+                                        {
+                                            var c = columns.Bound(TypeWrapper.GetGridColumnType(item.Model.edittype), item.Name).Title(item.Label).Width(item.Width)
+                                                 .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(Enum.GetName(typeof(Kendo_Example.Models.Edittype), item.Model.edittype))
+                                                 .Format(item.Model.Format).Filterable(true);
 
-                                            //                if (ag.AggregateType == Kendo_Example.Models.AggregateType.sum)
-                                            //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Sum();
-                                            //                if (ag.AggregateType == Kendo_Example.Models.AggregateType.min)
-                                            //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Min();
-                                            //                if (ag.AggregateType == Kendo_Example.Models.AggregateType.max)
-                                            //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Max();
-                                            //                if (ag.AggregateType == Kendo_Example.Models.AggregateType.count)
-                                            //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Count();
-                                            //                if (ag.AggregateType == Kendo_Example.Models.AggregateType.average)
-                                            //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Average();
-                                            //            }
-                                            //        }
-                                            //    }
-                                            //})
-                                            .Filter(filtersDefault =>
+                                            // link section
+                                            if (item.Type == Kendo_Example.Models.ColumnType.ProcessDesignerLink)
                                             {
-                                                // Apply default filters
-                                                if (ViewData["field_name"] != null && ViewData["field_value"] != null) {
-                                                    List<FilterDescriptor> filterDescriptors = new List<FilterDescriptor>();
-                                                    filterDescriptors.Add(new FilterDescriptor(ViewData["field_name"].ToString(),
-                                                        FilterOperator.IsEqualTo, ViewData["field_value"].ToString()));
-                                                    filtersDefault.AddRange(filterDescriptors.AsEnumerable());
-                                                }
-                                            })
-                                            .Read(read =>
+                                                c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "DynamicGraph",
+                                                    "Home", new { link = "#=" + item.Name + "#" }, null).ToHtmlString());
+                                            }
+                                            if (item.Type == Kendo_Example.Models.ColumnType.GridLink)
                                             {
-                                                read.Action(Model.DataSource.Action, Model.DataSource.Controller_name,
-                                                    new { link = Model.DataSource.key_link });
-                                            })
-                                            .Create(update => update.Action(Model.Update.DataSource.Action,
-                                                Model.Update.DataSource.Controller_name, new { link = Model.Update.DataSource.key_link }))
-                                            .Model(model =>
+                                                c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "DynamicGrid",
+                                                    "Home", new { filename = item.to_type_link, field_name = item.Name, field_value = "#=" + item.Name + "#" }, null).ToHtmlString());
+                                            }
+                                            // link section
+
+                                            if (item.Model.edittype == Kendo_Example.Models.Edittype.Date)
                                             {
-                                                foreach (var m in Model.COLUMNS.Column)
+                                                c.Filterable(x => x.Cell(y => y.Template("function(args){ convertDatePickerCell(args, '" + item.Model.Format + "','ru-RU')}")));
+                                                c.Filterable(x => x.UI("function(element){ convertDatePickerUI(element, '" + item.Model.Format + "','ru-RU')}"));
+                                            }
+                                        }
+                                        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(150);
+                                    })
+                                            .ToolBar(toolbar => { toolbar.Create(); })
+                                            .Editable(editable => editable.Mode(GridEditMode.InLine))
+                                            //.HtmlAttributes(new { style = "height: 1000px;" })
+                                            .HtmlAttributes(new { style = "width: " + Model.Width + "px;" })
+                                            .Scrollable(scr => scr.Height(Model.Height))
+                                            .Groupable()
+                                            .Navigatable()
+                                            .Resizable(resize => resize.Columns(true))
+                                            .Reorderable(reorder => reorder.Columns(true))
+                                            .Sortable()
+                                            .Pageable(pageable => pageable
+                                                .Refresh(true)
+                                                .PageSizes(true)
+                                                .ButtonCount(5))
+                                                .DataSource(dataSource => dataSource
+                                                    .Ajax()
+                                                    .ServerOperation(true)
+                                                    //.Aggregates(aggregates =>
+                                                    //{
+                                                    //    foreach (var col in Model.COLUMNS.Column)
+                                                    //    {
+                                                    //        if (col.Aggregates != null)
+                                                    //        {
+                                                    //            foreach (var ag in col.Aggregates.Add)
+                                                    //            {
+
+                                                    //                if (ag.AggregateType == Kendo_Example.Models.AggregateType.sum)
+                                                    //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Sum();
+                                                    //                if (ag.AggregateType == Kendo_Example.Models.AggregateType.min)
+                                                    //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Min();
+                                                    //                if (ag.AggregateType == Kendo_Example.Models.AggregateType.max)
+                                                    //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Max();
+                                                    //                if (ag.AggregateType == Kendo_Example.Models.AggregateType.count)
+                                                    //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Count();
+                                                    //                if (ag.AggregateType == Kendo_Example.Models.AggregateType.average)
+                                                    //                    aggregates.Add(col.Name, TypeWrapper.GetGridColumnType(col.Model.edittype)).Average();
+                                                    //            }
+                                                    //        }
+                                                    //    }
+                                                    //})
+                                                    .Filter(filtersDefault =>
+                                                    {
+                                                        // Apply default filters
+                                                        if (ViewData["field_name"] != null && ViewData["field_value"] != null)
+                                                        {
+                                                            if (Model.COLUMNS.Column.Exists(el => el.Name == ViewData["field_name"].ToString() ))
+                                                            {
+                                                                List<FilterDescriptor> filterDescriptors = new List<FilterDescriptor>();
+                                                                filterDescriptors.Add(new FilterDescriptor(ViewData["field_name"].ToString(),
+                                                                    FilterOperator.IsEqualTo, ViewData["field_value"].ToString()));
+                                                                filtersDefault.AddRange(filterDescriptors.AsEnumerable());
+                                                            }
+                                                        }
+                                                    })
+                                                    .Read(read =>
+                                                    {
+                                                        read.Action(Model.DataSource.Action, Model.DataSource.Controller_name,
+                                                            new { link = Model.DataSource.key_link });
+                                                    })
+                                                    .Create(update => update.Action(Model.Update.DataSource.Action,
+                                                        Model.Update.DataSource.Controller_name, new { link = Model.Update.DataSource.key_link }))
+                                                    .Model(model =>
+                                                    {
+                                                        foreach (var m in Model.COLUMNS.Column)
+                                                        {
+                                                            if (m.key)
+                                                                model.Id(m.Name);
+
+                                                            model.Field(m.Name, TypeWrapper.GetGridColumnType(m.Model.edittype))
+                                                             .DefaultValue(m.Model.Default_value).Editable(m.Model.editable);
+                                                        }
+                                                    })
+                                                    .Update(update => update.Action(Model.Edit.DataSource.Action,
+                                                        Model.Edit.DataSource.Controller_name, new { link = Model.Edit.DataSource.key_link }))
+                                                    .Destroy(update => update.Action(Model.Delete.DataSource.Action,
+                                                        Model.Delete.DataSource.Controller_name, new { link = Model.Delete.DataSource.key_link }))
+                                                    .Events(events =>
+                                                    {
+                                                        events.Error("onHTTPError_Alertify");
+                                                        events.RequestEnd("reload_Grid");
+                                                        events.Sync("sync_Grid");
+                                                    })
+                                                    .PageSize(Model.SelectCountRows)
+                                            )
+                                            .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                                            .ColumnMenu()
+                                            .Events(ev =>
+                                            {
+                                                StringBuilder functionBuilder = new StringBuilder();
+                                                Model.COLUMNS.Column.ForEach(el =>
                                                 {
-                                                    if (m.key)
-                                                        model.Id(m.Name);
-
-                                                    model.Field(m.Name, TypeWrapper.GetGridColumnType(m.Model.edittype))
-                                                     .DefaultValue(m.Model.Default_value).Editable(m.Model.editable);
+                                                    if (el.Model.edittype == Kendo_Example.Models.Edittype.Date)
+                                                        functionBuilder.Append("convertDatePickerUI($('#" + el.Name + "'),'" + el.Model.Format + "','ru-RU');" + "\n");
+                                                    if (el.Model.edittype == Kendo_Example.Models.Edittype.Integer)
+                                                        functionBuilder.Append("convertNumericTextBox($('#" + el.Name + "'),'" + el.Model.Format + "');" + "\n");
+                                                    if (el.Model.edittype == Kendo_Example.Models.Edittype.String)
+                                                        functionBuilder.Append("convertAU($('#" + el.Name + "'),'" + Url.Action("GetAuData", "ComponentData",
+                                                            new { link = el.Model.link }) + "','" + el.Name + "');" + "\n");
+                                                });
+                                                ev.BeforeEdit("function(){setTimeout(function () { " + functionBuilder + " }, 50); }");
+                                            })
+                                            .ToolBar(tools => { if (Model.Export_Pdf != null) tools.Pdf(); })
+                                            .ToolBar(tools => { if (Model.Export_Excel != null) tools.Excel(); })
+                                            .Pdf(pdf =>
+                                            {
+                                                if (Model.Export_Pdf != null)
+                                                {
+                                                    pdf
+                                                    .AvoidLinks()
+                                                    .PaperSize("auto")
+                                                    .Scale(0.8)
+                                                    .Margin("2cm", "1cm", "1cm", "1cm")
+                                                    .Landscape()
+                                                    .RepeatHeaders()
+                                                    .TemplateId("page-template")
+                                                    .Title(Model.Export_Pdf.Caption)
+                                                    .FileName(Model.Export_Pdf.File_name)
+                                                    .ProxyURL(Url.Action(Model.Export_Pdf.DataSource.Action, Model.Export_Pdf.DataSource.Controller_name));
                                                 }
                                             })
-                                            .Update(update => update.Action(Model.Edit.DataSource.Action,
-                                                Model.Edit.DataSource.Controller_name, new { link = Model.Edit.DataSource.key_link }))
-                                            .Destroy(update => update.Action(Model.Delete.DataSource.Action,
-                                                Model.Delete.DataSource.Controller_name, new { link = Model.Delete.DataSource.key_link }))
-                                            .Events(events =>
+                                            .Excel(excel =>
                                             {
-                                                events.Error("onHTTPError_Alertify");
-                                                events.RequestEnd("reload_Grid");
-                                                events.Sync("sync_Grid");
+                                                if (Model.Export_Excel != null)
+                                                {
+                                                    excel
+                                                    .Filterable(true)
+                                                     .FileName(Model.Export_Excel.File_name)
+                                                     .Filterable(true)
+                                                     .ProxyURL(Url.Action(Model.Export_Excel.DataSource.Action, Model.Export_Excel.DataSource.Controller_name));
+                                                }
                                             })
-                                            .PageSize(Model.SelectCountRows)
-                                    )
-                                    .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
-                                    .ColumnMenu()
-                                    .Events(ev => {
-                                        StringBuilder functionBuilder = new StringBuilder();
-                                        Model.COLUMNS.Column.ForEach(el =>
-                                        {
-                                            if (el.Model.edittype == Kendo_Example.Models.Edittype.Date)
-                                                functionBuilder.Append("convertDatePickerUI($('#" + el.Name + "'),'" + el.Model.Format + "','ru-RU');" + "\n");
-                                            if (el.Model.edittype == Kendo_Example.Models.Edittype.Integer)
-                                                functionBuilder.Append("convertNumericTextBox($('#" + el.Name + "'),'" + el.Model.Format + "');" + "\n");
-                                            if (el.Model.edittype == Kendo_Example.Models.Edittype.String)
-                                                functionBuilder.Append("convertAU($('#" + el.Name + "'),'" + Url.Action("GetAuData", "ComponentData",
-                                                    new { link = el.Model.link }) + "','" + el.Name + "');" + "\n");
-                                        });
-                                        ev.BeforeEdit("function(){setTimeout(function () { " + functionBuilder + " }, 50); }");
-                                    })
-                                    .ToolBar(tools => { if (Model.Export_Pdf != null) tools.Pdf(); })
-                                    .ToolBar(tools => { if (Model.Export_Excel != null) tools.Excel(); })
-                                    .Pdf(pdf =>
-                                    {
-                                        if (Model.Export_Pdf != null)
-                                        {
-                                            pdf
-                                            .AvoidLinks()
-                                            .PaperSize("auto")
-                                            .Scale(0.8)
-                                            .Margin("2cm", "1cm", "1cm", "1cm")
-                                            .Landscape()
-                                            .RepeatHeaders()
-                                            .TemplateId("page-template")
-                                            .Title(Model.Export_Pdf.Caption)
-                                            .FileName(Model.Export_Pdf.File_name)
-                                            .ProxyURL(Url.Action(Model.Export_Pdf.DataSource.Action, Model.Export_Pdf.DataSource.Controller_name));
-                                        }
-                                    })
-                                    .Excel(excel =>
-                                    {
-                                        if (Model.Export_Excel != null)
-                                        {
-                                            excel
-                                            .Filterable(true)
-                                             .FileName(Model.Export_Excel.File_name)
-                                             .Filterable(true)
-                                             .ProxyURL(Url.Action(Model.Export_Excel.DataSource.Action, Model.Export_Excel.DataSource.Controller_name));
-                                        }
-                                    })
 
 )
+
+@* context menu for grid *@
+@{
+    ContextMenuBuilder contextMenuBuilder = null;
+    if (Model.ContextMenu != null)
+    {
+
+        contextMenuBuilder = Html.Kendo().ContextMenu()
+                  .Name(Model.ContextMenu.Id)
+                  .Target("#" + Model.Id + "")
+                  .Orientation(Model.ContextMenu.ContextMenuOrientation)
+                  .Animation(animation =>
+                  {
+                  //animation.Open(open =>
+                  //{
+                  //    open.Fade(FadeDirection.In);
+                  //    open.Duration(500);
+                  //    open.Zoom(ZoomDirection.In);
+                  //});
+              })
+                  .Items(_items =>
+                  {
+                      if (Model.ContextMenu.Items != null)
+                      {
+                          foreach (var item in Model.ContextMenu.Items.Item)
+                          {
+                              if (item.ContextMenuItemType == ContextMenuItemType.Separator)
+                              {
+                                  _items.Add().Separator(true);
+                              }
+                              else
+                              {
+                                  var tmp = _items.Add().Text(item.Title).Separator(false)
+                                  .HtmlAttributes(new { action = Enum.GetName(typeof(ColumnType), item.Action) });
+
+                                  if (item.Action == ColumnType.GridLink)
+                                      tmp.Action(item.DataSource.Action, item.DataSource.Controller_name,
+                                          new { filename = item.DataSource.key_link });
+
+                                  if (item.Action == ColumnType.ProcessDesignerLink)
+                                      tmp.Action(item.DataSource.Action, item.DataSource.Controller_name, new { });
+
+                                  if (item.Action == ColumnType.simple)
+                                  {
+                                      if (item.Items.Item.Count > 0)
+                                          tmp.Items(_item2 =>
+
+                                          {
+                                              foreach (var item2 in item.Items.Item)
+                                              {
+                                                  if (item2.ContextMenuItemType == ContextMenuItemType.Separator)
+                                                  {
+                                                      _item2.Add().Separator(true);
+                                                  }
+                                                  else
+                                                  {
+                                                      var tmp2 = _item2.Add().Text(item2.Title).Separator(false)
+                                                        .HtmlAttributes(new { action = Enum.GetName(typeof(ColumnType), item2.Action) });
+
+                                                      if (item2.Action == ColumnType.GridLink)
+                                                          tmp2.Action(item2.DataSource.Action, item2.DataSource.Controller_name,
+                                                              new { filename = item2.DataSource.key_link });
+
+                                                      if (item2.Action == ColumnType.ProcessDesignerLink)
+                                                          tmp2.Action(item2.DataSource.Action, item2.DataSource.Controller_name, new { });
+                                                  }
+                                              }
+
+                                          });
+                                  }
+
+                              }
+                          }
+                      }
+                  })
+                  .Filter("tr[role='row']")
+                  .Events(events =>
+                  {
+                      events.Select("function (e){contextMenu_SelectEventHandler( e, 'test' )}");
+                  });
+
+    }
+}
+@( contextMenuBuilder )
+
+<script>
+
+    function contextMenu_SelectEventHandler(e, addData) {
+
+        var action = e.item.getAttribute('action')
+        console.log("Grid id : " + e.sender.target[0].id);
+        var gridId = e.sender.target[0].id;
+
+        //var grid = $("#jsTestGrid").data("kendoGrid");
+        //var model = grid.dataItem(event.target);
+
+        var fn = $('#' + gridId + ' thead tr th').eq($('td#' + gridId + '_active_cell').index())[0].dataset.field;
+        var cv = $('td#' + gridId + '_active_cell')[0].innerText;
+
+        console.log(e);
+
+        console.log('add data : ' + addData);
+        console.log("field name : " + fn);
+        console.log("cell value: " + cv);
+
+        //execute action
+        if (action == "GridLink") {
+            e.item.children[0].href = e.item.children[0].href +
+                '&field_name=' + fn + '&field_value=' + cv;
+        }
+        if (action == "ProcessDesignerLink") {
+            e.item.children[0].href = e.item.children[0].href +
+                '?link=' + cv;
+        }
+        if (action == "TempLink") { }
+    }
+
+</script>
