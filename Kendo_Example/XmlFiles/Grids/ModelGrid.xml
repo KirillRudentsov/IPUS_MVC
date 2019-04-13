@@ -65,25 +65,25 @@
 
   <ContextMenu ContextMenuOrientation="Vertical" id="ContextMenu">
     <Items>
-      
-      <item type="notSeparator" action="simple" title="Перейти к">
-        <Items>
-          <item type="notSeparator" action="GridLink" title="Тест сету">
-            <DataSource action="DynamicGrid" controller_name="Home" key_link="ModelGrid_Details.xml" />
-          </item>
 
-          <item type="Separator"/>
+      <item type="notSeparator" action="GridLink" title="Перейти к тест сету">
+        <DataSource action="DynamicGrid" controller_name="Home" key_link="ModelGrid_Details.xml" />
+      </item>
 
-          <item type="notSeparator" action="GridLink" title="Региональному тест сету">
-            <DataSource action="DynamicGrid" controller_name="Home" key_link="ModeGrid_Regions.xml" />
-          </item>
-        </Items>
+      <item type="Separator"/>
+
+      <item type="notSeparator" action="GridLink" title="Перейтик региональному тест сету">
+        <DataSource action="DynamicGrid" controller_name="Home" key_link="ModeGrid_Regions.xml" />
       </item>
       
       <item type="Separator"/>
 
       <item type="notSeparator" action="ProcessDesignerLink" title="Show process designer" >
         <DataSource action="DynamicGraph" controller_name="Home" />
+      </item>
+
+      <item type="notSeparator" action="GridLink" title="Test context menu item" >
+        <DataSource action="DynamicGrid" controller_name="Home" />
       </item>
       
     </Items>

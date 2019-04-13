@@ -203,9 +203,6 @@ namespace Kendo_Example.Models
         public ColumnType Action { get; set; }
         [XmlAttribute(AttributeName = "title")]
         public string Title { get; set; }
-
-        [XmlElement(ElementName = "Items")]
-        public Items Items { get; set; }
     }
    
     public enum ContextMenuItemType

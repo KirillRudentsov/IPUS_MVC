@@ -193,66 +193,14 @@
                   //    open.Zoom(ZoomDirection.In);
                   //});
               })
-                  .Items(_items =>
-                  {
-                      if (Model.ContextMenu.Items != null)
-                      {
-                          foreach (var item in Model.ContextMenu.Items.Item)
-                          {
-                              if (item.ContextMenuItemType == ContextMenuItemType.Separator)
-                              {
-                                  _items.Add().Separator(true);
-                              }
-                              else
-                              {
-                                  var tmp = _items.Add().Text(item.Title).Separator(false)
-                                  .HtmlAttributes(new { action = Enum.GetName(typeof(ColumnType), item.Action) });
-
-                                  if (item.Action == ColumnType.GridLink)
-                                      tmp.Action(item.DataSource.Action, item.DataSource.Controller_name,
-                                          new { filename = item.DataSource.key_link });
-
-                                  if (item.Action == ColumnType.ProcessDesignerLink)
-                                      tmp.Action(item.DataSource.Action, item.DataSource.Controller_name, new { });
-
-                                  if (item.Action == ColumnType.simple)
-                                  {
-                                      if (item.Items.Item.Count > 0)
-                                          tmp.Items(_item2 =>
-
-                                          {
-                                              foreach (var item2 in item.Items.Item)
-                                              {
-                                                  if (item2.ContextMenuItemType == ContextMenuItemType.Separator)
-                                                  {
-                                                      _item2.Add().Separator(true);
-                                                  }
-                                                  else
-                                                  {
-                                                      var tmp2 = _item2.Add().Text(item2.Title).Separator(false)
-                                                        .HtmlAttributes(new { action = Enum.GetName(typeof(ColumnType), item2.Action) });
-
-                                                      if (item2.Action == ColumnType.GridLink)
-                                                          tmp2.Action(item2.DataSource.Action, item2.DataSource.Controller_name,
-                                                              new { filename = item2.DataSource.key_link });
-
-                                                      if (item2.Action == ColumnType.ProcessDesignerLink)
-                                                          tmp2.Action(item2.DataSource.Action, item2.DataSource.Controller_name, new { });
-                                                  }
-                                              }
-
-                                          });
-                                  }
-
-                              }
-                          }
-                      }
-                  })
                   .Filter("tr[role='row']")
                   .Events(events =>
                   {
                       events.Select("function (e){contextMenu_SelectEventHandler( e, 'test' )}");
                   });
+
+        WrapperContextMenuItemsBuilder wrapper = new WrapperContextMenuItemsBuilder();
+        contextMenuBuilder = wrapper.build(contextMenuBuilder, Model.ContextMenu.Items);
 
     }
 }
