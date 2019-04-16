@@ -66,10 +66,13 @@
                                             {
                                                 // Apply default filters
                                                 if (ViewData["field_name"] != null && ViewData["field_value"] != null) {
-                                                    List<FilterDescriptor> filterDescriptors = new List<FilterDescriptor>();
-                                                    filterDescriptors.Add(new FilterDescriptor(ViewData["field_name"].ToString(),
-                                                        FilterOperator.IsEqualTo, ViewData["field_value"].ToString()));
-                                                    filtersDefault.AddRange(filterDescriptors.AsEnumerable());
+                                                    if (Model.COLUMNS.Column.Exists(el => el.Name == ViewData["field_name"].ToString()))
+                                                    {
+                                                        List<FilterDescriptor> filterDescriptors = new List<FilterDescriptor>();
+                                                        filterDescriptors.Add(new FilterDescriptor(ViewData["field_name"].ToString(),
+                                                            FilterOperator.IsEqualTo, ViewData["field_value"].ToString()));
+                                                        filtersDefault.AddRange(filterDescriptors.AsEnumerable());
+                                                    }
                                                 }
                                             })
                                             .Read(read =>
