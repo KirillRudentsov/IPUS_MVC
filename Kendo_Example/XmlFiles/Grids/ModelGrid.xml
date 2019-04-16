@@ -32,13 +32,13 @@
       </Model>
     </column>-->
 
-    <column type="ProcessDesignerLink" name="NAME" label="Имя" width="150" hidden="false" visible="true" key="false">
+    <column type="simple" name="NAME" label="Имя" width="150" hidden="false" visible="true" key="false">
       <Model editable="true" edittype="String" format="NAME" link="V_RPATEMPLATE_AU_NAME">
         <default_value></default_value>
       </Model>
     </column>
 
-    <column type="GridLink" to_type_link="ModelGrid_Details.xml" name="INFO" label="Описание" width="150" hidden="false" visible="true" key="false">
+    <column type="simple" name="INFO" label="Описание" width="150" hidden="false" visible="true" key="false">
       <Model editable="true" edittype="String" format="INFO" link="V_RPATEMPLATE_AU_INFO">
         <default_value></default_value>
       </Model>
@@ -93,4 +93,31 @@
   <Export_Excel file_name="Test_Export_File.xlsx" caption="EXPORT TO EXCEL">
     <DataSource action="ExportFile" controller_name="ExportFiles" key_link="GetExcel_key" />
   </Export_Excel>
+
+  <ContextMenu ContextMenuOrientation="Vertical" id="ContextMenu">
+    <Items>
+
+      <item type="notSeparator" action="GridLink" title="Перейти к тест сету">
+        <DataSource action="DynamicGrid" controller_name="Home" key_link="ModelGrid_Details.xml" />
+      </item>
+
+      <item type="Separator"/>
+
+      <item type="notSeparator" action="GridLink" title="Перейтик региональному тест сету">
+        <DataSource action="DynamicGrid" controller_name="Home" key_link="ModeGrid_Regions.xml" />
+      </item>
+
+      <item type="Separator"/>
+
+      <item type="notSeparator" action="ProcessDesignerLink" title="Show process designer" >
+        <DataSource action="DynamicGraph" controller_name="Home" />
+      </item>
+
+      <item type="notSeparator" action="GridLink" title="Test context menu item" >
+        <DataSource action="DynamicGrid" controller_name="Home" />
+      </item>
+
+    </Items>
+  </ContextMenu>
+  
 </Grid>
