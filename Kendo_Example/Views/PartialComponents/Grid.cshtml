@@ -166,12 +166,13 @@
                   .Orientation(Model.ContextMenu.ContextMenuOrientation)
                   .Animation(animation =>
                   {
-                              //animation.Open(open =>
-                              //{
-                              //    open.Fade(FadeDirection.In);
-                              //    open.Duration(500);
-                              //    open.Zoom(ZoomDirection.In);
-                              //});
+                              animation.Open(open =>
+                              {
+                                  open.Fade(FadeDirection.In);
+                                  open.Duration(500);
+                                  open.Expand(ExpandDirection.Horizontal);
+                                  open.Zoom(ZoomDirection.In);
+                              });
                           })
                   .Filter("tr[role='row']")
                   .Events(events =>
