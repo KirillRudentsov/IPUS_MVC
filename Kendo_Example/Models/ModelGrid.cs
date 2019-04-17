@@ -91,9 +91,18 @@ namespace Kendo_Example.Models
         [XmlEnum(Name = "ProcessDesignerLink")]
         ProcessDesignerLink = 1,
         [XmlEnum(Name = "GridLink")]
-        GridLink = 2
+        GridLink = 2,
+        [XmlEnum(Name = "ImageUrl")]
+        ImageUrl = 3
     }
-    
+
+    [XmlRoot(ElementName = "Matching")]
+    public class Matching
+    {
+        [XmlAttribute(AttributeName = "field_name")]
+        public string Field_name { get; set; }
+    }
+
     [XmlRoot(ElementName = "column")]
     public class Column
     {
@@ -119,6 +128,9 @@ namespace Kendo_Example.Models
 
         [XmlElement(ElementName = "Aggregates")]
         public Aggregates Aggregates { get; set; }
+
+        [XmlElement(ElementName = "Matching")]
+        public Matching Matching { get; set; }
     }
     
     public enum AggregateType
@@ -203,6 +215,9 @@ namespace Kendo_Example.Models
         public ColumnType Action { get; set; }
         [XmlAttribute(AttributeName = "title")]
         public string Title { get; set; }
+
+        [XmlAttribute(AttributeName = "IconUrl")]
+        public string IconUrl { get; set; }
     }
    
     public enum ContextMenuItemType

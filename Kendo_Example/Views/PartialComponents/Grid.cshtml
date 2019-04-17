@@ -15,22 +15,17 @@
                                     {
                                         foreach (var item in Model.COLUMNS.Column)
                                         {
+                                            if (item.Type == Kendo_Example.Models.ColumnType.ImageUrl)
+                                            {
+                                                columns.Bound(item.Name)
+                                                .ClientTemplate("<img src='" + Url.Content("~/Images/favicon/gridStatus/#=" + item.Matching.Field_name + "#.png") + "' />")
+                                                .Width(item.Width).Title(item.Label).Filterable(false);
+                                                continue;
+                                            }
+
                                             var c = columns.Bound(TypeWrapper.GetGridColumnType(item.Model.edittype), item.Name).Title(item.Label).Width(item.Width)
                                                  .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(Enum.GetName(typeof(Kendo_Example.Models.Edittype), item.Model.edittype))
                                                  .Format(item.Model.Format).Filterable(true);
-
-                                            // link section
-                                            if (item.Type == Kendo_Example.Models.ColumnType.ProcessDesignerLink)
-                                            {
-                                                c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "DynamicGraph",
-                                                    "Home", new { link = "#=" + item.Name + "#" }, null).ToHtmlString());
-                                            }
-                                            if (item.Type == Kendo_Example.Models.ColumnType.GridLink)
-                                            {
-                                                c.ClientTemplate(Html.ActionLink("#=" + item.Name + "#", "DynamicGrid",
-                                                    "Home", new { filename = item.to_type_link, field_name = item.Name, field_value = "#=" + item.Name + "#" }, null).ToHtmlString());
-                                            }
-                                            // link section
 
                                             if (item.Model.edittype == Kendo_Example.Models.Edittype.Date)
                                             {

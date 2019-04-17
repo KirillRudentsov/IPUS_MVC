@@ -27,6 +27,7 @@
                           items.Add().Text("Выход").Url(Url.Action("Index", "Home"));
 
                           //
-                          items.Add().Text("Login as " + Session["user_name"].ToString()).HtmlAttributes(new { @style ="float:right;" });
+                          items.Add().Text("Login as " + Session["user_name"].ToString()).HtmlAttributes(new { @style = "float:right;" })
+                          .ImageUrl("~/Images/favicon/person.png");
                       })
 )

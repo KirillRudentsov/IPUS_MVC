@@ -30,10 +30,12 @@ namespace Kendo_Example.SupportClasses
 
                         if (item.Action == ColumnType.GridLink)
                             i.Action(item.DataSource.Action, item.DataSource.Controller_name,
-                                new { filename = item.DataSource.key_link });
+                                new { filename = item.DataSource.key_link })
+                                .ImageUrl(item.IconUrl);
 
                         if (item.Action == ColumnType.ProcessDesignerLink)
-                            i.Action(item.DataSource.Action, item.DataSource.Controller_name, new { });
+                            i.Action(item.DataSource.Action, item.DataSource.Controller_name, new { })
+                            .ImageUrl(item.IconUrl);
 
                     });
                     

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Grid type="mainGrid" id="jsTestGrid" width="1800"
+<Grid type="mainGrid" id="jsTestGrid" width="1600"
           height="600" tableId="1"
           caption="This is test table caption"
           selectCountRows="20">
@@ -20,18 +20,27 @@
 
   <COLUMNS>
 
+    <column type="ImageUrl" name="Image" label="Статус" width="50" hidden="false" visible="true" key="false">
+      <Model editable="false" edittype="Integer" format="{0:0}">
+        <default_value>0</default_value>
+      </Model>
+      <Matching field_name="status" />
+    </column>
+    
     <column type="simple" name="ID" label="Id теста" width="100" hidden="false" visible="true" key="true">
       <Model editable="false" edittype="Integer" format="{0:0}">
         <default_value>0</default_value>
       </Model>
     </column>
 
-    <!--<column type="GridLink" to_type_link="ModelGrid_Details.xml" name="name" label="Имя" width="150" hidden="false" visible="true" key="false">
-      <Model editable="true" edittype="String" format="" link="v_distinct_names">
-        <default_value>TestName_Default</default_value>
+    <column type="simple" name="status" label="статус" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Integer" format="{0:0}">
+         <default_value>0</default_value>
       </Model>
-    </column>-->
-    <column type="GridLink" to_type_link="ModelGrid_Details.xml" name="name" label="Имя" width="150" hidden="false" visible="true" key="false">
+    </column>
+    
+
+    <column type="simple" to_type_link="ModelGrid_Details.xml" name="name" label="Имя" width="150" hidden="false" visible="true" key="false">
       <Model editable="true" edittype="String" format="" link="v_distinct_names">
         <default_value>TestName_Default</default_value>
       </Model>
@@ -49,7 +58,7 @@
       </Model>
     </column>
 
-    <column type="ProcessDesignerLink" name="number" label="числовой" width="150" hidden="false" visible="true" key="false">
+    <column type="simple" name="number" label="числовой" width="150" hidden="false" visible="true" key="false">
       <Model editable="true" edittype="Integer" format="{0:0}">
         <default_value>0</default_value>
       </Model>
@@ -66,23 +75,23 @@
   <ContextMenu ContextMenuOrientation="Vertical" id="ContextMenu">
     <Items>
 
-      <item type="notSeparator" action="GridLink" title="Перейти к тест сету">
+      <item type="notSeparator" action="GridLink" title="Перейти к тест сету" IconUrl="~/Images/favicon/grid.png">
         <DataSource action="DynamicGrid" controller_name="Home" key_link="ModelGrid_Details.xml" />
       </item>
 
       <item type="Separator"/>
 
-      <item type="notSeparator" action="GridLink" title="Перейтик региональному тест сету">
+      <item type="notSeparator" action="GridLink" title="Перейтик региональному тест сету" IconUrl="~/Images/favicon/grid.png">
         <DataSource action="DynamicGrid" controller_name="Home" key_link="ModeGrid_Regions.xml" />
       </item>
       
       <item type="Separator"/>
 
-      <item type="notSeparator" action="ProcessDesignerLink" title="Show process designer" >
+      <item type="notSeparator" action="ProcessDesignerLink" title="Show process designer" IconUrl="~/Images/favicon/graph.png">
         <DataSource action="DynamicGraph" controller_name="Home" />
       </item>
 
-      <item type="notSeparator" action="GridLink" title="Test context menu item" >
+      <item type="notSeparator" action="GridLink" title="Test context menu item" IconUrl="~/Images/favicon/grid.png">
         <DataSource action="DynamicGrid" controller_name="Home" />
       </item>
       
