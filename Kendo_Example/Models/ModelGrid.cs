@@ -97,6 +97,13 @@ namespace Kendo_Example.Models
         ImageUrl = 3
     }
 
+    [XmlRoot(ElementName = "Matching")]
+    public class Matching
+    {
+        [XmlAttribute(AttributeName = "field_name")]
+        public string Field_name { get; set; }
+    }
+
     [XmlRoot(ElementName = "column")]
     public class Column
     {
@@ -122,6 +129,9 @@ namespace Kendo_Example.Models
 
         [XmlElement(ElementName = "Aggregates")]
         public Aggregates Aggregates { get; set; }
+
+        [XmlElement(ElementName = "Matching")]
+        public Matching Matching { get; set; }
     }
 
     public enum AggregateType

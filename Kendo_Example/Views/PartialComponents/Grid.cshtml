@@ -16,8 +16,9 @@
                                 {
                                     if (item.Type == Kendo_Example.Models.ColumnType.ImageUrl)
                                     {
-                                        columns.Bound(item.Name).ClientTemplate("<img src='" + Url.Content("~/Images/favicon/go_to_next.png") + "' alt='#=NAME#' />")
-                                        .Width(item.Width).Title(item.Label);
+                                        columns.Bound(item.Name)
+                                        .ClientTemplate("<img src='" + Url.Content("~/Images/favicon/gridStatus/#=" + item.Matching.Field_name + "#.png") + "' alt='#=NAME#' />")
+                                        .Width(item.Width).Title(item.Label).Filterable(false);
                                         continue;
                                     }
 

@@ -586,6 +586,9 @@
     <Content Include="Images\favicon\go_to_next.png" />
     <Content Include="Images\favicon\graph.png" />
     <Content Include="Images\favicon\grid.png" />
+    <Content Include="Images\favicon\gridStatus\3.png" />
+    <Content Include="Images\favicon\gridStatus\1.png" />
+    <Content Include="Images\favicon\gridStatus\2.png" />
     <Content Include="Images\favicon\person.png" />
     <Content Include="Scripts\Cultures\kendo.culture.aa-DJ.min.js" />
     <Content Include="Scripts\Cultures\kendo.culture.aa-ER.min.js" />
@@ -2735,6 +2738,7 @@
   <ItemGroup>
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
