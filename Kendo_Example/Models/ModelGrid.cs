@@ -91,7 +91,10 @@ namespace Kendo_Example.Models
         [XmlEnum(Name = "ProcessDesignerLink")]
         ProcessDesignerLink = 1,
         [XmlEnum(Name = "GridLink")]
-        GridLink = 2
+        GridLink = 2,
+
+        [XmlEnum(Name = "ImageUrl")]
+        ImageUrl = 3
     }
 
     [XmlRoot(ElementName = "column")]

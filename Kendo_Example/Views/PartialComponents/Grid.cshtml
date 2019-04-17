@@ -14,6 +14,13 @@
                             {
                                 foreach (var item in Model.COLUMNS.Column)
                                 {
+                                    if (item.Type == Kendo_Example.Models.ColumnType.ImageUrl)
+                                    {
+                                        columns.Bound(item.Name).ClientTemplate("<img src='" + Url.Content("~/Images/favicon/go_to_next.png") + "' alt='#=NAME#' />")
+                                        .Width(item.Width).Title(item.Label);
+                                        continue;
+                                    }
+
                                     var c = columns.Bound(item.Name).Title(item.Label).Width(item.Width)
                                          .Hidden(item.hidden).Visible(item.visible).EditorTemplateName(Enum.GetName(typeof(Kendo_Example.Models.Edittype), item.Model.edittype))
                                          .Format(item.Model.Format).Filterable(true);

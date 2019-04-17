@@ -20,6 +20,13 @@
 
   <COLUMNS>
 
+    <!-- ImageUrl -->
+    <column type="ImageUrl" name="Image" label="Статус" width="50" hidden="false" visible="true" key="false">
+      <Model editable="false" edittype="Integer" format="{0:0}">
+        <default_value>0</default_value>
+      </Model>
+    </column>
+    
     <column type="simple" name="ID" label="Id теста" width="100" hidden="false" visible="true" key="true">
       <Model editable="false" edittype="Integer" format="{0:0}">
         <default_value>0</default_value>
@@ -33,13 +40,13 @@
     </column>-->
 
     <column type="simple" name="NAME" label="Имя" width="150" hidden="false" visible="true" key="false">
-      <Model editable="true" edittype="String" format="NAME" link="V_RPATEMPLATE_AU_NAME">
+      <Model editable="true" edittype="String" format="" link="V_RPATEMPLATE_AU_NAME">
         <default_value></default_value>
       </Model>
     </column>
 
     <column type="simple" name="INFO" label="Описание" width="150" hidden="false" visible="true" key="false">
-      <Model editable="true" edittype="String" format="INFO" link="V_RPATEMPLATE_AU_INFO">
+      <Model editable="true" edittype="String" format="" link="V_RPATEMPLATE_AU_INFO">
         <default_value></default_value>
       </Model>
     </column>
