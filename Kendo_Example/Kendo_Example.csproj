@@ -583,6 +583,10 @@
     <Content Include="Content\kendo\2019.1.220\fonts\glyphs\WebComponentsIcons.woff" />
     <Content Include="Content\kendo\2019.1.220\images\kendoui.ttf" />
     <Content Include="Content\kendo\2019.1.220\images\kendoui.woff" />
+    <Content Include="Images\favicon\go_to_next.png" />
+    <Content Include="Images\favicon\graph.png" />
+    <Content Include="Images\favicon\grid.png" />
+    <Content Include="Images\favicon\person.png" />
     <Content Include="Scripts\Cultures\kendo.culture.aa-DJ.min.js" />
     <Content Include="Scripts\Cultures\kendo.culture.aa-ER.min.js" />
     <Content Include="Scripts\Cultures\kendo.culture.aa-ET.min.js" />
