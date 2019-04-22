@@ -70,19 +70,6 @@
                                             //        }
                                             //    }
                                             //})
-                                            .Filter(filtersDefault =>
-                                            {
-                                                // Apply default filters
-                                                if (ViewData["field_name"] != null && ViewData["field_value"] != null) {
-                                                    if (Model.COLUMNS.Column.Exists(el => el.Name == ViewData["field_name"].ToString()))
-                                                    {
-                                                        List<FilterDescriptor> filterDescriptors = new List<FilterDescriptor>();
-                                                        filterDescriptors.Add(new FilterDescriptor(ViewData["field_name"].ToString(),
-                                                            FilterOperator.IsEqualTo, ViewData["field_value"].ToString()));
-                                                        filtersDefault.AddRange(filterDescriptors.AsEnumerable());
-                                                    }
-                                                }
-                                            })
                                             .Read(read =>
                                             {
                                                 read.Action(Model.DataSource.Action, Model.DataSource.Controller_name,
@@ -92,13 +79,44 @@
                                                 Model.Update.DataSource.Controller_name, new { link = Model.Update.DataSource.key_link }))
                                             .Model(model =>
                                             {
-                                                foreach (var m in Model.COLUMNS.Column)
-                                                {
+                                                foreach (var m in Model.COLUMNS.Column) {
                                                     if (m.key)
                                                         model.Id(m.Name);
 
                                                     model.Field(m.Name, TypeWrapper.GetGridColumnType(m.Model.edittype))
                                                      .DefaultValue(m.Model.Default_value).Editable(m.Model.editable);
+                                                }
+                                            })
+                                            .Filter(filtersDefault =>
+                                            {
+                                                // Apply multiple filters
+                                                List<FilterDescriptor> filterDescriptors = new List<FilterDescriptor>();
+                                                Model.COLUMNS.Column.ForEach(el =>
+                                                {
+                                                    if (el.Model.Default_filter != null) {
+                                                        if (el.Model.edittype == Kendo_Example.Models.Edittype.Date) {
+                                                            filterDescriptors.Add(new FilterDescriptor(el.Name, el.Model.Default_filter.FilterOperator
+                                                                , DateTime.ParseExact(el.Model.Default_filter.Text, el.Model.Default_filter.csharpDateFormat ,
+                                                                    System.Globalization.CultureInfo.InvariantCulture )));
+                                                        }
+                                                        else {
+                                                            filterDescriptors.Add(new FilterDescriptor(el.Name, el.Model.Default_filter.FilterOperator
+                                                            , el.Model.Default_filter.Text));
+                                                        }
+                                                    }
+                                                });
+                                                filtersDefault.AddRange(filterDescriptors.AsEnumerable());
+
+                                                // Apply context menu default filters if exist
+                                                if (ViewData["field_name"] != null && ViewData["field_value"] != null)
+                                                {
+                                                    if (Model.COLUMNS.Column.Exists(el => el.Name == ViewData["field_name"].ToString()))
+                                                    {
+                                                        List<FilterDescriptor> contextMenuFilter = new List<FilterDescriptor>();
+                                                        contextMenuFilter.Add(new FilterDescriptor(ViewData["field_name"].ToString(),
+                                                            FilterOperator.IsEqualTo, ViewData["field_value"].ToString()));
+                                                        filtersDefault.AddRange(contextMenuFilter.AsEnumerable());
+                                                    }
                                                 }
                                             })
                                             .Update(update => update.Action(Model.Edit.DataSource.Action,

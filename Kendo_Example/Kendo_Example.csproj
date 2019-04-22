@@ -589,6 +589,7 @@
     <Content Include="Images\favicon\gridStatus\3.png" />
     <Content Include="Images\favicon\gridStatus\1.png" />
     <Content Include="Images\favicon\gridStatus\2.png" />
+    <Content Include="Images\favicon\gridStatus\5.png" />
     <Content Include="Images\favicon\person.png" />
     <Content Include="Scripts\Cultures\kendo.culture.aa-DJ.min.js" />
     <Content Include="Scripts\Cultures\kendo.culture.aa-ER.min.js" />

@@ -33,22 +33,7 @@ namespace Kendo_Example.Controllers
 
         public void ConnectDB()
         {
-            SQL_Matchlist_query = Config.MatchlistRequest;
-
-            if (_db == null)
-            {
-                var dbType = DBAccess.GetDbTypeByName(Config.sDbType);
-                _db = new DBAccess(dbType);
-                //_log.Debug("Db Type : " + _db.DbType.ToString());
-
-                //_log.Debug("Matchlist Request : " + selectAction);
-
-                string status = _db.Login2SQL(Config.sConnSTR, Config.sLoginSTR, Config.sPasswordSTR);
-                if (status != "OK")
-                {
-                    throw new Exception("Couldn't connect to DB");
-                }
-            }
+            _db = (DBAccess)Session["db_conn"];
         }
 
         public JsonResult GetAuData([DataSourceRequest] DataSourceRequest request, string link)
@@ -118,7 +103,7 @@ namespace Kendo_Example.Controllers
                 res.Total = total;
             }
             catch (Exception ex) { res.Errors = ex.Message; }
-            finally { _db.Close(); }
+            //finally { _db.Close(); }
 
             return new System.Web.Mvc.JsonResult()
             {

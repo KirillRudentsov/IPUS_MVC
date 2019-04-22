@@ -9,6 +9,7 @@ using MainServer;
 using Kendo_Example.SupportClasses;
 using Kendo_Example.SQL_Helper;
 using SqlKata;
+using MainServer.Extension;
 
 namespace Kendo_Example.Controllers
 {
@@ -79,8 +80,8 @@ namespace Kendo_Example.Controllers
 
                 ConnectDB();
 
-                Query q = new Query().From("v_user_role".ToUpper()).Where("user_name".ToUpper(), "=", login)
-                    .Where("user_password".ToUpper(), "=", password);
+                Query q = new Query().From("M_OPERATOR_V".ToUpper()).Where("LOGIN_NAME".ToUpper(), "=", login)
+                    .Where("PASSWORD".ToUpper(), "=", password);
 
                 string select = CompilerQueryHelper.GetCompilerResult(_db.DbType, q);
 
@@ -88,7 +89,13 @@ namespace Kendo_Example.Controllers
 
                 if (dt.Rows.Count > 0)
                 {
-                    Session["user_role"] = dt.Rows[0]["user_role_xml".ToUpper()].ToString();
+                    var ls_param = new List<ProcedureParameter>() {
+                        new ProcedureParameter("sUserName", login, "VARCHAR", "IN")
+                    };
+
+                    _db.ProcCall("CreateFilialAccess", ls_param);
+                    Session["user_role"] = dt.Rows[0]["USER_ROLE_XML".ToUpper()].ToString();
+                    Session["db_conn"] = _db;
                     Session["user_name"] = login;
                     HttpCookie httpCookie = new HttpCookie("hstr", Guid.NewGuid().ToString());
                     httpCookie.Expires = DateTime.Now.AddMinutes(30);

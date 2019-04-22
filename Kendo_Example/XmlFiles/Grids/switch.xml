@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid type="mainGrid" id="v_switch" width="1800"
+          height="600" tableId="1"
+          caption="This is test table caption"
+          selectCountRows="20">
+
+  <DataSource action="GetGridData" controller_name="ComponentData" key_link="V_SWITCH" />
+
+  <Update>
+    <DataSource action="GridProcedure_Update" controller_name="ComponentData" key_link="TestProcedure.xml" />
+  </Update>
+
+  <Edit>
+    <DataSource action="GridProcedure_Edite" controller_name="ComponentData" key_link="TestProcedure.xml" />
+  </Edit>
+
+  <Delete>
+    <DataSource action="GridProcedure_Delete" controller_name="ComponentData" key_link="TestProcedure.xml" />
+  </Delete>
+
+  <COLUMNS>
+
+    <!-- ImageUrl -->
+	<!--
+    <column type="ImageUrl" name="Image" label="Статус" width="50" hidden="false" visible="true" key="false">
+      <Model editable="false" edittype="Integer" format="{0:0}">
+        <default_value>0</default_value>
+      </Model>
+
+      <Matching field_name="VERSION" />
+      
+    </column>
+    
+    <column type="simple" name="ID" label="Id теста" width="100" hidden="false" visible="true" key="true">
+      <Model editable="false" edittype="Integer" format="{0:0}">
+        <default_value>0</default_value>
+      </Model>
+    </column>
+	-->
+
+    <!--<column type="GridLink" to_type_link="ModelGrid_Details.xml" name="name" label="Имя" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="" link="v_distinct_names">
+        <default_value>TestName_Default</default_value>
+      </Model>
+    </column>-->
+	
+	<column type="simple" name="ID" label="Id коммутатора" width="100" hidden="true" visible="true" key="true">
+      <Model editable="false" edittype="Integer" format="{0:0}">
+        <default_value>0</default_value>
+      </Model>
+    </column>
+
+    <column type="simple" name="ATTR_121" label="Код" width="100" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="" >
+        <default_value></default_value>
+      </Model>
+    </column>
+	
+	<column type="simple" name="ATTR_122" label="Название" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="" >
+        <default_value></default_value>
+      </Model>
+    </column>
+	
+	<column type="simple" name="ATTR_123" label="SS7 точка" width="50" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="" >
+        <default_value></default_value>
+      </Model>
+    </column>
+	
+	<column type="simple" name="ATTR_125" label="Код ITC" width="100" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="" >
+        <default_value></default_value>
+      </Model>
+    </column>
+	
+	<column type="simple" name="ATTR_127" label="Вендор" width="100" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="" >
+        <default_value></default_value>
+      </Model>
+    </column>
+	
+	<column type="simple" name="ATTR_126" label="Тип" width="100" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="" >
+        <default_value></default_value>
+      </Model>
+    </column>
+	
+	<column type="simple" name="ATTR_124" label="зона" width="100" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="" >
+        <default_value></default_value>
+      </Model>
+    </column>
+	
+	<!-- 2019.04.22 07:23 -->
+	<column type="simple" name="ATTR_128" label="Обновлено" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="" >
+        <default_value></default_value>
+      </Model>
+    </column>
+	
+	<column type="simple" name="FILIAL" label="Филиал" width="80" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="" >
+        <default_value></default_value>
+      </Model>
+    </column>
+	
+	 <column type="simple" name="D_FROM" label="Дата создания" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Date" format="{0:dd.MM.yyyy HH:mm:ss}">
+        <default_value></default_value>
+		<default_filter FilterOperator="IsEqualTo" csharpDateFormat="dd.MM.yyyy HH:mm:ss">12.01.2019 11:21:50</default_filter>
+      </Model>
+    </column>
+
+	<!--
+    <column type="simple" name="INFO" label="Описание" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="String" format="" link="V_RPATEMPLATE_AU_INFO">
+        <default_value></default_value>
+      </Model>
+    </column>
+
+    <column type="simple" name="VERSION" label="Версия" width="100" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Integer" format="{0:0}">
+        <default_value>1</default_value>
+      </Model>
+    </column>
+
+    <column type="simple" name="CREATED" label="Дата создания" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Date" format="{0:dd.MM.yyyy HH:mm:ss}">
+        <default_value></default_value>
+      </Model>
+    </column>
+
+    <column type="simple" name="ACTIVE_FROM" label="Активно с" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Date" format="{0:dd.MM.yyyy HH:mm:ss}">
+        <default_value></default_value>
+      </Model>
+    </column>
+
+    <column type="simple" name="ACTIVE_TO" label="Активно до" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Date" format="{0:dd.MM.yyyy HH:mm:ss}">
+        <default_value></default_value>
+      </Model>
+    </column>
+
+    <column type="simple" name="DELETED" label="Время удаления" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Date" format="{0:dd.MM.yyyy HH:mm:ss}">
+        <default_value></default_value>
+      </Model>
+    </column>
+
+    <column type="simple" name="TRACE" label="Шаг" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Integer" format="{0:0}">
+        <default_value>0</default_value>
+      </Model>
+    </column>
+
+    <column type="simple" name="DEBUG" label="Отладка" width="150" hidden="false" visible="true" key="false">
+      <Model editable="true" edittype="Integer" format="{0:0}">
+        <default_value>0</default_value>
+      </Model>
+    </column>
+	-->
+
+  </COLUMNS>
+  <Export_Pdf file_name="Test_Export_File.pdf" caption="EXPORT TO PDF">
+    <DataSource action="ExportFile" controller_name="ExportFiles" key_link="GetPdf_key" />
+  </Export_Pdf>
+  <Export_Excel file_name="Test_Export_File.xlsx" caption="EXPORT TO EXCEL">
+    <DataSource action="ExportFile" controller_name="ExportFiles" key_link="GetExcel_key" />
+  </Export_Excel>
+
+  <ContextMenu ContextMenuOrientation="Vertical" id="ContextMenu">
+    <Items>
+
+      <item type="notSeparator" action="GridLink" title="Перейти к тест сету"  IconUrl="~/Images/favicon/grid.png">
+        <DataSource action="DynamicGrid" controller_name="Home" key_link="ModelGrid_Details.xml" />
+      </item>
+
+      <item type="Separator"/>
+
+      <item type="notSeparator" action="GridLink" title="Перейтик региональному тест сету" IconUrl="~/Images/favicon/grid.png">
+        <DataSource action="DynamicGrid" controller_name="Home" key_link="ModeGrid_Regions.xml" />
+      </item>
+
+      <item type="Separator"/>
+
+      <item type="notSeparator" action="ProcessDesignerLink" title="Show process designer" IconUrl="~/Images/favicon/graph.png">
+        <DataSource action="DynamicGraph" controller_name="Home" />
+      </item>
+
+      <item type="notSeparator" action="GridLink" title="Test context menu item" IconUrl="~/Images/favicon/grid.png">
+        <DataSource action="DynamicGrid" controller_name="Home" />
+      </item>
+
+    </Items>
+  </ContextMenu>
+  
+</Grid>

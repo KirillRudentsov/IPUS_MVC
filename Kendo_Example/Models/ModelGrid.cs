@@ -1,4 +1,5 @@
-﻿using Kendo.Mvc.UI;
+﻿using Kendo.Mvc;
+using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,9 @@ namespace Kendo_Example.Models
         [XmlElement(ElementName = "default_value")]
         public string Default_value { get; set; }
 
+        [XmlElement(ElementName = "default_filter")]
+        public Default_filter Default_filter { get; set; }
+
         [XmlAttribute(AttributeName = "edittype")]
         public Edittype edittype { get; set; }
 
@@ -41,6 +45,17 @@ namespace Kendo_Example.Models
         public string link { get; set; }
     }
 
+    [XmlRoot(ElementName = "default_filter")]
+    public class Default_filter
+    {
+        [XmlAttribute(AttributeName = "FilterOperator")]
+        public FilterOperator FilterOperator { get; set; }
+        [XmlAttribute(AttributeName = "csharpDateFormat")]
+        public string csharpDateFormat { get; set; }
+        [XmlText]
+        public string Text { get; set; }
+    }
+    
     [XmlRoot(ElementName = "Update")]
     public class Update
     {
