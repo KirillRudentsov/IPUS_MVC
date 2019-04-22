@@ -20,7 +20,7 @@
 
   <COLUMNS>
 
-    <column type="ImageUrl" name="Image" label="Статус" width="50" hidden="false" visible="true" key="false">
+    <column type="ImageUrl" name="Image" label="Статус" width="25" hidden="false" visible="true" key="false">
       <Model editable="false" edittype="Integer" format="{0:0}">
         <default_value>0</default_value>
       </Model>
@@ -39,16 +39,19 @@
       </Model>
     </column>
     
-
+    <!-- testname2 -->
     <column type="simple" to_type_link="ModelGrid_Details.xml" name="name" label="Имя" width="150" hidden="false" visible="true" key="false">
       <Model editable="true" edittype="String" format="" link="v_distinct_names">
         <default_value>TestName_Default</default_value>
+        <default_filter FilterOperator="IsEqualTo">testname2</default_filter>
       </Model>
     </column>
 
+    <!-- 2019-01-01 15:24:23 -->
     <column type="simple" name="date" label="Дата создания" width="150" hidden="false" visible="true" key="false">
       <Model editable="true" edittype="Date" format="{0:yyyy-MM-dd HH:mm:ss}">
         <default_value></default_value>
+        <default_filter FilterOperator="IsEqualTo" csharpDateFormat="yyyy-MM-dd HH:mm:ss">2019-01-01 15:24:23</default_filter>
       </Model>
     </column>
 
