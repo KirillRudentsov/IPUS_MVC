@@ -38,7 +38,7 @@ namespace Kendo_Example.Controllers
                     new ProcedureParameter("sUser",Session["user_name"].ToString(), "VARCHAR", "IN")
                 };
 
-                _db.ProcCall("recalc_switch", ls_proc_params);
+                _db.ProcCall(procname, ls_proc_params);
 
             }
             catch (Exception ex) { Response.StatusCode = 500; return ex.Message; }
