@@ -31,22 +31,22 @@ namespace Kendo_Example.Models
         public string ImageClass { get; set; }
         [XmlAttribute(AttributeName = "title")]
         public string Title { get; set; }
-        [XmlAttribute(AttributeName = "procedure")]
-        public string Procedure { get; set; }
-        [XmlAttribute(AttributeName = "refresh")]
-        public bool Refresh { get; set; }
-        [XmlAttribute(AttributeName = "xml")]
-        public string Xml { get; set; }
-        [XmlAttribute(AttributeName = "question")]
-        public bool Question { get; set; }
-        [XmlAttribute(AttributeName = "question_text")]
-        public string Question_text { get; set; }
-        [XmlAttribute(AttributeName = "process_text")]
-        public string Process_text { get; set; }
-
+        
         [XmlElement(ElementName = "DataSource")]
         public DataSource DataSource { get; set; }
+
+        [XmlElement(ElementName = "jsData")]
+        public JsData JsData { get; set; }
+
     }
+
+    [XmlRoot(ElementName = "jsData")]
+    public class JsData
+    {
+        [XmlText]
+        public string Text { get; set; }
+    }
+
 
     [XmlRoot(ElementName = "CustomControls")]
     public class CustomControls

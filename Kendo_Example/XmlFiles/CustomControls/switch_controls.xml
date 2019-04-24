@@ -1,19 +1,36 @@
 ﻿<CustomControls>
-  <control type="button" id="sync1" imageClass="clock" title="запустить синхронизацию с перезагрузкой" procedure="recalc_switch"
-		refresh="true" question="true" question_text="Are you sure to do this?" process_text="Syncronization..." >
-    <DataSource action="DynamicGrid" controller_name="Home" key_link="ModelGrid.xml" />
+  <control type="button" id="sync1" imageClass="clock" title="запустить синхронизацию с перезагрузкой">
+    <jsData>
+      {
+      "procedure" : "recalc_switch",
+      "refresh" : true,
+      "question" : true,
+      "xml_link" : "ModelGrid.xml",
+      "question_text" : "Are you sure to do this?",
+      "process_text" : "Syncronization..."
+      }
+    </jsData>
   </control>
 
-  <control type="button" id="sync2" imageClass="clock" title="запустить синхронизацию без перезагрузки" procedure="recalc_switch"
-		refresh="false" question="false" question_text="Are you sure to do this?" process_text="Syncronization..." />
+  <control type="button" id="sync2" imageClass="clock" title="запустить синхронизацию без перезагрузки">
+    <jsData>
+      {
+      "procedure" : "recalc_switch",
+      "refresh" : false,
+      "question" : true,
+      "xml_link" : "ModelGrid.xml",
+      "question_text" : "Are you sure to do this?",
+      "process_text" : "Syncronization..."
+      }
+    </jsData>
+  </control>
 
   <control type="checkbox" id="sync3" imageClass="clock" title="запустить синхронизацию checkbox с перезагрузкой" procedure="recalc_switch"
-		refresh="true" question="true" question_text="Are you sure to do this?" process_text="Syncronization..." >
-    <DataSource action="DynamicGrid" controller_name="Home" key_link="ModelGrid.xml" />
+		refresh="true" question="true" xml_link="ModelGrid.xml" question_text="Are you sure to do this?" process_text="Syncronization..." >
   </control>
 
   <control type="dropdownlist" id="sync4" imageClass="clock" title="запустить синхронизацию checkbox с перезагрузкой" procedure="recalc_switch"
-		refresh="true" question="true" question_text="Are you sure to do this?" process_text="Syncronization..." >
+		refresh="true" question="true" xml_link="ModelGrid.xml" question_text="Are you sure to do this?" process_text="Syncronization..." >
     <DataSource action="DynamicGrid" controller_name="Home" key_link="ModelGrid.xml" />
   </control>
 

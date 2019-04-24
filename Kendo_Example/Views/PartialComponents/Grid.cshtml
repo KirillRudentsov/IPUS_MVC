@@ -221,4 +221,8 @@
 @( contextMenuBuilder )
 
 @* custom controls *@
-@Html.Action(Model.Controls.DataSource.Action, Model.Controls.DataSource.Controller_name, new { link = Model.Controls.DataSource.key_link })
+@{
+    if (Model.Controls != null) {
+        @(Html.Action(Model.Controls.DataSource.Action, Model.Controls.DataSource.Controller_name, new { link = Model.Controls.DataSource.key_link }))
+    }
+}

@@ -178,7 +178,3 @@ function contextMenu_SelectEventHandler(e, addData) {
     }
     if (action == "TempLink") { }
 }
-
-function testclick(e) {
-    console.log(e);
-}
