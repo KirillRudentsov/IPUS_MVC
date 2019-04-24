@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Threading;
+using MainServer.Extension;
+using System.Net;
 
 namespace Kendo_Example.Controllers
 {
@@ -28,7 +30,18 @@ namespace Kendo_Example.Controllers
         [HttpGet]
         public string CallRecalcProcedure(string procname)
         {
-            Thread.Sleep(5000); // emulate load time
+            try
+            {
+                ConnectDB();
+
+                List<ProcedureParameter> ls_proc_params = new List<ProcedureParameter>() {
+                    new ProcedureParameter("sUser",Session["user_name"].ToString(), "VARCHAR", "IN")
+                };
+
+                _db.ProcCall("recalc_switch", ls_proc_params);
+
+            }
+            catch (Exception ex) { Response.StatusCode = 500; return ex.Message; }
 
             return "OK";
         }

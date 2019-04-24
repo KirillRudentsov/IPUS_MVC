@@ -178,3 +178,49 @@ function contextMenu_SelectEventHandler(e, addData) {
     }
     if (action == "TempLink") { }
 }
+
+function customButtonClick(event, additional, api_url) {
+    console.log(event);
+    console.log(additional);
+    console.log(api_url);
+
+    var dialog = $('#dialog');
+
+    dialog.kendoDialog({
+        width: "150px",
+        height: "100px",
+        title: 'Dialog title',
+        closable: true,
+        modal: false,
+        content: additional.process_text
+    });
+    dialog.data("kendoDialog").close();
+
+    if (additional.question) {
+        kendo.confirm(additional.question_text).done(function () {
+            //TODO
+
+            $.ajax({
+                url: api_url + '?procname=' + additional.procedure,
+                type: 'GET',
+                beforeSend: function (xhr) {
+                    console.log(xhr);
+                    dialog.data("kendoDialog").open();
+                },
+                success: function (data) {
+                    on_Alertify(data, "success");
+                    dialog.data("kendoDialog").close();
+                },
+                error: function (jq, status, message) {
+                    on_Alertify(message, "error");
+                    dialog.data("kendoDialog").close();
+                }
+            });
+
+            if (additional.refresh) {
+                document.location.href = document.location.origin + document.location.pathname + '?' + 'filename=' + additional.xml_link;
+            }
+        });
+
+    }
+}
