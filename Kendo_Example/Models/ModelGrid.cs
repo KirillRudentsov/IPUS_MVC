@@ -147,6 +147,8 @@ namespace Kendo_Example.Models
 
         [XmlElement(ElementName = "Matching")]
         public Matching Matching { get; set; }
+        [XmlAttribute(AttributeName = "filterable")]
+        public bool filterable { get; set; }
     }
 
     public enum AggregateType
@@ -218,8 +220,11 @@ namespace Kendo_Example.Models
 
         [XmlElement(ElementName = "ContextMenu")]
         public ContextMenu ContextMenu { get; set; }
-    }
 
+        [XmlElement(ElementName = "Controls")]
+        public Controls Controls { get; set; }
+    }
+    
     [XmlRoot(ElementName = "item")]
     public class Item
     {
@@ -260,5 +265,12 @@ namespace Kendo_Example.Models
         public ContextMenuOrientation ContextMenuOrientation { get; set; }
         [XmlAttribute(AttributeName = "id")]
         public string Id { get; set; }
+    }
+
+    [XmlRoot(ElementName = "Controls")]
+    public class Controls
+    {
+        [XmlElement(ElementName = "DataSource")]
+        public DataSource DataSource { get; set; }
     }
 }

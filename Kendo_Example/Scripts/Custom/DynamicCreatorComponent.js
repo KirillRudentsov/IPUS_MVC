@@ -150,3 +150,35 @@ function onDataBound(e) {
         that.bringIntoView(that.shapes);
     }, 0);
 }
+
+function reloadGrid(gridId) {
+    $("#" + gridId).dataSource.read();
+}
+
+function contextMenu_SelectEventHandler(e, addData) {
+    var action = e.item.getAttribute('action')
+    console.log("Grid id : " + e.sender.target[0].id);
+    var gridId = e.sender.target[0].id;
+    //var grid = $("#jsTestGrid").data("kendoGrid");
+    //var model = grid.dataItem(event.target);
+    var fn = $('#' + gridId + ' thead tr th').eq($('td#' + gridId + '_active_cell').index())[0].dataset.field;
+    var cv = $('td#' + gridId + '_active_cell')[0].innerText;
+    console.log(e);
+    console.log('add data : ' + addData);
+    console.log("field name : " + fn);
+    console.log("cell value: " + cv);
+    //execute action
+    if (action == "GridLink") {
+        e.item.children[0].href = e.item.children[0].href +
+            '&field_name=' + fn + '&field_value=' + cv;
+    }
+    if (action == "ProcessDesignerLink") {
+        e.item.children[0].href = e.item.children[0].href +
+            '?link=' + cv;
+    }
+    if (action == "TempLink") { }
+}
+
+function testclick(e) {
+    console.log(e);
+}

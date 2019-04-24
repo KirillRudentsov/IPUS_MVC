@@ -18,6 +18,11 @@
     <DataSource action="GridProcedure_Delete" controller_name="ComponentData" key_link="TestProcedure.xml" />
   </Delete>
 
+	<Controls>
+		<DataSource action="LoadCustomControlsComponent" controller_name="PartialComponents" key_link="switch_controls.xml" />
+	</Controls>
+  
+  
   <COLUMNS>
 
     <!-- ImageUrl -->
@@ -44,68 +49,68 @@
       </Model>
     </column>-->
 	
-	<column type="simple" name="ID" label="Id коммутатора" width="100" hidden="true" visible="true" key="true">
+	<column type="simple" name="ID" label="Id коммутатора" width="100" hidden="true" visible="true" key="true" filterable="true">
       <Model editable="false" edittype="Integer" format="{0:0}">
         <default_value>0</default_value>
       </Model>
     </column>
 
-    <column type="simple" name="ATTR_121" label="Код" width="100" hidden="false" visible="true" key="false">
+    <column type="simple" name="ATTR_121" label="Код" width="100" hidden="false" visible="true" key="false" filterable="true">
       <Model editable="true" edittype="String" format="" >
         <default_value></default_value>
       </Model>
     </column>
 	
-	<column type="simple" name="ATTR_122" label="Название" width="150" hidden="false" visible="true" key="false">
+	<column type="simple" name="ATTR_122" label="Название" width="150" hidden="false" visible="true" key="false" filterable="true">
       <Model editable="true" edittype="String" format="" >
         <default_value></default_value>
       </Model>
     </column>
 	
-	<column type="simple" name="ATTR_123" label="SS7 точка" width="50" hidden="false" visible="true" key="false">
+	<column type="simple" name="ATTR_123" label="SS7 точка" width="50" hidden="false" visible="true" key="false" filterable="true">
       <Model editable="true" edittype="String" format="" >
         <default_value></default_value>
       </Model>
     </column>
 	
-	<column type="simple" name="ATTR_125" label="Код ITC" width="100" hidden="false" visible="true" key="false">
+	<column type="simple" name="ATTR_125" label="Код ITC" width="100" hidden="false" visible="true" key="false" filterable="true">
       <Model editable="true" edittype="String" format="" >
         <default_value></default_value>
       </Model>
     </column>
 	
-	<column type="simple" name="ATTR_127" label="Вендор" width="100" hidden="false" visible="true" key="false">
+	<column type="simple" name="ATTR_127" label="Вендор" width="100" hidden="false" visible="true" key="false" filterable="true">
       <Model editable="true" edittype="String" format="" >
         <default_value></default_value>
       </Model>
     </column>
 	
-	<column type="simple" name="ATTR_126" label="Тип" width="100" hidden="false" visible="true" key="false">
+	<column type="simple" name="ATTR_126" label="Тип" width="100" hidden="false" visible="true" key="false" filterable="true">
       <Model editable="true" edittype="String" format="" >
         <default_value></default_value>
       </Model>
     </column>
 	
-	<column type="simple" name="ATTR_124" label="зона" width="100" hidden="false" visible="true" key="false">
+	<column type="simple" name="ATTR_124" label="зона" width="100" hidden="false" visible="true" key="false" filterable="true">
       <Model editable="true" edittype="String" format="" >
         <default_value></default_value>
       </Model>
     </column>
 	
 	<!-- 2019.04.22 07:23 -->
-	<column type="simple" name="ATTR_128" label="Обновлено" width="150" hidden="false" visible="true" key="false">
+	<column type="simple" name="ATTR_128" label="Обновлено" width="150" hidden="false" visible="true" key="false" filterable="true">
       <Model editable="true" edittype="String" format="" >
         <default_value></default_value>
       </Model>
     </column>
 	
-	<column type="simple" name="FILIAL" label="Филиал" width="80" hidden="false" visible="true" key="false">
+	<column type="simple" name="FILIAL" label="Филиал" width="80" hidden="false" visible="true" key="false" filterable="true">
       <Model editable="true" edittype="String" format="" >
         <default_value></default_value>
       </Model>
     </column>
 	
-	 <column type="simple" name="D_FROM" label="Дата создания" width="150" hidden="false" visible="true" key="false">
+	 <column type="simple" name="D_FROM" label="Дата создания" width="150" hidden="false" visible="true" key="false" filterable="true">
       <Model editable="true" edittype="Date" format="{0:dd.MM.yyyy HH:mm:ss}">
         <default_value></default_value>
 		<default_filter FilterOperator="IsEqualTo" csharpDateFormat="dd.MM.yyyy HH:mm:ss">12.01.2019 11:21:50</default_filter>
@@ -173,23 +178,23 @@
   <ContextMenu ContextMenuOrientation="Vertical" id="ContextMenu">
     <Items>
 
-      <item type="notSeparator" action="GridLink" title="Перейти к тест сету"  IconUrl="~/Images/favicon/grid.png">
+      <item type="notSeparator" action="GridLink" title="Перейти к тест сету"  IconUrl="k-icon k-i-table-cell-properties">
         <DataSource action="DynamicGrid" controller_name="Home" key_link="ModelGrid_Details.xml" />
       </item>
 
       <item type="Separator"/>
 
-      <item type="notSeparator" action="GridLink" title="Перейтик региональному тест сету" IconUrl="~/Images/favicon/grid.png">
+      <item type="notSeparator" action="GridLink" title="Перейтик региональному тест сету" IconUrl="k-icon k-i-table-cell-properties">
         <DataSource action="DynamicGrid" controller_name="Home" key_link="ModeGrid_Regions.xml" />
       </item>
 
       <item type="Separator"/>
 
-      <item type="notSeparator" action="ProcessDesignerLink" title="Show process designer" IconUrl="~/Images/favicon/graph.png">
+      <item type="notSeparator" action="ProcessDesignerLink" title="Show process designer" IconUrl="k-icon k-i-shape">
         <DataSource action="DynamicGraph" controller_name="Home" />
       </item>
 
-      <item type="notSeparator" action="GridLink" title="Test context menu item" IconUrl="~/Images/favicon/grid.png">
+      <item type="notSeparator" action="GridLink" title="Test context menu item" IconUrl="k-icon k-i-table-cell-properties">
         <DataSource action="DynamicGrid" controller_name="Home" />
       </item>
 

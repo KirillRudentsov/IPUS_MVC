@@ -1,0 +1,22 @@
+﻿<CustomControls>
+  <control type="button" id="sync1" imageClass="clock" title="запустить синхронизацию с перезагрузкой" procedure="recalc_switch"
+		refresh="true" question="true" question_text="Are you sure to do this?" process_text="Syncronization..." >
+    <DataSource action="DynamicGrid" controller_name="Home" key_link="ModelGrid.xml" />
+  </control>
+
+  <control type="button" id="sync2" imageClass="clock" title="запустить синхронизацию без перезагрузки" procedure="recalc_switch"
+		refresh="false" question="false" question_text="Are you sure to do this?" process_text="Syncronization..." />
+
+  <control type="checkbox" id="sync3" imageClass="clock" title="запустить синхронизацию checkbox с перезагрузкой" procedure="recalc_switch"
+		refresh="true" question="true" question_text="Are you sure to do this?" process_text="Syncronization..." >
+    <DataSource action="DynamicGrid" controller_name="Home" key_link="ModelGrid.xml" />
+  </control>
+
+  <control type="dropdownlist" id="sync4" imageClass="clock" title="запустить синхронизацию checkbox с перезагрузкой" procedure="recalc_switch"
+		refresh="true" question="true" question_text="Are you sure to do this?" process_text="Syncronization..." >
+    <DataSource action="DynamicGrid" controller_name="Home" key_link="ModelGrid.xml" />
+  </control>
+
+  <!-- create or replace procedure recalc_switch(sUser in varchar2) -->
+  
+</CustomControls>

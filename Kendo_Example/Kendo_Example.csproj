@@ -127,6 +127,7 @@
     <Compile Include="Models\GraphUrlParam.cs" />
     <Compile Include="Models\GridUrlParam.cs" />
     <Compile Include="Models\ModelAu.cs" />
+    <Compile Include="Models\ModelCustomControls.cs" />
     <Compile Include="Models\ModelDateTimePicker.cs" />
     <Compile Include="Models\ModelGrid.cs" />
     <Compile Include="Models\ModelMenu.cs" />
@@ -1494,6 +1495,7 @@
     <Content Include="Scripts\messages\kendo.messages.zh-CN.min.js" />
     <Content Include="Scripts\messages\kendo.messages.zh-HK.min.js" />
     <Content Include="Scripts\messages\kendo.messages.zh-TW.min.js" />
+    <Content Include="XmlFiles\CustomControls\switch_controls.xml" />
     <Content Include="XmlFiles\Date\DateTimePicker_1.xml" />
     <Content Include="XmlFiles\Grids\ModelGrid_Details.xml" />
     <Content Include="XmlFiles\AutoComplete\ModelAu.xml" />
@@ -2719,6 +2721,7 @@
     <Content Include="Views\PartialComponents\Graph.cshtml" />
     <Content Include="Views\PartialComponents\Grid.cshtml" />
     <Content Include="Views\PartialComponents\Menu.cshtml" />
+    <Content Include="Views\PartialComponents\CustomControls.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

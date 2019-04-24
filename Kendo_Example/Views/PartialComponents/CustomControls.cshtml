@@ -1,0 +1,18 @@
+﻿@using Kendo_Example.Models;
+
+@model CustomControls
+
+
+            @{foreach (var item in Model.Control)
+                {
+                    if (item.ControlType == ControlType.button)
+                    {
+                        @(Html.Kendo().Button()
+                                    .Name(item.Id)
+                                    //.Tag("a")
+                                    .Icon(item.ImageClass)
+                                    .Content(item.Title)
+                                    .Events(events => events.Click("testclick")))
+                    }
+                }
+             }

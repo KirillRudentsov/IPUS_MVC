@@ -69,5 +69,15 @@ namespace Kendo_Example.Controllers
         {
             return PartialView("Graph", link);
         }
+
+        public PartialViewResult LoadCustomControlsComponent(string link)
+        {
+            CustomControls controls = new CustomControls();
+            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/XmlFiles/CustomControls/" + link));
+            XmlSerializer xmlSerizlizer = new XmlSerializer(typeof(CustomControls));
+            controls = (CustomControls)xmlSerizlizer.Deserialize(new StringReader(fileContents));
+
+            return PartialView("CustomControls", controls);
+        }
     }
 }

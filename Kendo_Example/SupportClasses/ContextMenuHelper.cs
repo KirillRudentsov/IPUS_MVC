@@ -24,16 +24,17 @@ namespace Kendo_Example.SupportClasses
                 {
                     res.Items(item2 => {
 
-                        var i = item2.Add().Separator(false).Text(item.Title)
+                        var i = item2.Add().Separator(false).Text("")
                         .HtmlAttributes(new { action = Enum.GetName(typeof(ColumnType), item.Action) });
 
                         if (item.Action == ColumnType.GridLink)
                             i.Action(item.DataSource.Action, item.DataSource.Controller_name,
-                                new { filename = item.DataSource.key_link }).ImageUrl( item.IconUrl );
+                                new { filename = item.DataSource.key_link })
+                                .Text("<span class=\"" + item.IconUrl + "\"></span>" + item.Title).Encoded(false);
 
                         if (item.Action == ColumnType.ProcessDesignerLink)
                             i.Action(item.DataSource.Action, item.DataSource.Controller_name, new { })
-                            .ImageUrl(item.IconUrl);
+                            .Text("<span class=\"" + item.IconUrl + "\"></span>" + item.Title).Encoded(false);
 
                     });
 
